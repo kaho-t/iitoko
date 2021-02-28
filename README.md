@@ -1,24 +1,25 @@
-# README
+# iitoko
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+"iitoko" means a nice place in japanese.
+I hope you can find your next hometown with this app.
 
-Things you may want to cover:
+## Description
 
-* Ruby version
+* You can search and find towns by narrowing the conditions.
+* You can keep towns in your bookmarks.
+* You can get more informations about the town by reading articles written by locals.
+* You can send messages to locals if you have any questions about the town.
 
-* System dependencies
+## Technologies
 
-* Configuration
+* Ruby version: 3.0.0
 
-* Database creation
+* Rails version: 6.1.1
 
-* Database initialization
+* Rspec: 4.0.0
 
-* How to run the test suite
+* Mysql version: 8.0
 
-* Services (job queues, cache servers, search engines, etc.)
+* nginx: 1.18.0
 
-* Deployment instructions
-
-* ...
+* Docker desktop (Apple M1 Tech Preview7)
