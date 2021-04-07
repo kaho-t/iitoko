@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    @user = User.new(
-      name: 'iitoko taro',
-      email: 'iitoko@example.com',
-      password: 'foobarbaz',
-      password_confirmation: 'foobarbaz'
-    )
+    @user = FactoryBot.build(:user)
   end
 
   it 'is valid with a name, email' do
@@ -17,37 +12,32 @@ RSpec.describe User, type: :model do
   it 'is invalid without a name' do
     @user.name = nil
     @user.valid?
-    expect(@user.errors[:name]).to include("can't be blank")
+    expect(@user.errors[:name]).to include('を入力してください')
   end
 
   it 'is invalid without an email address' do
     @user.email = nil
     @user.valid?
-    expect(@user.errors[:email]).to include("can't be blank")
+    expect(@user.errors[:email]).to include('を入力してください', 'は不正な値です')
   end
 
   it 'is invalid with a duplicate email address' do
-    User.create(
-      name: 'tester',
-      email: 'tester@example.com',
-      password: 'password',
-      password_confirmation: 'password'
-    )
-    @user.email = 'TESTER@EXAMPLE.COM'
+    FactoryBot.create(:user)
+    @user.email = 'IITOKO@EXAMPLE.COM'
     @user.valid?
-    expect(@user.errors[:email]).to include('has already been taken')
+    expect(@user.errors[:email]).to include('はすでに存在します')
   end
 
   it 'is invalid with a too long name' do
     @user.name = 'a' * 51
     @user.valid?
-    expect(@user.errors[:name]).to include('is too long (maximum is 50 characters)')
+    expect(@user.errors[:name]).to include('は50文字以内で入力してください')
   end
 
   it 'is invalid with a too long email address' do
     @user.email = 'a' * 256
     @user.valid?
-    expect(@user.errors[:email]).to include('is too long (maximum is 255 characters)')
+    expect(@user.errors[:email]).to include('は255文字以内で入力してください', 'は不正な値です')
   end
 
   it 'has an email address saved as lower-case' do
@@ -73,7 +63,7 @@ RSpec.describe User, type: :model do
         invalid_addresses.each do |invalid_address|
           @user.email = invalid_address
           @user.valid?
-          expect(@user.errors[:email]).to include('is invalid')
+          expect(@user.errors[:email]).to include('は不正な値です')
         end
       end
     end
@@ -84,7 +74,7 @@ RSpec.describe User, type: :model do
       it 'is invalid' do
         @user.password = @user.password_confirmation = ' ' * 8
         @user.valid?
-        expect(@user.errors[:password]).to include("can't be blank")
+        expect(@user.errors[:password]).to include('を入力してください')
       end
     end
 
@@ -92,7 +82,7 @@ RSpec.describe User, type: :model do
       it 'is invalid' do
         @user.password = @user.password_confirmation = 'a' * 7
         @user.valid?
-        expect(@user.errors[:password]).to include('is too short (minimum is 8 characters)')
+        expect(@user.errors[:password]).to include('は8文字以上で入力してください')
       end
     end
   end
