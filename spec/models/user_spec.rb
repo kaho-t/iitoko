@@ -5,7 +5,7 @@ RSpec.describe User, type: :model do
     @user = FactoryBot.build(:user)
   end
 
-  it 'is valid with a name, email' do
+  it 'is valid with a name, email, password and password_confirmation' do
     expect(@user).to be_valid
   end
 
@@ -78,11 +78,34 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'when a password is too short' do
-      it 'is invalid' do
-        @user.password = @user.password_confirmation = 'a' * 7
+    context 'password length' do
+      it 'is invalid with a too short password ' do
+        @user.password = @user.password_confirmation = 'aA1'
         @user.valid?
-        expect(@user.errors[:password]).to include('は8文字以上で入力してください')
+        expect(@user.errors[:password]).to include('は半角8~12文字で英大文字・小文字・数字それぞれ１文字以上含む必要があります')
+      end
+      it 'is invalid with a too long password' do
+        @user.password = @user.password_confirmation = 'aA1' * 10
+        @user.valid?
+        expect(@user.errors[:password]).to include('は半角8~12文字で英大文字・小文字・数字それぞれ１文字以上含む必要があります')
+      end
+    end
+
+    context 'when a password does not contain at least one uppercase letter, one lowercase letter or a number' do
+      it 'is invalid without an uppercase letter' do
+        @user.password = @user.password_confirmation = 'a1' * 4
+        @user.valid?
+        expect(@user.errors[:password]).to include('は半角8~12文字で英大文字・小文字・数字それぞれ１文字以上含む必要があります')
+      end
+      it 'is invalid without a lowercase letter' do
+        @user.password = @user.password_confirmation = 'A1' * 4
+        @user.valid?
+        expect(@user.errors[:password]).to include('は半角8~12文字で英大文字・小文字・数字それぞれ１文字以上含む必要があります')
+      end
+      it 'is invalid without a number' do
+        @user.password = @user.password_confirmation = 'aA' * 4
+        @user.valid?
+        expect(@user.errors[:password]).to include('は半角8~12文字で英大文字・小文字・数字それぞれ１文字以上含む必要があります')
       end
     end
   end
