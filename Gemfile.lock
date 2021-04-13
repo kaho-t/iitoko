@@ -217,6 +217,8 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    show_me_the_cookies (5.0.1)
+      capybara (>= 2, < 4)
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -280,6 +282,7 @@ DEPENDENCIES
   rubocop-rails
   sass-rails (>= 6)
   selenium-webdriver
+  show_me_the_cookies
   spring
   spring-commands-rspec
   turbolinks (~> 5)

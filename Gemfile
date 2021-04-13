@@ -60,6 +60,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'launchy'
+  gem 'show_me_the_cookies'
   gem 'webdrivers'
 end
 

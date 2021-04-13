@@ -71,4 +71,6 @@ RSpec.configure do |config|
       end
     end
   end
+  config.include ShowMeTheCookies, type: :system
+  config.include SessionsHelper
 end
