@@ -6,20 +6,20 @@ RSpec.describe 'Users', type: :system do
   describe 'log in' do
     context 'when log in with a valid user info' do
       it 'shows view for logged in user' do
-        log_in_as_user
+        log_in_as_user(user)
         expect(page).to have_current_path '/'
         expect(page).to have_css 'li.dropdown'
         expect(page).to_not have_content 'ログイン'
       end
       it 'redirects to recommends page from login and signup page' do
-        log_in_as_user
+        log_in_as_user(user)
         visit login_path
         expect(page).to have_current_path '/'
         visit signup_path
         expect(page).to have_current_path '/'
       end
       it 'does not have cookies' do
-        log_in_as_user
+        log_in_as_user(user)
         expect(get_me_the_cookie('remember_token')).to eq nil
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe 'Users', type: :system do
 
   describe 'logout' do
     it 'logs out' do
-      log_in_as_user_with_remembering
+      log_in_as_user_with_remembering(user)
       expect(get_me_the_cookie('remember_token')).to_not eq nil
       expect(page).to have_content 'ログアウト'
       click_link 'ログアウト'
@@ -56,16 +56,15 @@ RSpec.describe 'Users', type: :system do
 
   describe 'across browser restarts' do
     it 'remembers user login when login with remembering' do
-      log_in_as_user_with_remembering
+      log_in_as_user_with_remembering(user)
       expect(get_me_the_cookie('remember_token')).to_not eq nil
       # browser restart = session cookie is lost
       expire_cookies
       expect(get_me_the_cookie('remember_token')).to_not eq nil
     end
     it 'does not remember user login when login without remembering' do
-      log_in_as_user
+      log_in_as_user(user)
       expect(get_me_the_cookie('remember_token')).to eq nil
     end
   end
-
 end
