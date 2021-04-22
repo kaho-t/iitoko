@@ -33,7 +33,7 @@ RSpec.describe 'Users', type: :request do
   describe 'DELETE /destroy' do
     it 'redirects destroy when not logged in' do
       delete user_path(user)
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to login_path
     end
   end
 end

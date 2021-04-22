@@ -73,4 +73,12 @@ RSpec.configure do |config|
   end
   config.include ShowMeTheCookies, type: :system
   config.include SessionsHelper
+
+  config.before(:suite) do
+    DatabaseRewinder.clean_all
+  end
+
+  config.after(:each) do
+    DatabaseRewinder.clean
+  end
 end

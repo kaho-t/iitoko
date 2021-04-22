@@ -32,8 +32,10 @@ gem 'rexml', '~> 3.2', '>= 3.2.4'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+gem 'mail-iso-2022-jp'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
+gem 'rails-controller-testing'
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -59,6 +61,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'database_rewinder'
   gem 'launchy'
   gem 'show_me_the_cookies'
   gem 'webdrivers'
