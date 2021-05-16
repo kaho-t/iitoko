@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
   end
 
   it 'is invalid with a duplicate email address' do
-    FactoryBot.create(:user)
+    FactoryBot.create(:user, email: "taro@example.com")
     @user.email = 'TARO@EXAMPLE.COM'
     @user.valid?
     expect(@user.errors[:email]).to include('はすでに存在します')

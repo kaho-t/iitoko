@@ -1,9 +1,10 @@
 class StaticPagesController < ApplicationController
+  skip_before_action :authenticate_user!
   def home
-    return unless logged_in?
+    return unless user_signed_in?
 
     @user = current_user
-    render '/recommends/index'
+    redirect_to top_url
   end
 
   def home_local; end

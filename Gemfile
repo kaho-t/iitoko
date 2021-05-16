@@ -36,6 +36,8 @@ gem 'mail-iso-2022-jp'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 gem 'rails-controller-testing'
+gem "devise", git: "https://github.com/heartcombo/devise"
+gem 'omniauth-google-oauth2'
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -59,6 +61,8 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
+  gem 'capybara-email'
+  gem 'email_spec'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'database_rewinder'

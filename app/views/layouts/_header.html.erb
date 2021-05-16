@@ -3,7 +3,7 @@
     <%= link_to "iitoko", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <% if logged_in? %>
+        <% if user_signed_in? %>
           <li><%= link_to "検索", '#' %></li>
           <li><%= link_to "タイムライン", '#' %></li>
           <li><%= link_to "メッセージ", '#' %></li>
@@ -13,18 +13,18 @@
             <%= gravatar_for @user, size: 30 %>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "プロフィール", current_user %></li>
-              <li><%= link_to "プロフィール編集", edit_user_path(current_user) %></li>
-              <li><%= link_to "ブックマーク", '#' %></li>
+              <li><%= link_to "プロフィール", user_path(@user) %></li>
+              <li><%= link_to "プロフィール編集", edit_user_registration_path %></li>
+              <li><%= link_to "ブックマーク", "#" %></li>
               <li class="divider"></li>
               <li>
-                <%= link_to "ログアウト", logout_path, method: :delete %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
               </li>
             </ul>
           </li>
         <% else %>
-          <li><%= link_to "ログイン", login_path %></li>
-          <li><%= link_to "自治体の方はこちら", login_path %></li>
+          <li><%= link_to "ログイン", new_user_session_path %></li>
+          <li><%= link_to "自治体の方はこちら", "#" %></li>
         <% end %>
       </ul>
     </nav>
