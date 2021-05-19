@@ -42,8 +42,8 @@ RSpec.describe 'Users', js: true, type: :system do
 
         user.reload
         expect(user.confirmed_at).to_not be_nil
-        expect(page).to have_current_path new_user_session_path
-        # expect(page).to have_content 'ようこそ！'
+        expect(page).to have_current_path welcome_path
+        expect(page).to have_content 'ようこそ！'
 
         expect(User.count).to eq @number_of_users + 1
       end

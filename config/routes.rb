@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  get '/welcome', to: 'onboadings#welcome'
+  get '/donnatoko',to: 'onboadings#edit'
   get '/user/:id', to: 'users#show', as: 'user'
   devise_for :users, controllers: {
      omniauth_callbacks: 'users/omniauth_callbacks',
-     registrations: "users/registrations"
+     registrations: "users/registrations",
+     confirmations: 'users/confirmations'
     }
   get '/top', to: 'recommends#index'
   root 'static_pages#home'
