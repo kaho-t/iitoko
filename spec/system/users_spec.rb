@@ -4,6 +4,7 @@ RSpec.describe 'Users', js: true, type: :system do
   describe 'User CRUD' do
     let(:user) { FactoryBot.build(:user) }
     let(:another_user) { FactoryBot.create(:user, email: 'another@example.com') }
+    let(:score) { FactoryBot.create(:score)}
     before do
       @number_of_users = User.count
       ActionMailer::Base.deliveries.clear
@@ -90,6 +91,7 @@ RSpec.describe 'Users', js: true, type: :system do
       it 'updates user info' do
         user.save
         user.confirm
+        user.score = score
         visit edit_user_registration_path
         expect(page).to have_current_path new_user_session_path
         log_in_as_user(user)
@@ -102,7 +104,7 @@ RSpec.describe 'Users', js: true, type: :system do
         fill_in '現在のパスワード', with: user.password
         click_button '確定する'
 
-        expect(page).to have_current_path user_path(user)
+        expect(page).to have_current_path user_path
         expect(page).to have_content 'アカウント情報を変更しました。'
         expect(user.reload.name).to eq 'いいとこ　太郎'
       end

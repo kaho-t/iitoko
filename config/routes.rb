@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  # get '/donnatoko/score', to: 'scores#new'
+  # post '/donnatoko/score', to: 'scores#create'
+  resources :scores, only: [:new, :create, :edit, :update]
   get '/welcome', to: 'onboadings#welcome'
-  get '/donnatoko',to: 'onboadings#edit'
-  get '/user/:id', to: 'users#show', as: 'user'
+  get '/user', to: 'users#show', as: 'user'
   devise_for :users, controllers: {
      omniauth_callbacks: 'users/omniauth_callbacks',
      registrations: "users/registrations",

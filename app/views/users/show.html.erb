@@ -1,3 +1,34 @@
 <%= gravatar_for @user %>
 <%= @user.name %>, <%= @user.email %>
 <%= link_to "プロフィール編集", edit_user_registration_path %>
+
+<div>
+  <% if @user.score %>
+    <p>登録スコア</p>
+    <%= link_to "スコア編集", edit_score_path(@user.score.id) %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>自然</th>
+          <th>アクセス</th>
+          <th>お財布事情</th>
+          <th>職</th>
+          <th>ファミリー向け支援</th>
+          <th>文化</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @user.score.nature %></td>
+          <td><%= @user.score.accessibility %></td>
+          <td><%= @user.score.budget %></td>
+          <td><%= @user.score.job_support %></td>
+          <td><%= @user.score.family_support %></td>
+          <td><%= @user.score.culture %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% else %>
+    <%= link_to '移住に求める条件を登録しましょう', new_score_path %>
+  <% end %>
+</div>
