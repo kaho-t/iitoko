@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+
+  devise_for :locals, controllers: {
+    sessions: 'locals/sessions',
+    passwords: 'locals/passwords',
+    registrations: 'locals/registrations',
+    confirmations: 'locals/confirmations'
+  }
+  get 'locals/:id', to: 'locals#show', as: 'local'
+
   # get '/donnatoko/score', to: 'scores#new'
   # post '/donnatoko/score', to: 'scores#create'
   resources :scores, only: [:new, :create, :edit, :update]

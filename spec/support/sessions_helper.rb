@@ -14,4 +14,11 @@ module SessionsHelper
     click_button 'ログイン'
   end
 
+  def log_in_as_local(local)
+    visit new_local_session_path
+    fill_in 'local[email]', with: local.email
+    fill_in 'local[password]', with: local.password
+    click_button 'ログイン'
+  end
+
 end

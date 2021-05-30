@@ -5,11 +5,11 @@ RSpec.describe Score, type: :model do
     expect(FactoryBot.build(:score)).to be_valid
   end
 
-  it "is invalid without user" do
-    score = FactoryBot.build(:score, user_id: nil)
-    score.valid?
-    expect(score.errors[:user]).to include("を入力してください")
-  end
+  # it "is invalid without user" do
+  #   score = FactoryBot.build(:score, user_id: nil)
+  #   score.valid?
+  #   expect(score.errors[:user]).to include("を入力してください")
+  # end
 
   it "is invalid without any points" do
     score = FactoryBot.build(:score,

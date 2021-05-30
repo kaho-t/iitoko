@@ -24,6 +24,18 @@ RSpec.describe 'Users', js: true, type: :system do
         expect(page).to have_content '名前を入力してください'
         expect(page).to have_css 'div#error_explanation'
       end
+      it 'fails to create a user with unmatched password' do
+        visit new_user_registration_path
+        fill_in '名前', with: user.name
+        fill_in 'メールアドレス', with: user.email
+        fill_in 'パスワード', with: user.password
+        fill_in 'パスワード（確認）', with: 'invalid'
+        click_button 'ユーザー登録'
+
+        expect(User.count).to eq @number_of_users
+        expect(page).to have_current_path '/users'
+        expect(page).to have_css 'div#error_explanation'
+      end
       it 'creates a new user' do
         visit new_user_registration_path
         fill_in '名前', with: user.name
@@ -92,9 +104,10 @@ RSpec.describe 'Users', js: true, type: :system do
         user.save
         user.confirm
         user.score = score
-        visit edit_user_registration_path
-        expect(page).to have_current_path new_user_session_path
         log_in_as_user(user)
+        visit edit_user_registration_path
+        # expect(page).to have_current_path new_user_session_path
+        # log_in_as_user(user)
         expect(page).to have_current_path edit_user_registration_path
         expect(user.name).to eq 'iitoko taro'
         fill_in '名前', with: 'いいとこ　太郎'

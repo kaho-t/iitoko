@@ -1,0 +1,4 @@
+<h1><%= @local.name %></h1>
+<% if local_signed_in? && current_local == @local %>
+  <%= link_to "アカウント情報編集", edit_local_registration_path %>
+<% end %>

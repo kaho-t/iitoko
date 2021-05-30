@@ -1,5 +1,6 @@
 class Score < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
+  belongs_to :local, optional: true
   validates :nature, presence: true,
                       numericality: { only_integer: true,
                                       greater_than_or_equal_to: 0,

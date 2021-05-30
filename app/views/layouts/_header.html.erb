@@ -22,9 +22,14 @@
               </li>
             </ul>
           </li>
+        <% elsif local_signed_in? %>
+          <li><%= link_to 'マイページ', current_local %></li>
+          <li><%= link_to "メッセージ", '#' %></li>
+          <li><%= link_to "通知", '#' %></li>
+          <li><%= link_to 'ログアウト', destroy_local_session_path, method: :delete %>
         <% else %>
           <li><%= link_to "ログイン", new_user_session_path %></li>
-          <li><%= link_to "自治体の方はこちら", "#" %></li>
+          <li><%= link_to "自治体の方はこちら", new_local_session_path %></li>
         <% end %>
       </ul>
     </nav>
