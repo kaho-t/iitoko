@@ -7,5 +7,6 @@ FactoryBot.define do
     family_support { 0 }
     culture { 0 }
     association :user
+    association :local
   end
 end

@@ -11,7 +11,7 @@ RSpec.describe 'Users', type: :request do
 
   describe 'GET /show' do
     it 'redirects show when not logged in' do
-      get user_path
+      get user_path(user)
       expect(response).to redirect_to new_user_session_path
     end
   end

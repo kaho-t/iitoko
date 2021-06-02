@@ -2,3 +2,37 @@
 <% if local_signed_in? && current_local == @local %>
   <%= link_to "アカウント情報編集", edit_local_registration_path %>
 <% end %>
+<div>
+  <% if @local.score %>
+    <p>登録スコア</p>
+    <% if current_local == @local %>
+      <%= link_to "スコア編集", edit_score_path(@local.score.id) %>
+    <% end %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>自然</th>
+          <th>アクセス</th>
+          <th>お財布事情</th>
+          <th>職</th>
+          <th>ファミリー向け支援</th>
+          <th>文化</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @local.score.nature %></td>
+          <td><%= @local.score.accessibility %></td>
+          <td><%= @local.score.budget %></td>
+          <td><%= @local.score.job_support %></td>
+          <td><%= @local.score.family_support %></td>
+          <td><%= @local.score.culture %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% elsif current_local == @local %>
+    <%= link_to 'あなたの町がドンナトコか登録しましょう', new_score_path %>
+  <% else %>
+    coming soon...
+  <% end %>
+</div>

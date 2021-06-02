@@ -9,7 +9,12 @@ class ScoresController < ApplicationController
   end
 
   def create
-    @score = current_user.build_score(score_params)
+    if current_user
+      current_account = current_user
+    elsif current_local
+      current_account = current_local
+    end
+    @score = current_account.build_score(score_params)
     if @score.save
       redirect_to top_url
     else
@@ -18,16 +23,24 @@ class ScoresController < ApplicationController
   end
 
   def edit
-    @user = current_user
-    @score = current_user.score
+    if current_user
+      @current_account = current_user
+    elsif current_local
+      @current_account = current_local
+    end
+    @score = @current_account.score
     @points = 0..5
   end
 
   def update
-    @user = current_user
-    @score = @user.score
+    if current_user
+      @current_account = current_user
+    elsif current_local
+      @current_account = current_local
+    end
+    @score = @current_account.score
     if @score.update(score_params)
-      redirect_to user_url
+      redirect_to @current_account
     else
       render 'edit'
     end

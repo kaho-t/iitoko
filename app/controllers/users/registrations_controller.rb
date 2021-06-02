@@ -42,7 +42,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     # 自分で設定した「マイページ」へのパス
-    user_path
+    user_path(@user)
   end
 
   # If you have extra params to permit, append them to the sanitizer.

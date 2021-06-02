@@ -3,11 +3,12 @@
 <% if user_signed_in? && current_user == @user %>
   <%= link_to "プロフィール編集", edit_user_registration_path %>
 <% end %>
-
 <div>
   <% if @user.score %>
     <p>登録スコア</p>
-    <%= link_to "スコア編集", edit_score_path(@user.score.id) %>
+    <% if current_user == @user %>
+      <%= link_to "スコア編集", edit_score_path(@user.score.id) %>
+    <% end %>
     <table class="table">
       <thead>
         <tr>
@@ -30,7 +31,9 @@
         </tr>
       </tbody>
     </table>
-  <% else %>
+  <% elsif @user == current_user %>
     <%= link_to '移住に求める条件を登録しましょう', new_score_path %>
+  <% else %>
+    coming soon...
   <% end %>
 </div>
