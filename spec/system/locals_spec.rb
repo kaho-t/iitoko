@@ -14,6 +14,7 @@ let(:local) { FactoryBot.build(:local) }
         expect(page).to have_content '自治体としてログイン'
         click_link '自治体登録'
         expect(page).to have_content '自治体登録'
+        select "北海道", from: "都道府県"
         fill_in '自治体名', with: ""
         fill_in 'メールアドレス', with: local.email
         fill_in 'パスワード', with: local.password
@@ -110,8 +111,8 @@ let(:local) { FactoryBot.build(:local) }
         # expect(page).to have_current_path new_local_session_path
         # log_in_as_local(local)
         expect(page).to have_current_path edit_local_registration_path
-        expect(local.name).to eq '東京都北区'
-        fill_in '自治体名', with: '北区'
+        expect(local.name).to eq '北区'
+        fill_in '自治体名', with: '足立区'
         fill_in 'メールアドレス', with: local.email
         fill_in 'パスワード', with: ''
         fill_in 'パスワード（確認用）', with: ''
@@ -120,7 +121,7 @@ let(:local) { FactoryBot.build(:local) }
 
         expect(page).to have_current_path local_path(local)
         expect(page).to have_content 'アカウント情報を変更しました。'
-        expect(local.reload.name).to eq '北区'
+        expect(local.reload.name).to eq '足立区'
       end
     end
   end

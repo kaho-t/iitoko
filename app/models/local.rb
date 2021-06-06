@@ -1,4 +1,6 @@
 class Local < ApplicationRecord
+  include JpPrefecture
+  jp_prefecture :prefecture_code
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,5 +20,6 @@ class Local < ApplicationRecord
                         confirmation: true
   validates :password_confirmation, presence: true, allow_nil: true
   attr_accessor :current_password
-  has_one :score
+  has_one :score, dependent: :destroy
+  has_one :profile, dependent: :destroy
 end

@@ -4,6 +4,11 @@
   <%= render "locals/shared/error_messages", resource: resource %>
 
   <div class="field">
+  <%= f.label :prefecture_code, '都道府県' %><br />
+  <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name %>
+  </div>
+
+  <div class="field">
   <%= f.label :name, '自治体名' %><br />
   <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>

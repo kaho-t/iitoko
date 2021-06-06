@@ -73,6 +73,7 @@ RSpec.describe 'Scores', type: :system do
       choose 'score_family_support_5'
       choose 'score_culture_0'
       click_button '次へ'
+      expect(page).to have_current_path new_profile_path
       visit local_path(local)
       expect(page).to have_content '登録スコア'
       expect(page).to have_content 'スコア編集'

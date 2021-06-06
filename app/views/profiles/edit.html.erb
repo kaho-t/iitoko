@@ -1,0 +1,49 @@
+<h1>プロフィール編集</h1>
+<p>※データの入力率が高いほど移住希望者とのマッチング成功率が高まります</p>
+
+<%= form_with(model: @profile, local: true) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+
+  <div class="field">
+    <%= f.label :population, "人口" %><br />
+    <%= f.number_field :population, step: '0.1', autofocus: true, autocomplete: "population" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :temperature, "平均気温" %><br />
+    <%= f.number_field :temperature, step: '0.1', autofocus: true, autocomplete: "temperature" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :moved_in, "転入数（前年）" %><br />
+    <%= f.number_field :moved_in, autofocus: true, autocomplete: "moved_in" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :waiting_children, "待機児童数" %><br />
+    <%= f.number_field :waiting_children, autofocus: true, autocomplete: "waiting_children" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :land_price, "地価" %><br />
+    <%= f.number_field :land_price, autofocus: true, autocomplete: "land_price" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :income, "平均所得" %><br />
+    <%= f.number_field :income, autofocus: true, autocomplete: "income" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :crime_rate, "犯罪率" %><br />
+    <%= f.number_field :crime_rate, step: '0.1', autofocus: true, autocomplete: "crime_rate" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :introduction, "町の紹介文" %><br />
+    <%= f.text_area :introduction, placeholder: "あなたの町を255文字以内でアピールしましょう" %>
+
+  <div class="actions">
+    <%= f.submit "確定" %>
+  </div>
+<% end %>

@@ -38,6 +38,8 @@ gem 'rubocop-rails', require: false
 gem 'rails-controller-testing'
 gem "devise", git: "https://github.com/heartcombo/devise"
 gem 'omniauth-google-oauth2'
+gem 'jp_prefecture'
+gem 'faker'
 
 group :development, :test do
   gem 'factory_bot_rails'

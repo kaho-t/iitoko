@@ -16,7 +16,11 @@ class ScoresController < ApplicationController
     end
     @score = current_account.build_score(score_params)
     if @score.save
-      redirect_to top_url
+      if current_account == current_local
+        redirect_to new_profile_url
+      else
+        redirect_to top_url
+      end
     else
       render 'score/new'
     end

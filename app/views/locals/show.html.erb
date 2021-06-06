@@ -1,38 +1,153 @@
 <h1><%= @local.name %></h1>
-<% if local_signed_in? && current_local == @local %>
-  <%= link_to "アカウント情報編集", edit_local_registration_path %>
-<% end %>
-<div>
-  <% if @local.score %>
-    <p>登録スコア</p>
-    <% if current_local == @local %>
-      <%= link_to "スコア編集", edit_score_path(@local.score.id) %>
+<p><%= @local.prefecture.name %></p>
+
+<section class="score">
+  <% if local_signed_in? && current_local == @local %>
+    <%= link_to "アカウント情報編集", edit_local_registration_path %>
+  <% end %>
+  <div>
+    <% if @local.score %>
+      <h2>登録スコア</h2>
+      <% if current_local == @local %>
+        <%= link_to "スコア編集", edit_score_path(@local.score.id) %>
+      <% end %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>自然</th>
+            <th>アクセス</th>
+            <th>お財布事情</th>
+            <th>職</th>
+            <th>ファミリー向け支援</th>
+            <th>文化</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @local.score.nature %></td>
+            <td><%= @local.score.accessibility %></td>
+            <td><%= @local.score.budget %></td>
+            <td><%= @local.score.job_support %></td>
+            <td><%= @local.score.family_support %></td>
+            <td><%= @local.score.culture %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+      <canvas id="myChart"></canvas>
+      </div>
+    <% elsif current_local == @local %>
+      <%= link_to 'あなたの町がドンナトコか登録しましょう', new_score_path %>
+    <% else %>
+      coming soon...
     <% end %>
+  </div>
+</section>
+
+<section class="intro">
+<% if local_signed_in? && current_local == @local && @local.profile%>
+<%= link_to "町のプロフィール編集", edit_profile_path(@local.profile.id) %>
+<% end %>
+  <h2>町の紹介文</h2>
+  <% if @local.profile %>
+    <div class="intro_box">
+      <p><%= @local.profile.introduction ? @local.profile.introduction : 'coming soon...' %></p>
+    </div>
+  <% else %>
+  <p>coming soon...</p>
+  <% end %>
+</section>
+
+<section class="numbers">
+  <h2>数字で見るとドンナトコ？</h2>
+  <% if @local.profile %>
     <table class="table">
       <thead>
         <tr>
-          <th>自然</th>
-          <th>アクセス</th>
-          <th>お財布事情</th>
-          <th>職</th>
-          <th>ファミリー向け支援</th>
-          <th>文化</th>
+          <th>人口</th>
+          <th>平均気温</th>
+          <th>転入数（前年）</th>
+          <th>待機児童数</th>
+          <th>地価</th>
+          <th>平均所得</th>
+          <th>犯罪率</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><%= @local.score.nature %></td>
-          <td><%= @local.score.accessibility %></td>
-          <td><%= @local.score.budget %></td>
-          <td><%= @local.score.job_support %></td>
-          <td><%= @local.score.family_support %></td>
-          <td><%= @local.score.culture %></td>
+          <td><%= @local.profile.population ? pluralize(@local.profile.population, "人") : 'coming soon...' %></td>
+          <td><%= @local.profile.temperature ? pluralize(@local.profile.temperature, "度") : 'coming soon...' %></td>
+          <td><%= @local.profile.moved_in ? pluralize(@local.profile.moved_in, "人") : 'coming soon...' %></td>
+          <td><%= @local.profile.waiting_children ? pluralize(@local.profile.waiting_children, "人") : 'coming soon...' %></td>
+          <td><%= @local.profile.land_price ? pluralize(@local.profile.land_price, "円") : 'coming soon...' %></td>
+          <td><%= @local.profile.income ? pluralize(@local.profile.income, "円") : 'coming soon...' %></td>
+          <td><%= @local.profile.crime_rate ? pluralize(@local.profile.crime_rate, "%") : 'coming soon...' %></td>
         </tr>
       </tbody>
     </table>
-  <% elsif current_local == @local %>
-    <%= link_to 'あなたの町がドンナトコか登録しましょう', new_score_path %>
   <% else %>
-    coming soon...
+    <p>coming soon...</p>
   <% end %>
-</div>
+</section>
+
+  <script>
+    <% if @local.score %>
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ["自然", "アクセス", "財政支援", "職", "ファミリー支援", "文化"],
+          <% if user_signed_in? && current_user.score %>
+            datasets: 
+            [
+                {
+                label: '町の登録スコア',
+                backgroundColor: 'rgba(102,255,129,0.2)',
+                borderColor: 'rgba(122,255,129,0.2)',
+                data: [<%= @local.score.nature %>,
+                        <%= @local.score.accessibility %>,
+                        <%= @local.score.budget %>,
+                        <%= @local.score.job_support %>,
+                        <%= @local.score.family_support %>,
+                        <%= @local.score.culture %>]
+                },
+                {
+                label: '自分の登録スコア',
+                backgroundColor: 'rgba(122,205,129,0.2)',
+                borderColor: 'rgba(122,255,129,0.2)',
+                data: [<%= current_user.score.nature %>,
+                        <%= current_user.score.accessibility %>,
+                        <%= current_user.score.budget %>,
+                        <%= current_user.score.job_support %>,
+                        <%= current_user.score.family_support %>,
+                        <%= current_user.score.culture %>]
+                }
+              ]
+          <% else %>
+          datasets: 
+            [
+                {
+                label: '町の登録スコア',
+                backgroundColor: 'rgba(102,255,129,0.2)',
+                borderColor: 'rgba(122,255,129,0.2)',
+                data: [<%= @local.score.nature %>,
+                        <%= @local.score.accessibility %>,
+                        <%= @local.score.budget %>,
+                        <%= @local.score.job_support %>,
+                        <%= @local.score.family_support %>,
+                        <%= @local.score.culture %>]
+                }
+            ]
+          <% end %>
+        },
+        options: {
+            scale: {
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 5
+                }
+            }
+        }
+      });
+      <% end %>
+    </script>

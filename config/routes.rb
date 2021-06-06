@@ -8,9 +8,6 @@ Rails.application.routes.draw do
   }
   get 'locals/:id', to: 'locals#show', as: 'local'
 
-  # get '/donnatoko/score', to: 'scores#new'
-  # post '/donnatoko/score', to: 'scores#create'
-  # get '/user', to: 'users#show', as: 'user'
   devise_for :users, controllers: {
      omniauth_callbacks: 'users/omniauth_callbacks',
      registrations: "users/registrations",
@@ -19,6 +16,7 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: 'user'
 
   resources :scores, only: [:new, :create, :edit, :update]
+  resources :profiles, only: [:new, :create, :edit, :update]
   get '/welcome', to: 'onboadings#welcome'
   get '/top', to: 'recommends#index'
   root 'static_pages#home'

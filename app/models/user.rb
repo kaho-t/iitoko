@@ -18,7 +18,7 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, allow_nil: true
   attr_accessor :current_password
 
-  has_one :score
+  has_one :score, dependent: :destroy
 
   # omniauthのコールバック時に呼ばれるメソッド
   def self.from_omniauth(auth)

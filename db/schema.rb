@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_234718) do
+ActiveRecord::Schema.define(version: 2021_06_05_070729) do
 
   create_table "locals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -31,10 +31,26 @@ ActiveRecord::Schema.define(version: 2021_05_31_234718) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider"
     t.string "uid"
+    t.integer "prefecture_code"
     t.index ["confirmation_token"], name: "index_locals_on_confirmation_token", unique: true
     t.index ["email"], name: "index_locals_on_email", unique: true
     t.index ["reset_password_token"], name: "index_locals_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_locals_on_unlock_token", unique: true
+  end
+
+  create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "introduction"
+    t.integer "population"
+    t.float "temperature"
+    t.integer "moved_in"
+    t.integer "waiting_children"
+    t.integer "land_price"
+    t.integer "income"
+    t.float "crime_rate"
+    t.bigint "local_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["local_id"], name: "index_profiles_on_local_id"
   end
 
   create_table "scores", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -72,6 +88,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_234718) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "profiles", "locals"
   add_foreign_key "scores", "locals"
   add_foreign_key "scores", "users"
 end

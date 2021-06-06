@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :local do
-    name { '東京都北区' }
+    prefecture_code { 13 }
+    name { '北区' }
     sequence(:email) { |n| "local#{n}@example.com" }
     password { 'Iitoko123' }
     password_confirmation { 'Iitoko123' }
