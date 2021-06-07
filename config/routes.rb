@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :tags, only: [:new, :create, :edit, :update]
   devise_for :locals, controllers: {
     sessions: 'locals/sessions',
     passwords: 'locals/passwords',

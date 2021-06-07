@@ -1,6 +1,20 @@
 <h1><%= @local.name %></h1>
 <p><%= @local.prefecture.name %></p>
 
+
+<div class="tags">
+<% if @local.tag %>
+  <% if @local == current_local %>
+    <%= link_to "タグ編集", edit_tag_path(@local.tag.id) %>
+  <% end %>
+    <% @local.tag.i18n_true_tags.each do |local_tag| %>
+      <p class="tag"><%= local_tag %></p>
+    <% end %>
+ <% elsif @local == current_local %>
+    <%= link_to "タグ付けをして移住希望者に見つけてもらいやすくする", new_tag_path %>
+<% end %>
+</div>
+
 <section class="score">
   <% if local_signed_in? && current_local == @local %>
     <%= link_to "アカウント情報編集", edit_local_registration_path %>
@@ -61,6 +75,8 @@
 <section class="numbers">
   <h2>数字で見るとドンナトコ？</h2>
   <% if @local.profile %>
+  入力日時：<%= @local.profile.created_at %>
+  更新日時：<%= @local.profile.updated_at %>
     <table class="table">
       <thead>
         <tr>

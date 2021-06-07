@@ -22,6 +22,7 @@ RSpec.describe 'Profiles', type: :system do
       fill_in '町の紹介文', with: profile.introduction
       click_button '次へ'
       expect(Profile.count).to eq @number_of_profiles + 1
+      expect(page).to have_current_path new_tag_path
       visit local_path(local)
       expect(page).to have_content "#{profile.introduction}"
     end

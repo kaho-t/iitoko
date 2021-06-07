@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_05_070729) do
+ActiveRecord::Schema.define(version: 2021_06_06_073938) do
 
   create_table "locals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -68,6 +68,36 @@ ActiveRecord::Schema.define(version: 2021_06_05_070729) do
     t.index ["user_id"], name: "index_scores_on_user_id"
   end
 
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.boolean "sea"
+    t.boolean "mountain"
+    t.boolean "river"
+    t.boolean "field"
+    t.boolean "hotspring"
+    t.boolean "north"
+    t.boolean "south"
+    t.boolean "easy_to_go"
+    t.boolean "small_city"
+    t.boolean "car"
+    t.boolean "train"
+    t.boolean "low_price"
+    t.boolean "moving_support"
+    t.boolean "entrepreneur_support"
+    t.boolean "child_care_support"
+    t.boolean "job_change_support"
+    t.boolean "park"
+    t.boolean "education"
+    t.boolean "food"
+    t.boolean "architecture"
+    t.boolean "history"
+    t.boolean "event"
+    t.boolean "tourism"
+    t.bigint "local_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["local_id"], name: "index_tags_on_local_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -91,4 +121,5 @@ ActiveRecord::Schema.define(version: 2021_06_05_070729) do
   add_foreign_key "profiles", "locals"
   add_foreign_key "scores", "locals"
   add_foreign_key "scores", "users"
+  add_foreign_key "tags", "locals"
 end

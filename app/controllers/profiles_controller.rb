@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
     @profile = current_local.build_profile(profile_params)
     if @profile.save
       flash[:success] = "プロフィールが登録されました"
-      redirect_to current_local
+      redirect_to new_tag_path
     else
       render 'profiles/new'
     end

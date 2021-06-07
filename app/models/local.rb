@@ -22,4 +22,5 @@ class Local < ApplicationRecord
   attr_accessor :current_password
   has_one :score, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_one :tag, dependent: :destroy
 end

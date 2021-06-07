@@ -122,3 +122,18 @@ input {
   padding: 5px 10px;
   margin: 0 10px;
 }
+
+// ================
+//    LOCAL_SHOW
+// ================
+.tags {
+  display: flex;
+}
+.tag {
+  display: inline-block;
+  padding: 1px 3px;
+  margin: 1px 3px;
+  justify-content: space-between;
+  color: #fff;
+  background-color: #ffa500;
+}
