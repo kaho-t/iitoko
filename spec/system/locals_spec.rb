@@ -140,4 +140,16 @@ let(:local) { FactoryBot.build(:local) }
       expect(Local.count).to eq @number_of_locals - 1
     end
   end
+  describe 'local uploads an attachment' do
+    it 'successfully uploads' do
+      local.save
+      local.confirm
+      sign_in local
+      visit edit_local_registration_path
+      attach_file "ヘッダー画像", "#{Rails.root}/spec/files/attachment.jpeg"
+      fill_in '現在のパスワード', with: local.password
+      click_button "確定する"
+      expect(page).to have_current_path local_path(local)
+    end
+  end
 end

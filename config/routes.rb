@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     registrations: 'locals/registrations',
     confirmations: 'locals/confirmations'
   }
+
   get 'locals/:id', to: 'locals#show', as: 'local'
 
   devise_for :users, controllers: {

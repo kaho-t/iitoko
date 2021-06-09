@@ -40,6 +40,9 @@ gem "devise", git: "https://github.com/heartcombo/devise"
 gem 'omniauth-google-oauth2'
 gem 'jp_prefecture'
 gem 'faker'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'rmagick'
 
 group :development, :test do
   gem 'factory_bot_rails'

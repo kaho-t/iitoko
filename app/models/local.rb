@@ -1,4 +1,5 @@
 class Local < ApplicationRecord
+  mount_uploader :image, ImageUploader
   include JpPrefecture
   jp_prefecture :prefecture_code
   # Include default devise modules. Others available are:
