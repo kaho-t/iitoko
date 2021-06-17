@@ -1,0 +1,7 @@
+<h1><%= @local.name %> 記事一覧</h1>
+<% if @local.articles.any? %>
+  <ol class="articles">
+    <%= render @articles, local: @local %>
+  </ol>
+  <%= paginate @articles %>
+<% end %>

@@ -1,0 +1,13 @@
+<li id="article-<%= article.id %>">
+  <% if article.main_image.attached? && article.main_image.variable? %>
+    <%= image_tag article.main_image.variant(resize_to_fill:[120,120], crop:("120x120+0+0")).processed %>
+  <% end %>
+  <span class="local"><%= link_to article.local.name, article.local %></span>
+  <span class="title"><%= link_to article.title, article_path(article) %></span>
+  <span class="content"><%= link_to strip_tags(article.content.to_s).gsub(/[\n]/,"").strip.truncate(100), article_path(article) %></span>
+  <span class="timestamp">投稿日：<%= time_ago_in_words(article.created_at) %> 前</span>
+  <% if local == current_local  %>
+    <%= link_to '編集', edit_article_path(article) %>
+    <span class="delete_button"><%= link_to '削除', article, method: :delete, data: {confirm: "'#{article.title}' を削除します"} %>
+  <% end %>
+</li>

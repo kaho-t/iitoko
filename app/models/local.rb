@@ -24,4 +24,5 @@ class Local < ApplicationRecord
   has_one :score, dependent: :destroy
   has_one :profile, dependent: :destroy
   has_one :tag, dependent: :destroy
+  has_many :articles, dependent: :destroy
 end

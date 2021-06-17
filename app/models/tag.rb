@@ -1,5 +1,6 @@
 class Tag < ApplicationRecord
-  belongs_to :local
+  belongs_to :local, optional: true
+  belongs_to :article, optional: true
   TAG_FIELDS = [:sea, :mountain, :river, :field, :hotspring, :north, :south,
                 :easy_to_go, :small_city, :car, :train,
                 :low_price, :moving_support, :entrepreneur_support, :child_care_support, :job_change_support,

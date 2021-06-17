@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_063801) do
+ActiveRecord::Schema.define(version: 2021_06_12_075531) do
+
+  create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body", size: :long
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +48,15 @@ ActiveRecord::Schema.define(version: 2021_06_08_063801) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "local_id", null: false
+    t.index ["local_id", "created_at"], name: "index_articles_on_local_id_and_created_at"
+    t.index ["local_id"], name: "index_articles_on_local_id"
   end
 
   create_table "locals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -121,9 +140,11 @@ ActiveRecord::Schema.define(version: 2021_06_08_063801) do
     t.boolean "history"
     t.boolean "event"
     t.boolean "tourism"
-    t.bigint "local_id", null: false
+    t.bigint "local_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "article_id"
+    t.index ["article_id"], name: "index_tags_on_article_id"
     t.index ["local_id"], name: "index_tags_on_local_id"
   end
 
@@ -149,8 +170,10 @@ ActiveRecord::Schema.define(version: 2021_06_08_063801) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "articles", "locals"
   add_foreign_key "profiles", "locals"
   add_foreign_key "scores", "locals"
   add_foreign_key "scores", "users"
+  add_foreign_key "tags", "articles"
   add_foreign_key "tags", "locals"
 end

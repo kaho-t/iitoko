@@ -1,0 +1,17 @@
+<div class="header_image" style="background-image: url(<%= @article.main_image if @article.main_image.attached? %>); background-size: cover;">
+  <h1><%= @article.title %></h1>
+</div>
+<% if @article.local == current_local %>
+  <%= link_to '削除', @article, method: :delete, data: {confirm: "'#{@article.title}' を削除します"} %>
+  <%= link_to '編集', edit_article_path(@article)%>
+<% end %>
+<div class="tags">
+  <% if @article.tag %>
+    <% @article.tag.i18n_true_tags.each do |local_tag| %>
+      <p class="tag"><%= local_tag %></p>
+    <% end %>
+  <% end %>
+</div>
+<section>
+  <%= @article.content %>
+</section>

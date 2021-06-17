@@ -43,6 +43,14 @@ gem 'faker'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'rmagick'
+gem 'jquery-rails'
+gem 'bootstrap'
+gem 'simple_form'
+gem 'actiontext'
+gem 'image_processing'
+gem 'active_storage_validations'
+gem 'kaminari'
+
 
 group :development, :test do
   gem 'factory_bot_rails'

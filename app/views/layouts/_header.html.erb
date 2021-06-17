@@ -24,6 +24,8 @@
           </li>
         <% elsif local_signed_in? %>
           <li><%= link_to 'マイページ', current_local %></li>
+          <li><%= link_to '記事作成', new_article_path %></li>
+          <li><%= link_to '記事一覧', local_articles_path(current_local) %></li>
           <li><%= link_to "メッセージ", '#' %></li>
           <li><%= link_to "通知", '#' %></li>
           <li><%= link_to 'ログアウト', destroy_local_session_path, method: :delete %>

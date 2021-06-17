@@ -108,6 +108,14 @@
     <p>coming soon...</p>
   <% end %>
 </section>
+<section class="articles">
+<% if @local.articles.any? %>
+  <ol class="articles">
+    <%= render @articles.first(3), local: @local %>
+  </ol>
+  <%= link_to '記事一覧', local_articles_path(@local) %>
+<% end %>
+</section>
 
   <script>
     <% if @local.score %>
