@@ -1,0 +1,31 @@
+<h1>iitoko検索</h1>
+
+<%= search_form_for(@q, url:search_path) do |f| %>
+
+  <% @tags.each do |key, jp| %>
+    <div class="field">
+      <%= f.label key, jp %><br />
+      <%= f.check_box '#{key}_eq_any', { multiple: true }, true, false %>
+    </div>
+    <% end %>
+
+  <div class="actions">
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+
+<table>
+<% @locals.each do |local| %>
+  <tr>
+    <td><%= local.prefecture.name %>
+    <td><%= local.name %>
+    <td>
+      <% local.tag.i18n_true_tags.each do |local_tag| %>
+        <p class="tag"><%= local_tag %></p>
+      <% end %>
+      </td>
+    <td><%= link_to '詳細はこちら', local_path(local) %></td>
+  </tr>
+<% end %>
+</table>

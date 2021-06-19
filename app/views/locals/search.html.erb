@@ -1,0 +1,143 @@
+<h1>iitoko検索</h1>
+<%= search_form_for(@q, url:search_path) do |f| %>
+  
+  <div class="field">
+    <%= f.label :local_prefecture, '都道府県' %><br />
+    <%= f.collection_select :prefecture_code_eq, JpPrefecture::Prefecture.all, :code, :name, { include_blank: '都道府県' }, { class: 'custom-select'} %>
+  </div>
+
+  <div style="display: flex;">
+    <div class="field">
+      <%= f.label :tag_sea %><br />
+      <%= f.check_box :tag_sea_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_mountain %><br />
+      <%= f.check_box :tag_mountain_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_river %><br />
+      <%= f.check_box :tag_river_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_field %><br />
+      <%= f.check_box :tag_field_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_hotspring %><br />
+      <%= f.check_box :tag_hotspring_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_north %><br />
+      <%= f.check_box :tag_north_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_south %><br />
+      <%= f.check_box :tag_south_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_easy_to_go %><br />
+      <%= f.check_box :tag_easy_to_go_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_small_city %><br />
+      <%= f.check_box :tag_small_city_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_car %><br />
+      <%= f.check_box :tag_car_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_train %><br />
+      <%= f.check_box :tag_train_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_low_price %><br />
+      <%= f.check_box :tag_low_price_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_moving_support %><br />
+      <%= f.check_box :tag_moving_support_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_entrepreneur_support %><br />
+      <%= f.check_box :tag_entrepreneur_support_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_child_care_support %><br />
+      <%= f.check_box :tag_child_care_support_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_job_change_support %><br />
+      <%= f.check_box :tag_job_change_support_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_park %><br />
+      <%= f.check_box :tag_park_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_education %><br />
+      <%= f.check_box :tag_education_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_food %><br />
+      <%= f.check_box :tag_food_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_architecture %><br />
+      <%= f.check_box :tag_architecture_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_history %><br />
+      <%= f.check_box :tag_history_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_event %><br />
+      <%= f.check_box :tag_event_true, {}, true, false %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tag_tourism %><br />
+      <%= f.check_box :tag_tourism_true, {}, true, false %>
+    </div>
+ </div>
+  <div class="actions">
+  <%= f.submit '検索', class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<section>
+<table>
+  <tr>
+   <th><%= sort_link(@q, :name, "自治体名") %></th>
+   <th><%= sort_link(@q, :prefecture_code, "都道府県") %></th>
+  </tr>
+  <% @locals.each do |local| %>
+  <tr>
+    <td><%= link_to local.name, local_path(local) %></td>
+    <td><%= local.prefecture.name %></td>
+  </tr>
+  <% end %>
+</table>
+</section>

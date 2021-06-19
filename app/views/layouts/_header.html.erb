@@ -3,6 +3,7 @@
     <%= link_to "iitoko", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="<%= search_path %>"><i class="fas fa-search"></i></a>
         <% if user_signed_in? %>
           <li><%= link_to "検索", '#' %></li>
           <li><%= link_to "タイムライン", '#' %></li>

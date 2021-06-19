@@ -90,6 +90,9 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
     builder (3.2.4)
+    bullet (6.1.4)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.1.3)
     capybara (3.35.3)
       addressable
@@ -263,6 +266,10 @@ GEM
       thor (~> 1.0)
     rainbow (3.0.0)
     rake (13.0.3)
+    ransack (2.4.2)
+      activerecord (>= 5.2.4)
+      activesupport (>= 5.2.4)
+      i18n
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -347,6 +354,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
+    uniform_notifier (1.14.2)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)
@@ -380,6 +388,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   bootstrap
   bootstrap-sass (= 3.4.1)
+  bullet
   byebug
   capybara (>= 3.26)
   capybara-email
@@ -405,6 +414,7 @@ DEPENDENCIES
   rails (~> 6.1.3, >= 6.1.3.1)
   rails-controller-testing
   rails-i18n
+  ransack
   rexml (~> 3.2, >= 3.2.4)
   rmagick
   rspec-rails

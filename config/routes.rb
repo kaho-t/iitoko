@@ -9,9 +9,11 @@ Rails.application.routes.draw do
     confirmations: 'locals/confirmations'
   }
   resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
-  resources :locals, only: [:show] do
+  resources :locals, only: [:show, :index] do
     resources :articles, only: [:index]
   end
+
+  get 'search', to: 'locals#search'
 
   devise_for :users, controllers: {
      omniauth_callbacks: 'users/omniauth_callbacks',

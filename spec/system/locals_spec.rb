@@ -1,5 +1,9 @@
 RSpec.describe 'Locals', js: true, type: :system do
 let(:local) { FactoryBot.build(:local) }
+let(:hokkaido) { FactoryBot.build(:local, prefecture_code: 1, name: '札幌' )}
+let(:shimokawa) { FactoryBot.build(:local, prefecture_code: 1, name: '下川町' )}
+let(:tag) { FactoryBot.build(:tag, local: local)}
+let(:shimokawa_tag) { FactoryBot.build(:tag, local: shimokawa)}
 
   describe 'creating a new local' do
     before do
@@ -150,6 +154,44 @@ let(:local) { FactoryBot.build(:local) }
       fill_in '現在のパスワード', with: local.password
       click_button "確定する"
       expect(page).to have_current_path local_path(local)
+    end
+  end
+  describe 'search' do
+    it 'searches locals only from prefecture' do
+      local.save
+      hokkaido.save
+      visit search_path
+      expect(page).to have_content '札幌'
+      select '東京都', from: 'q[prefecture_code_eq]'
+      click_button '検索'
+      expect(page).to have_content '北区'
+      expect(page).to have_no_content '札幌'
+    end
+    it 'searches locals only from tag' do
+      local.save
+      hokkaido.save
+      tag.save
+      visit search_path
+      expect(page).to have_content '札幌'
+      check 'q[tag_sea_true]'
+      click_button '検索'
+      expect(page).to have_content '北区'
+      expect(page).to have_no_content '札幌'
+    end
+    it 'searches local from prefecture and tag' do
+      local.save
+      hokkaido.save
+      shimokawa.save
+      tag.save
+      shimokawa_tag.save
+      visit search_path
+      expect(page).to have_content '札幌'
+      select '北海道', from: 'q[prefecture_code_eq]'
+      check 'q[tag_mountain_true]'
+      click_button '検索'
+      expect(page).to have_content '下川町'
+      expect(page).to have_no_content '北区'
+      expect(page).to have_no_content '札幌'
     end
   end
 end
