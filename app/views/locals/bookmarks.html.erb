@@ -1,0 +1,12 @@
+<h1><%= @local.name %>をブックマークしているユーザー一覧</h1>
+
+<p>ユーザー数：　<%= @users.count %>人</p>
+<% if @users.any? %>
+  <ul>
+    <% @users.each do |user| %>
+      <li><%= link_to user.name, user_path(user) %></li>
+    <% end %>
+  </ul>
+<% else %>
+まだブックマークされていません。
+<% end %>

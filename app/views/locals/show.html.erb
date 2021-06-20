@@ -3,7 +3,7 @@
 <p><%= @local.prefecture.name %></p>
 </div>
 
-
+<%= render 'bookmarks/bookmark_button', local: @local %>
 
 <div class="tags">
 <% if @local.tag %>

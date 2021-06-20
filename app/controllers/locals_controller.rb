@@ -28,7 +28,13 @@ class LocalsController < ApplicationController
     @locals = @q.result(distinct: true).page(params[:page])
   end
 
+  def bookmarks
+    @local = Local.find(params[:id])
+    @users = @local.users.page(params[:page])
+  end
+
   private
+
   def search_params
     params.require(:q).permit(:prefecture_code_eq, :tag_sea_true,
                                                     :tag_mountain_true,

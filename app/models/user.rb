@@ -19,6 +19,8 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   has_one :score, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :locals, through: :bookmarks
 
   # omniauthのコールバック時に呼ばれるメソッド
   def self.from_omniauth(auth)
@@ -26,6 +28,19 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
     end
+  end
+
+  def bookmark_local(local)
+    self.bookmarks.find_or_create_by(local_id: local.id)
+  end
+
+  def unbookmark_local(local)
+    bookmarked = self.bookmarks.find_by(local_id: local.id)
+    bookmarked.destroy if bookmarked
+  end
+
+  def bookmarking?(local)
+    self.locals.include?(local)
   end
 
   private
