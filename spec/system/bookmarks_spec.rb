@@ -1,10 +1,12 @@
 RSpec.describe 'Bookmarks', js: true, type: :system do
   let(:user) { FactoryBot.create(:user) }
   let(:local) { FactoryBot.create(:local) }
+  let(:article) { FactoryBot.build(:article, local: local)}
 
   before do
     user.confirm
     local.confirm
+    article.save
   end
 
 
@@ -17,6 +19,8 @@ RSpec.describe 'Bookmarks', js: true, type: :system do
     expect(page).to have_content local.name
     visit bookmarks_local_path(local)
     expect(page).to have_content user.name
+    visit timeline_path
+    expect(page).to have_content article.title
 
     visit local_path(local)
     find(".bookmarked-btn").click

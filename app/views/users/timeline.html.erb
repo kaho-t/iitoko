@@ -1,0 +1,7 @@
+<h1>タイムライン</h1>
+<% if @articles.any? %>
+  <ol class="articles">
+    <%= render @articles %>
+  </ol>
+  <%= paginate @articles %>
+<% end %>

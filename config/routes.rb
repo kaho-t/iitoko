@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:new, :create, :edit, :update]
   get '/welcome', to: 'onboadings#welcome'
   get '/top', to: 'recommends#index'
+  get '/timeline', to: 'users#timeline'
   root 'static_pages#home'
   get 'static_pages/home_local'
 end

@@ -9,4 +9,15 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     @bookmarked_locals = @user.locals.page(params[:page])
   end
+
+  # def timeline
+  #   local_ids = "SELECT local_id FROM bookmarks WHERE user_id = :user_id"
+  #   Article.where("local_id IN (#{local_ids}) self.local_ids)
+  # end
+
+  def timeline
+    @articles = current_user.feed.page(params[:page])
+  end
+
+
 end

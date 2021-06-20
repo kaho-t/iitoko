@@ -43,6 +43,11 @@ class User < ApplicationRecord
     self.locals.include?(local)
   end
 
+  def feed
+    # Article.where(local_id: self.local_ids)
+    Article.where("local_id IN (?)", local_ids)
+  end
+
   private
 
   def downcase_email

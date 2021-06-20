@@ -6,7 +6,7 @@
   <span class="title"><%= link_to article.title, article_path(article) %></span>
   <span class="content"><%= link_to strip_tags(article.content.to_s).gsub(/[\n]/,"").strip.truncate(100), article_path(article) %></span>
   <span class="timestamp">投稿日：<%= time_ago_in_words(article.created_at) %> 前</span>
-  <% if local == current_local  %>
+  <% if article.local == current_local  %>
     <%= link_to '編集', edit_article_path(article) %>
     <span class="delete_button"><%= link_to '削除', article, method: :delete, data: {confirm: "'#{article.title}' を削除します"} %>
   <% end %>
