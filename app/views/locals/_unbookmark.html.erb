@@ -1,0 +1,6 @@
+<%= form_with(model: current_user.bookmarks.find_by(local_id: @local.id), html: {method: :delete}, remote: true, local: false) do |f| %>
+  <%= hidden_field_tag :local_id, @local.id %>
+  <%= button_tag :type => "submit", style: 'color: orange; border: none; background: none;', class: 'bookmarked-btn' do %>
+    <i class="fas fa-bookmark"></i>
+  <% end %>
+<% end %>
