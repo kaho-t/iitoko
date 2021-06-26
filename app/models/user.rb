@@ -19,8 +19,14 @@ class User < ApplicationRecord
   attr_accessor :current_password
 
   has_one :score, dependent: :destroy
+
   has_many :bookmarks, dependent: :destroy
   has_many :locals, through: :bookmarks
+
+  has_many :talkrooms, dependent: :destroy
+  has_many :talking_withs, through: :talkrooms, source: :local
+
+  has_many :messages
 
   # omniauthのコールバック時に呼ばれるメソッド
   def self.from_omniauth(auth)
@@ -46,6 +52,12 @@ class User < ApplicationRecord
   def feed
     # Article.where(local_id: self.local_ids)
     Article.where("local_id IN (?)", local_ids)
+  end
+
+
+
+  def talking?(local)
+    talking_withs.include?(local)
   end
 
   private

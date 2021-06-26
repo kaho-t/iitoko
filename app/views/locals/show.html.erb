@@ -117,6 +117,17 @@
 <% end %>
 </section>
 
+<% if user_signed_in? %>
+  <section class="cv_area">
+
+    <%= form_with(model: @talkroom, loacal: true) do |f| %>
+      <%= f.hidden_field :local_id, value: @local.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.submit '話を聞いてみたい', class: 'btn btn-primary' %>
+    <% end %>
+  </section>
+<% end %>
+
   <script>
     <% if @local.score %>
       var ctx = document.getElementById("myChart");

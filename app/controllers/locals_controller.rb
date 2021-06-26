@@ -4,6 +4,7 @@ class LocalsController < ApplicationController
   def show
     @local = Local.find_by(id: params[:id])
     @articles = @local.articles
+    @talkroom = current_user.talkrooms.build if user_signed_in?
 
     if @local.image
       @local_headerimage = @local.image.url

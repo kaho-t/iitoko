@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-
-  get 'bookmarks/create'
-  get 'bookmarks/destroy'
-  resources :tags, only: [:new, :create, :edit, :update]
+ resources :tags, only: [:new, :create, :edit, :update]
   
   devise_for :locals, controllers: {
     sessions: 'locals/sessions',
@@ -14,7 +11,7 @@ Rails.application.routes.draw do
   resources :locals, only: [:show, :index] do
     resources :articles, only: [:index]
     member do
-      get :bookmarks
+      get :bookmarks, :talkrooms
     end
   end
 
@@ -28,11 +25,15 @@ Rails.application.routes.draw do
   #get 'users/:id', to: 'users#show', as: 'user'
   resources :users, only: [:show] do
     member do
-      get :bookmarks
+      get :bookmarks, :talkrooms
     end
   end
 
   resources :bookmarks, only: [:create, :destroy]
+  resources :messages, only: [:destroy]
+  resources :talkrooms, only: [:index, :create, :destroy] do
+      resources :messages, only: [:new, :create, :index]
+  end
 
   resources :scores, only: [:new, :create, :edit, :update]
   resources :profiles, only: [:new, :create, :edit, :update]

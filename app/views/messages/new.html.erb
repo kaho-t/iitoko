@@ -1,0 +1,14 @@
+<h1>話を聞いてみたい</h1>
+<p>メッセージのカテゴリを洗濯してください</p>
+<%= form_with(model: [@talkroom, @message], local: true) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <%= f.hidden_field :talkroom_id, value: @talkroom.id %>
+
+  <%= f.label :category, 'カテゴリ' %> *必須
+  <%= f.select :category, [["資料請求したい"],["質問がある"],["移住の相談をしたい"],["直接話を聞いてみたい"],["その他"]], prompt: "カテゴリを選択してください" %>
+
+  <%= f.label :content, '備考欄' %>　任意
+  <%= f.text_area :content %>
+
+  <%= f.submit "送信" %>
+<% end %>

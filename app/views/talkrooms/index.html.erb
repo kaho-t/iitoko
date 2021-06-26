@@ -1,0 +1,20 @@
+<h1>トークルーム</h1>
+
+<% if @talkrooms %>
+  <% @talkrooms.each do |room| %>
+    <div>
+      <% if user_signed_in? %>
+        <%= link_to room.local.name, talkroom_messages_path(room) %>
+        <span>
+          <%=link_to 'トークルームを削除',
+                          room, method: :delete, 
+                          data: {confirm: "#{room.local.name}とのトークルームを削除します。削除すると相手からもトークルームは見れなくなります。"} %>
+        </span>
+      <% elsif local_signed_in? %>
+        <%= link_to room.user.name, talkroom_messages_path(room) %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+まだトークルームがありません
+<% end %>

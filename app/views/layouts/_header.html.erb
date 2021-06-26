@@ -6,7 +6,7 @@
         <li><a href="<%= search_path %>"><i class="fas fa-search"></i></a>
         <% if user_signed_in? %>
           <li><%= link_to "タイムライン", timeline_path %></li>
-          <li><%= link_to "メッセージ", '#' %></li>
+          <li><%= link_to "メッセージ", talkrooms_path %></li>
           <li><%= link_to "通知", '#' %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -26,7 +26,7 @@
           <li><%= link_to 'マイページ', current_local %></li>
           <li><%= link_to '記事作成', new_article_path %></li>
           <li><%= link_to '記事一覧', local_articles_path(current_local) %></li>
-          <li><%= link_to "メッセージ", '#' %></li>
+          <li><%= link_to "メッセージ", talkrooms_path %></li>
           <li><%= link_to "通知", '#' %></li>
           <li><%= link_to 'ログアウト', destroy_local_session_path, method: :delete %>
         <% else %>

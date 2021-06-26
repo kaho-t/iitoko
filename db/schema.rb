@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_19_070039) do
+ActiveRecord::Schema.define(version: 2021_06_21_213300) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -96,6 +96,17 @@ ActiveRecord::Schema.define(version: 2021_06_19_070039) do
     t.index ["unlock_token"], name: "index_locals_on_unlock_token", unique: true
   end
 
+  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "talkroom_id", null: false
+    t.integer "sent_from"
+    t.boolean "is_user"
+    t.text "content"
+    t.string "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["talkroom_id", "is_user", "created_at"], name: "index_messages_on_talkroom_id_and_is_user_and_created_at"
+  end
+
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "introduction"
     t.integer "population"
@@ -158,6 +169,16 @@ ActiveRecord::Schema.define(version: 2021_06_19_070039) do
     t.index ["local_id"], name: "index_tags_on_local_id"
   end
 
+  create_table "talkrooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.bigint "local_id"
+    t.index ["local_id"], name: "index_talkrooms_on_local_id"
+    t.index ["user_id", "local_id"], name: "index_talkrooms_on_user_id_and_local_id", unique: true
+    t.index ["user_id"], name: "index_talkrooms_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -183,9 +204,12 @@ ActiveRecord::Schema.define(version: 2021_06_19_070039) do
   add_foreign_key "articles", "locals"
   add_foreign_key "bookmarks", "locals"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "messages", "talkrooms"
   add_foreign_key "profiles", "locals"
   add_foreign_key "scores", "locals"
   add_foreign_key "scores", "users"
   add_foreign_key "tags", "articles"
   add_foreign_key "tags", "locals"
+  add_foreign_key "talkrooms", "locals"
+  add_foreign_key "talkrooms", "users"
 end
