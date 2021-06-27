@@ -1,0 +1,38 @@
+
+<% notice_to = notification.notice_to %>
+
+<% if user_signed_in? %>
+<% from = Local.find_by(id: notification.notice_from) %>
+  <span>
+    <%= link_to from.name, local_path(from.id) %>さんが
+  </span>
+
+  <% case notification.action %>
+  <% when 'article' %>
+    <%= link_to '記事を更新しました', article_path(notification.article) %>
+  <% when 'message' %>
+    <%= link_to 'あなた宛のメッセージを送信しました', talkroom_messages_path(notification.message.talkroom) %>
+    <%= notification.message.content.truncate(10) %>
+  <% when 'talkroom' %>
+    <%= link_to 'あなたとのトークルームを作成しました', talkroom_messages_path(notification.talkroom) %>
+  <% end %>
+  <p><%= time_ago_in_words(notification.created_at) %>前</p>
+  <hr>
+<% elsif local_signed_in? %>
+  <% from = User.find_by(id: notification.notice_from) %>
+  <span>
+  <%= link_to from.name, user_path(from.id) %>さんが
+  </span>
+
+  <% case notification.action %>
+  <% when 'bookmark' %>
+  <%= 'あなたをブックマークしました' %>
+  <% when 'message' %>
+  <%= link_to 'あなた宛のメッセージを送信しました', talkroom_messages_path(notification.message.talkroom) %>
+  <%= notification.message.content.truncate(10) %>
+  <% when 'talkroom' %>
+  <%= link_to 'あなたとのトークルームを作成しました', talkroom_messages_path(notification.talkroom) %>
+  <% end %>
+  <p><%= time_ago_in_words(notification.created_at) %>前</p>
+  <hr>
+<% end %>

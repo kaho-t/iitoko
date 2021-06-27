@@ -28,6 +28,9 @@ class User < ApplicationRecord
 
   has_many :messages
 
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'notice_from', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'notice_to', dependent: :destroy
+
   # omniauthのコールバック時に呼ばれるメソッド
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

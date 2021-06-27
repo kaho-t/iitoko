@@ -21,6 +21,7 @@ class ArticlesController < ApplicationController
     @article = current_local.articles.build(article_params)
     tags
     if @article.save
+      @article.create_notification_feed(current_local)
       flash[:success] = "投稿が完了しました"
       redirect_to @article
     else

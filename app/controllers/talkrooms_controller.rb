@@ -7,6 +7,11 @@ class TalkroomsController < ApplicationController
     @local = Local.find_by(id: params[:talkroom][:local_id])
     @talkroom = Talkroom.new(talkroom_params)
       if @talkroom.save
+        if user_signed_in?
+          @talkroom.create_notification_tkrm(current_user, @talkroom)
+        elsif local_signed_in?
+          @talkroom.create_notification_tkrm(current_local, @talkroom)
+        end
         flash[:success] = "トークルームが作成されました"
         redirect_to new_talkroom_message_path(@talkroom)
       else

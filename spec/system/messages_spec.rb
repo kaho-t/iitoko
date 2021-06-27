@@ -20,7 +20,7 @@ RSpec.describe 'Messages', js: true, type: :system do
       click_button '送信'
       talkroom = Talkroom.last
       expect(page).to have_content local.name
-  }.to change(Message, :count).by(1)
+  }.to change(Message, :count).by(1).and change(Notification, :count).by(1)
   end
   it 'delete a message' do
     talkroom.save

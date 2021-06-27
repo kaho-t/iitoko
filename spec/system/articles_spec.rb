@@ -1,10 +1,14 @@
 RSpec.describe 'Articles', js: true, type: :system do
+  let(:user) { FactoryBot.create(:user) }
   let(:local) { FactoryBot.create(:local) }
+  let(:bookmark) { FactoryBot.build(:bookmark, user: user, local: local)}
   let(:article) { FactoryBot.build(:article, local: local) }
   let(:another_article) { FactoryBot.build(:article, title: 'another', local: local)}
   let(:another_local) { FactoryBot.create(:local) }
   before do
     local.confirm
+    user.confirm
+    bookmark.save
     @number_of_articles = Article.count
     @number_of_tags = Tag.count
   end
@@ -12,16 +16,19 @@ RSpec.describe 'Articles', js: true, type: :system do
     it 'success to create an article' do
       sign_in local
       visit new_article_path
-      fill_in 'タイトル', with: article.title
-      fill_in_rich_text_area '本文', with: article.content
-      page.attach_file("#{Rails.root}/spec/files/attachment.jpeg") do
-        page.find('.trix-button--icon-attach').click
-      end
-      check '建築・街並み'
-      check 'イベント・祭'
-      click_button '投稿'
-      expect(Article.count).to eq @number_of_articles +1
-      expect(Tag.count).to eq @number_of_tags +1
+
+      expect {
+        fill_in 'タイトル', with: article.title
+        fill_in_rich_text_area '本文', with: article.content
+        page.attach_file("#{Rails.root}/spec/files/attachment.jpeg") do
+          page.find('.trix-button--icon-attach').click
+        end
+        check '建築・街並み'
+        check 'イベント・祭'
+        click_button '投稿'
+        expect(Article.count).to eq @number_of_articles +1
+        expect(Tag.count).to eq @number_of_tags +1
+      }.to change(Notification, :count).by(1)
       expect(page).to have_current_path article_path(Article.last)
       expect(page).to have_content article.title
       expect(page).to have_content 'this is my article!'

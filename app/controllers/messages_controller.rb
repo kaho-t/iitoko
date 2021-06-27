@@ -30,6 +30,12 @@ class MessagesController < ApplicationController
     end
 
     if @message.save
+      if user_signed_in?
+        @message.create_notification_msg(current_user, @message)
+      elsif
+        local_signed_in?
+        @message.create_notification_msg(current_local, @message)
+      end
       flash[:success] = 'メッセージを送信しました'
     else
       flash[:danger] = 'メッセージの送信に失敗しました'

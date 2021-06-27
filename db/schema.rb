@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_213300) do
+ActiveRecord::Schema.define(version: 2021_06_27_022928) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -105,6 +105,27 @@ ActiveRecord::Schema.define(version: 2021_06_21_213300) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["talkroom_id", "is_user", "created_at"], name: "index_messages_on_talkroom_id_and_is_user_and_created_at"
+  end
+
+  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "notice_to", null: false
+    t.boolean "is_for_user", null: false
+    t.integer "notice_from", null: false
+    t.boolean "is_from_user", null: false
+    t.string "action", default: "", null: false
+    t.bigint "bookmark_id"
+    t.bigint "talkroom_id"
+    t.bigint "message_id"
+    t.bigint "article_id"
+    t.boolean "is_checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_notifications_on_article_id"
+    t.index ["bookmark_id"], name: "index_notifications_on_bookmark_id"
+    t.index ["message_id"], name: "index_notifications_on_message_id"
+    t.index ["notice_from", "is_from_user"], name: "index_notifications_on_notice_from_and_is_from_user"
+    t.index ["notice_to", "is_for_user"], name: "index_notifications_on_notice_to_and_is_for_user"
+    t.index ["talkroom_id"], name: "index_notifications_on_talkroom_id"
   end
 
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -205,6 +226,10 @@ ActiveRecord::Schema.define(version: 2021_06_21_213300) do
   add_foreign_key "bookmarks", "locals"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "messages", "talkrooms"
+  add_foreign_key "notifications", "articles"
+  add_foreign_key "notifications", "bookmarks"
+  add_foreign_key "notifications", "messages"
+  add_foreign_key "notifications", "talkrooms"
   add_foreign_key "profiles", "locals"
   add_foreign_key "scores", "locals"
   add_foreign_key "scores", "users"

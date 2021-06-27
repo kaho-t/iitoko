@@ -37,5 +37,8 @@ class Local < ApplicationRecord
 
   has_many :messages
 
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'notice_from', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'notice_to', dependent: :destroy
+
   ransack_alias :local_tags, :tag_sea_or_tag_mountain_or_tag_river_or_tag_field_or_tag_hotspring_or_tag_north_or_tag_south_or_tag_easy_to_tag_go_or_tag_small_city_or_tag_car_or_tag_train_or_tag_low_price_or_tag_moving_support_or_tag_entrepreneur_support_or_tag_child_care_support_or_tag_job_change_support_or_tag_park_or_tag_education_or_tag_food_or_tag_architecture_or_tag_history_or_tag_event_or_tag_tourism
 end
