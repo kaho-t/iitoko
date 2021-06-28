@@ -86,7 +86,7 @@ RSpec.describe 'Profiles', type: :system do
       another_local.confirm
       sign_in another_local
       visit edit_profile_path(profile)
-      expect(page).to have_current_path top_path
+      expect(page).to have_current_path root_path
     end
   end
 end

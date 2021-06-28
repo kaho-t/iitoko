@@ -86,6 +86,6 @@ class TagsController < ApplicationController
   def correct_local
     @tag = Tag.find_by(id: [params[:id]])
     @local = Local.find_by(id: @tag.local_id)
-    redirect_to(top_url) unless @local == current_local
+    redirect_to(root_path) unless @local == current_local
   end
 end

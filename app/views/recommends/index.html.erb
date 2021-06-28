@@ -1,2 +1,14 @@
-<h1>Recommends#index</h1>
-<p>Find me in app/views/recommends/index.html.erb</p>
+<h1>おすすめ地域</h1>
+<% if @recommends %>
+  <% @recommends.each do |local| %>
+    <%= local.name %>
+    <%= local.prefecture.name %>
+    <p>マッチ度：　<%= local.difference_rate(current_user) %>%</p>
+  <% end %>
+  
+  <%= paginate @recommends %>
+
+<% else %>
+  <p>おすすめ地域はありません。。。</p>
+  <%= link_to '登録スコアを見直す', edit_score_path(current_user) %>
+<% end %>

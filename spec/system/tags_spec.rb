@@ -84,7 +84,7 @@ RSpec.describe 'Tags', type: :system do
     it 'redirects to top when invalid account' do
       sign_in another_local
       visit edit_tag_path(tag)
-      expect(page).to have_current_path top_path
+      expect(page).to have_current_path root_path
     end
   end
 end

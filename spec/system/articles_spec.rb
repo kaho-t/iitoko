@@ -142,7 +142,7 @@ RSpec.describe 'Articles', js: true, type: :system do
     it 'fails to edit' do
       sign_in another_local
       visit edit_article_path(article)
-      expect(page).to have_current_path top_path
+      expect(page).to have_current_path root_path
     end
     it 'doesnt show links' do
       sign_in another_local
