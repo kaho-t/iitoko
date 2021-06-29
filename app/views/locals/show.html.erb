@@ -1,6 +1,9 @@
 <div class="header_image" style="background-image: url(<%= @local_headerimage %>); background-size: cover;">
 <h1 class="local_name"><%= @local.name %></h1>
 <p><%= @local.prefecture.name %></p>
+<% if user_signed_in? && current_user.score %>
+  <p>マッチ度：<%= @local.difference_rate(current_user) %>％</p>
+<% end %>
 </div>
 
 <%= render 'bookmark_button', local: @local %>

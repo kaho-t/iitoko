@@ -1,12 +1,12 @@
 <h1>おすすめ地域</h1>
 <% if @recommends %>
   <% @recommends.each do |local| %>
-    <%= local.name %>
+    <%= link_to local.name, local_path(local) %>
     <%= local.prefecture.name %>
     <p>マッチ度：　<%= local.difference_rate(current_user) %>%</p>
   <% end %>
   
-  <%= paginate @recommends %>
+
 
 <% else %>
   <p>おすすめ地域はありません。。。</p>
