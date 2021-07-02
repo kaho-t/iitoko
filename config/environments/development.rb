@@ -40,6 +40,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
   :enable_starttls_auto => true,
   :address => "smtp.gmail.com",
@@ -47,7 +48,8 @@ Rails.application.configure do
   :domain => 'smtp.gmail.com',
   :user_name => ENV['IITOKO_MAIL_ADDRESS'], #gmailアドレス
   :password => ENV['IITOKO_MAIL_ADDRESS_PASSWORD'], #gmailパスワード
-  :authentication => 'login',
+  :authentication => 'plain',
+  # :authentication => 'login',
 }
 
   # Print deprecation notices to the Rails logger.

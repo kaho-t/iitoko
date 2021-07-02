@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :notifications, only: :index
   resources :tags, only: [:new, :create, :edit, :update]
 
@@ -35,12 +36,14 @@ Rails.application.routes.draw do
   resources :talkrooms, only: [:index, :create, :destroy] do
       resources :messages, only: [:new, :create, :index]
   end
+  resources :contacts, only: [:create]
 
   resources :scores, only: [:new, :create, :edit, :update]
   resources :profiles, only: [:new, :create, :edit, :update]
   get '/welcome', to: 'onboadings#welcome'
   get '/top', to: 'recommends#index'
   get '/timeline', to: 'users#timeline'
+  get '/contact', to: 'contacts#new'
   root 'static_pages#home'
   get 'static_pages/home_local'
 end

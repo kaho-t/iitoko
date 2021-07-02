@@ -1,0 +1,16 @@
+<h1>お問い合わせ</h1>
+<p>Find me in app/views/contacts/new.html.erb</p>
+<%= form_with(model: @contact, local: true) do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+
+  <%= f.label :category, 'カテゴリ' %> *必須
+  <%= f.select :category, [["お問い合わせ"],["資料請求"],["その他"]], prompt: "カテゴリを選択してください" %>
+
+  <%= f.label :email, 'メールアドレス' %>
+  <%= f.email_field :email, autocomplete: "email" %>
+
+  <%= f.label :content, '備考欄' %>　任意
+  <%= f.text_area :content %>
+
+  <%= f.submit "送信" %>
+<% end %>

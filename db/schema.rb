@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_27_022928) do
+ActiveRecord::Schema.define(version: 2021_06_30_005217) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -67,6 +67,14 @@ ActiveRecord::Schema.define(version: 2021_06_27_022928) do
     t.index ["local_id"], name: "index_bookmarks_on_local_id"
     t.index ["user_id", "local_id"], name: "index_bookmarks_on_user_id_and_local_id", unique: true
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "contacts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email"
+    t.string "category"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "locals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
