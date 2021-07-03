@@ -11,11 +11,13 @@ class RecommendsController < ApplicationController
     @recommends = []
     locals = Local.all
     locals.each do |local|
-      rate = local.difference_rate(@user)
-      local.send("match_rate=", rate)
+      if local.score
+        rate = local.difference_rate(@user)
+        local.send("match_rate=", rate)
 
-      if local.match_rate >= 60 and @user.bookmarking?(local) == false
-        @recommends << local
+        if local.match_rate >= 60 and @user.bookmarking?(local) == false
+          @recommends << local
+        end
       end
     end
 

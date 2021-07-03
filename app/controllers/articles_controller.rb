@@ -83,7 +83,7 @@ class ArticlesController < ApplicationController
   def correct_local
     @article = Article.find_by(id: [params[:id]])
     @local = Local.find_by(id: @article.local_id)
-    redirect_to(root_path) unless @local == current_local
+    redirect_to local_path(current_local) unless @local == current_local
   end
 
   def tags

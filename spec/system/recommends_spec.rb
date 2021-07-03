@@ -50,7 +50,7 @@ RSpec.describe 'Recommends', type: :system do
 
   it 'shows recommended locals' do
     sign_in user
-    visit top_path
+    visit home_path
 
     expect(page).to have_content local.name
     expect(page).to have_content local2.name

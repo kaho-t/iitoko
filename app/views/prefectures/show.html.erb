@@ -1,0 +1,21 @@
+
+<h1><%= @pref.name %>の地域一覧</h1>
+
+<% if @locals.any? %>
+  <table>
+  <% @locals.each do |local| %>
+    <tr>
+      <td><%= local.prefecture.name %>
+      <td><%= local.name %>
+      <td>
+        <% local.tag.i18n_true_tags.each do |local_tag| %>
+          <p class="tag"><%= local_tag %></p>
+        <% end %>
+        </td>
+      <td><%= link_to '詳細はこちら', local_path(local) %></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <p>まだ登録された地域がありません</p>
+<% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'locals#index'
 
   resources :notifications, only: :index
   resources :tags, only: [:new, :create, :edit, :update]
@@ -10,12 +11,15 @@ Rails.application.routes.draw do
     confirmations: 'locals/confirmations'
   }
   resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
-  resources :locals, only: [:show, :index] do
+
+  resources :locals, only: [:show] do
     resources :articles, only: [:index]
     member do
       get :bookmarks, :talkrooms
     end
   end
+
+  resources :prefectures, only: [:index, :show]
 
   get 'search', to: 'locals#search'
 
@@ -41,9 +45,8 @@ Rails.application.routes.draw do
   resources :scores, only: [:new, :create, :edit, :update]
   resources :profiles, only: [:new, :create, :edit, :update]
   get '/welcome', to: 'onboadings#welcome'
-  get '/top', to: 'recommends#index'
+  get '/home', to: 'recommends#index'
   get '/timeline', to: 'users#timeline'
   get '/contact', to: 'contacts#new'
-  root 'static_pages#home'
-  get 'static_pages/home_local'
+  get '/top', to: 'static_pages#home'
 end

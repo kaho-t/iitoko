@@ -11,16 +11,16 @@ RSpec.describe 'Users', type: :system do
     context 'when log in with a valid user info' do
       it 'shows view for logged in user' do
         log_in_as_user(user)
-        expect(page).to have_current_path '/top'
+        expect(page).to have_current_path '/home'
         expect(page).to have_css 'li.dropdown'
         expect(page).to have_content 'ログインしました。'
       end
       it 'redirects to recommends page from login and signup page' do
         log_in_as_user(user)
         visit new_user_session_path
-        expect(page).to have_current_path '/top'
+        expect(page).to have_current_path '/home'
         visit new_user_registration_path
-        expect(page).to have_current_path '/top'
+        expect(page).to have_current_path '/home'
       end
       it 'does not have cookies' do
         log_in_as_user(user)

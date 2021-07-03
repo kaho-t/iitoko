@@ -14,11 +14,12 @@ class LocalsController < ApplicationController
   end
 
   def index
-    tags
-    @q = Local.ransack(params[:q])
-    @q.sorts = 'updated_at desc' if @q.sorts.empty?
-    # @locals = @q.result.includes(:tag).page(params[:page])
-    @locals = @q.result.uniq.page(params[:page])
+    if user_signed_in?
+      @user = current_user
+      redirect_to home_url
+    end
+
+    @locals = Local.all.sample(10)
   end
 
   def search

@@ -4,6 +4,7 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="<%= search_path %>"><i class="fas fa-search"></i></a>
+        <li><%= link_to '都道府県から探す', prefectures_path %></li>
         <% if user_signed_in? %>
           <li><%= link_to "タイムライン", timeline_path %></li>
           <li><%= link_to "メッセージ", talkrooms_path %></li>
