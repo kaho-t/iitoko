@@ -16,7 +16,7 @@ class Article < ApplicationRecord
 
 
   def create_notification_feed(current_local)
-    b_users = current_local.bookmarks
+    b_users = current_local.users
     notice = Notification.where("notice_from = ? and is_from_user = ? and article_id = ? and action = ?", current_local, false, id, 'article')
     if notice.blank?
       b_users.each do |b_user|

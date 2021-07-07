@@ -15,6 +15,8 @@
     <%= notification.message.content.truncate(10) %>
   <% when 'talkroom' %>
     <%= link_to 'あなたとのトークルームを作成しました', talkroom_messages_path(notification.talkroom) %>
+  <% when 'footprint' %>
+    <%= 'あなたのページを訪問しました' %>
   <% end %>
   <p><%= time_ago_in_words(notification.created_at) %>前</p>
   <hr>
@@ -26,12 +28,14 @@
 
   <% case notification.action %>
   <% when 'bookmark' %>
-  <%= 'あなたをブックマークしました' %>
+    <%= 'あなたをブックマークしました' %>
   <% when 'message' %>
-  <%= link_to 'あなた宛のメッセージを送信しました', talkroom_messages_path(notification.message.talkroom) %>
-  <%= notification.message.content.truncate(10) %>
+    <%= link_to 'あなた宛のメッセージを送信しました', talkroom_messages_path(notification.message.talkroom) %>
+    <%= notification.message.content.truncate(10) %>
   <% when 'talkroom' %>
-  <%= link_to 'あなたとのトークルームを作成しました', talkroom_messages_path(notification.talkroom) %>
+    <%= link_to 'あなたとのトークルームを作成しました', talkroom_messages_path(notification.talkroom) %>
+  <% when 'footprint' %>
+    <%= 'あなたのページを訪問しました' %>
   <% end %>
   <p><%= time_ago_in_words(notification.created_at) %>前</p>
   <hr>

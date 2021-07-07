@@ -1,5 +1,5 @@
 <h1>おすすめ地域</h1>
-<% if @recommends %>
+<% if @recommends.any? %>
   <% @recommends.each do |local| %>
     <%= link_to local.name, local_path(local) %>
     <%= local.prefecture.name %>
@@ -10,5 +10,6 @@
 
 <% else %>
   <p>おすすめ地域はありません。。。</p>
-  <%= link_to '登録スコアを見直す', edit_score_path(current_user) %>
+  <%= link_to 'スコアを登録する', new_score_path unless current_user.score %>
+  <%= link_to '登録スコアを見直す', edit_score_path(current_user)  if current_user.score %>
 <% end %>

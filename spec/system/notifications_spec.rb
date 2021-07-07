@@ -1,4 +1,4 @@
-RSpec.describe 'Messages', type: :system do
+RSpec.describe 'Notifications', type: :system do
   let(:user) {FactoryBot.create(:user)}
   let(:local){FactoryBot.create(:local)}
 

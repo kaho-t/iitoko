@@ -40,8 +40,27 @@ class Local < ApplicationRecord
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'notice_from', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'notice_to', dependent: :destroy
 
+  has_many :active_footprints, class_name: 'Footprint', foreign_key: 'visitorlocal_id', dependent: :destroy
+  has_many :visitedusers, through: :active_footprints
+
+  has_many :passive_footprints, class_name: 'Footprint', foreign_key: 'visitedlocal_id', dependent: :destroy
+  has_many :visitorusers, through: :passive_footprints
+
   ransack_alias :local_tags, :tag_sea_or_tag_mountain_or_tag_river_or_tag_field_or_tag_hotspring_or_tag_north_or_tag_south_or_tag_easy_to_tag_go_or_tag_small_city_or_tag_car_or_tag_train_or_tag_low_price_or_tag_moving_support_or_tag_entrepreneur_support_or_tag_child_care_support_or_tag_job_change_support_or_tag_park_or_tag_education_or_tag_food_or_tag_architecture_or_tag_history_or_tag_event_or_tag_tourism
 
   attr_accessor :match_rate
+
+  def visit(user)
+    unless active_footprints.where(visiteduser_id: user.id, created_at: Time.now.all_day).any?
+      visitedusers << user
+    else
+      footprint = active_footprints.find_by(visiteduser_id: user.id, created_at: Time.now.all_day)
+      footprint.update(updated_at: Time.now)
+    end
+  end
+
+  def visited?(user)
+    visitedusers.include?(user)
+  end
 
 end

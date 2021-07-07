@@ -59,6 +59,13 @@ RSpec.describe 'Users', js: true, type: :system do
         expect(page).to have_content 'ようこそ！'
 
         expect(User.count).to eq @number_of_users + 1
+
+        visit home_path
+        expect(page).to have_content 'おすすめ地域はありません'
+        expect(page).to have_content 'スコアを登録する'
+
+        visit notifications_path
+        expect(page).to have_content '通知はありません'
       end
       it 'fails to login before activated' do
         visit new_user_registration_path

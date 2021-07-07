@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_03_085622) do
+ActiveRecord::Schema.define(version: 2021_07_07_071526) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -77,6 +77,15 @@ ActiveRecord::Schema.define(version: 2021_07_03_085622) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "footprints", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "visitoruser_id"
+    t.integer "visiteduser_id"
+    t.integer "visitorlocal_id"
+    t.integer "visitedlocal_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "locals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "profile"
@@ -128,8 +137,10 @@ ActiveRecord::Schema.define(version: 2021_07_03_085622) do
     t.boolean "is_checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "footprint_id"
     t.index ["article_id"], name: "index_notifications_on_article_id"
     t.index ["bookmark_id"], name: "index_notifications_on_bookmark_id"
+    t.index ["footprint_id"], name: "index_notifications_on_footprint_id"
     t.index ["message_id"], name: "index_notifications_on_message_id"
     t.index ["notice_from", "is_from_user"], name: "index_notifications_on_notice_from_and_is_from_user"
     t.index ["notice_to", "is_for_user"], name: "index_notifications_on_notice_to_and_is_for_user"
@@ -250,6 +261,7 @@ ActiveRecord::Schema.define(version: 2021_07_03_085622) do
   add_foreign_key "messages", "talkrooms"
   add_foreign_key "notifications", "articles"
   add_foreign_key "notifications", "bookmarks"
+  add_foreign_key "notifications", "footprints"
   add_foreign_key "notifications", "messages"
   add_foreign_key "notifications", "talkrooms"
   add_foreign_key "profiles", "locals"

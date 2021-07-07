@@ -11,6 +11,14 @@ class LocalsController < ApplicationController
     else
       @local_headerimage = "/assets/default.png"
     end
+
+    if user_signed_in?
+      current_user.visit(@local)
+      userfootprints = Footprint.where(["visitoruser_id = ? and visitedlocal_id = ?", current_user.id, @local.id ])
+      fp = userfootprints.order(created_at: :desc).take
+      fp.create_notification_visited(current_user, @local)
+    end
+
   end
 
   def index

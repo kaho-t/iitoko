@@ -5,6 +5,13 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     @score = @user.score
     @profile = @user.user_profile
+
+    if local_signed_in?
+      current_local.visit(@user)
+      localfootprints = Footprint.where(["visitorlocal_id = ? and visiteduser_id = ?", current_local.id, @user.id ])
+      fp = localfootprints.order(created_at: :desc).take
+      fp.create_notification_visited(current_local, @user)
+    end
   end
 
   def bookmarks

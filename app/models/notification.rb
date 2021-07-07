@@ -4,6 +4,7 @@ class Notification < ApplicationRecord
   belongs_to :talkroom, optional: true
   belongs_to :message, optional: true
   belongs_to :article, optional: true
+  belongs_to :footprint, optional: true
 
   belongs_to :user, optional: true
   belongs_to :local, optional: true

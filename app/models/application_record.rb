@@ -30,4 +30,6 @@ class ApplicationRecord < ActiveRecord::Base
     return sum / 6
   end
 
+
+
 end

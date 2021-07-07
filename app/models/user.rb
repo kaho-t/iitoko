@@ -35,6 +35,12 @@ class User < ApplicationRecord
 
   has_one :user_profile, dependent: :destroy
 
+  has_many :active_footprints, class_name: 'Footprint', foreign_key: 'visitoruser_id', dependent: :destroy
+  has_many :visitedlocals, through: :active_footprints
+
+  has_many :passive_footprints, class_name: 'Footprint', foreign_key: 'visiteduser_id', dependent: :destroy
+  has_many :visitorlocals, through: :passive_footprints
+
   # omniauthのコールバック時に呼ばれるメソッド
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -61,10 +67,21 @@ class User < ApplicationRecord
     Article.where("local_id IN (?)", local_ids)
   end
 
-
-
   def talking?(local)
     talking_withs.include?(local)
+  end
+
+  def visit(local)
+    unless active_footprints.where(visitedlocal_id: local.id, created_at: Time.now.all_day).any?
+      visitedlocals << local
+    else
+      footprint = active_footprints.find_by(visitedlocal_id: local.id, created_at: Time.now.all_day)
+      footprint.update(updated_at: Time.now)
+    end
+  end
+
+  def visited?(local)
+    visitedlocals.include?(local)
   end
 
   private
