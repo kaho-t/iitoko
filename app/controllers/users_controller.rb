@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_local!, if: :user_signed_in?
   def show
     @user = User.find_by(id: params[:id])
+    @score = @user.score
+    @profile = @user.user_profile
   end
 
   def bookmarks

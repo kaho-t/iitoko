@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       get :bookmarks, :talkrooms
     end
   end
+  resources :user_profiles, only: [:new, :create, :edit, :update]
 
   resources :bookmarks, only: [:create, :destroy]
   resources :messages, only: [:destroy]

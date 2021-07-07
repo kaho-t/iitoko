@@ -27,7 +27,6 @@ RSpec.describe 'Scores', type: :system do
     it 'shows link to new_score_path when a user doesnt have any score' do
       sign_in user
       visit user_path(user)
-      expect(page).to_not have_content '登録スコア'
       expect(page).to have_content '移住に求める条件を登録しましょう'
     end
     it 'updates scores' do

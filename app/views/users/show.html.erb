@@ -1,11 +1,11 @@
 <%= gravatar_for @user %>
-<%= @user.name %>, <%= @user.email %>
+<%= @user.name %>
 <% if user_signed_in? && current_user == @user %>
-  <%= link_to "プロフィール編集", edit_user_registration_path %>
+  <%= link_to "アカウント設定", edit_user_registration_path %>
 <% end %>
 <div>
-  <% if @user.score %>
-    <p>登録スコア</p>
+<h2>登録スコア</h2>
+  <% if @score %>
     <% if current_user == @user %>
       <%= link_to "スコア編集", edit_score_path(@user.score.id) %>
     <% end %>
@@ -22,12 +22,12 @@
       </thead>
       <tbody>
         <tr>
-          <td><%= @user.score.nature %></td>
-          <td><%= @user.score.accessibility %></td>
-          <td><%= @user.score.budget %></td>
-          <td><%= @user.score.job_support %></td>
-          <td><%= @user.score.family_support %></td>
-          <td><%= @user.score.culture %></td>
+          <td><%= @score.nature %></td>
+          <td><%= @score.accessibility %></td>
+          <td><%= @score.budget %></td>
+          <td><%= @score.job_support %></td>
+          <td><%= @score.family_support %></td>
+          <td><%= @score.culture %></td>
         </tr>
       </tbody>
     </table>
@@ -36,4 +36,44 @@
   <% else %>
     coming soon...
   <% end %>
+</div>
+<div>
+  <h2>プロフィール</h2>
+  <% if @user.user_profile %>
+    <%= link_to 'プロフィール編集', edit_user_profile_path(@profile) if @user == current_user %>
+    <table class="table">
+      <tr>
+        <th>居住地</th>
+        <td><%= @profile.prefecture.name %></td>
+      </tr>
+      <tr>
+        <th>年齢</th>
+        <td><%= @profile.age %>代</td>
+      </tr>
+      <tr>
+        <th>興味のある地域・検討中の地域</th>
+        <td><%= @profile.proposed_site %></td>
+      </tr>
+      <tr>
+        <th>職業</th>
+        <td><%= @profile.job %></td>
+      </tr>
+      <tr>
+        <th>家族構成</th>
+        <td><%= @profile.family_structure %></td>
+      </tr>
+      <tr>
+        <th>移住を検討している時期</th>
+        <td><%= @profile.timing %></td>
+      </tr>
+      <tr>
+        <th>移住を検討したきっかけ</th>
+        <td><%= @profile.content %></td>
+      </tr>
+    </table>
+  <% else %>
+    <p>coming soon...</p>
+    <%= link_to 'プロフィールを登録しましょう', new_user_profile_path if @user == current_user %>
+  <% end %>
+
 </div>

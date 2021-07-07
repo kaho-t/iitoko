@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_005217) do
+ActiveRecord::Schema.define(version: 2021_07_03_085622) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -206,6 +206,20 @@ ActiveRecord::Schema.define(version: 2021_06_30_005217) do
     t.index ["local_id"], name: "index_talkrooms_on_local_id"
     t.index ["user_id", "local_id"], name: "index_talkrooms_on_user_id_and_local_id", unique: true
     t.index ["user_id"], name: "index_talkrooms_on_user_id"
+  end
+
+  create_table "user_profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "prefecture_code"
+    t.integer "age"
+    t.string "proposed_site", default: ""
+    t.string "job", default: ""
+    t.string "family_structure", default: ""
+    t.string "timing", default: ""
+    t.text "content"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

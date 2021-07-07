@@ -19,7 +19,7 @@ class ScoresController < ApplicationController
       if current_account == current_local
         redirect_to new_profile_url
       else
-        redirect_to top_url
+        redirect_to new_user_profile_url
       end
     else
       render 'score/new'

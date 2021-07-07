@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :confirmable, :timeoutable, :omniauthable, omniauth_providers: %i[google_oauth2]
 
+  include JpPrefecture
+  jp_prefecture :prefecture_code
   before_save   :downcase_email
   validates :name, presence: true, length: { maximum: 50 }
 
@@ -30,6 +32,8 @@ class User < ApplicationRecord
 
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'notice_from', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'notice_to', dependent: :destroy
+
+  has_one :user_profile, dependent: :destroy
 
   # omniauthのコールバック時に呼ばれるメソッド
   def self.from_omniauth(auth)
