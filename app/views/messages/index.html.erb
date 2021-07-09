@@ -3,7 +3,7 @@
     <h1><%= @local.name %></h1>
 
     <% @messages.each do |message| %>
-      <% unless message.is_user? %>
+      <% unless message.sender_type == 'User' %>
         <div class="from_talkingwith">
           <p>カテゴリ：<%= message.category %></p>
           <p><%= message.content %></p>
@@ -22,7 +22,7 @@
   <% elsif local_signed_in? %>
     <h1><%= @user.name %></h1>
     <% @messages.each do |message| %>
-      <% if message.is_user? %>
+      <% if message.sender_type == 'Local' %>
         <div class="from_talkingwith">
           <p>カテゴリ：<%= message.category %></p>
           <p><%= message.content %></p>

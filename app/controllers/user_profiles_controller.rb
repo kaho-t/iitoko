@@ -1,6 +1,6 @@
 class UserProfilesController < ApplicationController
   skip_before_action :authenticate_local!, if: :user_signed_in?
-  before_action :correct_user, only: [:edit, :update]
+  before_action :correct_user, only: %i[edit update]
   def new
     @user_profile = UserProfile.new
   end
@@ -16,11 +16,9 @@ class UserProfilesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
-
     if @user_profile.update(user_profile_params)
       flash[:success] = 'プロフィールを更新しました'
       redirect_to user_path(current_user)
@@ -29,15 +27,15 @@ class UserProfilesController < ApplicationController
     end
   end
 
-private
+  private
 
   def user_profile_params
-    params.require(:user_profile).permit(:prefecture_code, :age, :proposed_site, :job, :family_structure, :timing, :content, :user_id)
+    params.require(:user_profile).permit(:prefecture_code, :age, :proposed_site, :job, :family_structure, :timing,
+                                         :content, :user_id)
   end
 
   def correct_user
     @user_profile = UserProfile.find_by(id: params[:id])
     redirect_to(home_url) unless @user_profile.user == current_user
   end
-
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :profile do
-    introduction { "MyText" }
+    introduction { 'MyText' }
     population { 1 }
     temperature { 1 }
     moved_in { 1 }

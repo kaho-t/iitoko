@@ -1,6 +1,6 @@
 RSpec.describe 'Tags', type: :system do
   let(:local) { FactoryBot.create(:local) }
-  let(:another_local) { FactoryBot.create(:local )}
+  let(:another_local) { FactoryBot.create(:local) }
   let(:tag) { FactoryBot.build(:tag, local: local) }
   before do
     local.confirm

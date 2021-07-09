@@ -5,7 +5,7 @@ class BookmarksController < ApplicationController
     bookmark = current_user.bookmark_local(@local)
     bookmark.create_notification_bmk(current_user)
     respond_to do |format|
-      format.html {redirect_to @local}
+      format.html { redirect_to @local }
       format.js
     end
   end
@@ -14,7 +14,7 @@ class BookmarksController < ApplicationController
     @local = Local.find(params[:local_id])
     current_user.unbookmark_local(@local)
     respond_to do |format|
-      format.html {redirect_to @local}
+      format.html { redirect_to @local }
       format.js
     end
   end

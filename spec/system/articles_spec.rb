@@ -1,9 +1,9 @@
 RSpec.describe 'Articles', js: true, type: :system do
   let(:user) { FactoryBot.create(:user) }
   let(:local) { FactoryBot.create(:local) }
-  let(:bookmark) { FactoryBot.build(:bookmark, user: user, local: local)}
+  let(:bookmark) { FactoryBot.build(:bookmark, user: user, local: local) }
   let(:article) { FactoryBot.build(:article, local: local) }
-  let(:another_article) { FactoryBot.build(:article, title: 'another', local: local)}
+  let(:another_article) { FactoryBot.build(:article, title: 'another', local: local) }
   let(:another_local) { FactoryBot.create(:local) }
   before do
     local.confirm
@@ -17,23 +17,23 @@ RSpec.describe 'Articles', js: true, type: :system do
       sign_in local
       visit new_article_path
 
-      expect {
+      expect do
         fill_in 'タイトル', with: article.title
         fill_in_rich_text_area '本文', with: article.content
-        page.attach_file("#{Rails.root}/spec/files/attachment.jpeg") do
+        page.attach_file(Rails.root.join('spec/files/attachment.jpeg').to_s) do
           page.find('.trix-button--icon-attach').click
         end
         check '建築・街並み'
         check 'イベント・祭'
         click_button '投稿'
-        expect(Article.count).to eq @number_of_articles +1
-        expect(Tag.count).to eq @number_of_tags +1
-      }.to change(Notification, :count).by(1)
+        expect(Article.count).to eq @number_of_articles + 1
+        expect(Tag.count).to eq @number_of_tags + 1
+      end.to change(Notification, :count).by(1)
       expect(page).to have_current_path article_path(Article.last)
       expect(page).to have_content article.title
       expect(page).to have_content 'this is my article!'
-      expect(page).to have_css "figure.attachment"
-      expect(page).to have_content "建築・街並み"
+      expect(page).to have_css 'figure.attachment'
+      expect(page).to have_content '建築・街並み'
     end
     context 'fails to create an article' do
       it 'has no title' do
@@ -64,7 +64,7 @@ RSpec.describe 'Articles', js: true, type: :system do
       sign_in local
       article.save
       visit local_path(local)
-      within "section.articles" do
+      within 'section.articles' do
         click_link '記事一覧'
       end
       expect(page).to have_current_path local_articles_path(local)
@@ -111,7 +111,7 @@ RSpec.describe 'Articles', js: true, type: :system do
       article.save
       sign_in local
       visit local_articles_path(local)
-      expect {
+      expect do
         accept_alert do
           within "li#article-#{article.id}" do
             click_link '削除'
@@ -119,19 +119,19 @@ RSpec.describe 'Articles', js: true, type: :system do
         end
         expect(page).to have_current_path local_articles_path(local)
         expect(page).to have_no_content article.title
-      }.to change(Article, :count).by(-1)
+      end.to change(Article, :count).by(-1)
     end
     it 'deletes an article from article page' do
       article.save
       sign_in local
       visit article_path(article)
-      expect {
+      expect do
         accept_alert do
           click_link '削除'
         end
         expect(page).to have_current_path local_articles_path(local)
         expect(page).to have_no_content article.title
-      }.to change(Article, :count).by(-1)
+      end.to change(Article, :count).by(-1)
     end
   end
   describe 'from invalid account' do
@@ -154,5 +154,4 @@ RSpec.describe 'Articles', js: true, type: :system do
       expect(page).to have_no_content '編集'
     end
   end
-
 end

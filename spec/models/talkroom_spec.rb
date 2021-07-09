@@ -15,17 +15,17 @@ RSpec.describe Talkroom, type: :model do
   end
 
   it 'shows who is talking with' do
-    room = user.talkrooms.find(talkroom.id)
+    user.talkrooms.find(talkroom.id)
     expect(user.talking_withs.last).to eq local
     expect(local.talking_withs.last).to eq user
   end
 
   it 'is deleted when its talker was deleted' do
-    expect {
+    expect do
       talkroom.save
-    }.to change(Talkroom, :count).by(1)
-    expect {
+    end.to change(Talkroom, :count).by(1)
+    expect do
       user.destroy
-    }.to change(Talkroom, :count).by(-1)
+    end.to change(Talkroom, :count).by(-1)
   end
 end

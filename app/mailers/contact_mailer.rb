@@ -1,5 +1,4 @@
 class ContactMailer < ApplicationMailer
-
   def send_email(contact)
     @contact = contact
     mail(
@@ -8,5 +7,4 @@ class ContactMailer < ApplicationMailer
       subject: 'お問い合わせ通知'
     )
   end
-
 end

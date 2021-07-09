@@ -20,5 +20,4 @@ module SessionsHelper
     fill_in 'local[password]', with: local.password
     click_button 'ログイン'
   end
-
 end

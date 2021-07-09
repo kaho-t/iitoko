@@ -1,9 +1,9 @@
 RSpec.describe 'Locals', js: true, type: :system do
-let(:local) { FactoryBot.build(:local) }
-let(:hokkaido) { FactoryBot.build(:local, prefecture_code: 1, name: '札幌' )}
-let(:shimokawa) { FactoryBot.build(:local, prefecture_code: 1, name: '下川町' )}
-let(:tag) { FactoryBot.build(:tag, local: local)}
-let(:shimokawa_tag) { FactoryBot.build(:tag, local: shimokawa)}
+  let(:local) { FactoryBot.build(:local) }
+  let(:hokkaido) { FactoryBot.build(:local, prefecture_code: 1, name: '札幌') }
+  let(:shimokawa) { FactoryBot.build(:local, prefecture_code: 1, name: '下川町') }
+  let(:tag) { FactoryBot.build(:tag, local: local) }
+  let(:shimokawa_tag) { FactoryBot.build(:tag, local: shimokawa) }
 
   describe 'creating a new local' do
     before do
@@ -18,8 +18,8 @@ let(:shimokawa_tag) { FactoryBot.build(:tag, local: shimokawa)}
         expect(page).to have_content '自治体としてログイン'
         click_link '自治体登録'
         expect(page).to have_content '自治体登録'
-        select "北海道", from: "都道府県"
-        fill_in '自治体名', with: ""
+        select '北海道', from: '都道府県'
+        fill_in '自治体名', with: ''
         fill_in 'メールアドレス', with: local.email
         fill_in 'パスワード', with: local.password
         fill_in 'パスワード（確認用）', with: local.password_confirmation
@@ -150,9 +150,9 @@ let(:shimokawa_tag) { FactoryBot.build(:tag, local: shimokawa)}
       local.confirm
       sign_in local
       visit edit_local_registration_path
-      attach_file "ヘッダー画像", "#{Rails.root}/spec/files/attachment.jpeg"
+      attach_file 'ヘッダー画像', Rails.root.join('spec/files/attachment.jpeg').to_s
       fill_in '現在のパスワード', with: local.password
-      click_button "確定する"
+      click_button '確定する'
       expect(page).to have_current_path local_path(local)
     end
   end

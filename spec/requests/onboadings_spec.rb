@@ -1,18 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe "Onboadings", type: :request do
+RSpec.describe 'Onboadings', type: :request do
   before do
     @user = FactoryBot.create(:user)
     @user.confirm
     @user.reload
   end
 
-  describe "GET /welcome" do
-    it "returns http success" do
+  describe 'GET /welcome' do
+    it 'returns http success' do
       sign_in @user
-      get "/welcome"
+      get '/welcome'
       expect(response).to have_http_status(:success)
     end
   end
-
 end

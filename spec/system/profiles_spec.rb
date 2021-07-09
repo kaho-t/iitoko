@@ -1,6 +1,6 @@
 RSpec.describe 'Profiles', type: :system do
   let(:local) { FactoryBot.create(:local) }
-  let(:profile) { FactoryBot.build(:profile, local: local)}
+  let(:profile) { FactoryBot.build(:profile, local: local) }
   let(:user) { FactoryBot.create(:user) }
   let(:another_local) { FactoryBot.create(:local, email: 'another@example.com') }
   before do
@@ -24,7 +24,7 @@ RSpec.describe 'Profiles', type: :system do
       expect(Profile.count).to eq @number_of_profiles + 1
       expect(page).to have_current_path new_tag_path
       visit local_path(local)
-      expect(page).to have_content "#{profile.introduction}"
+      expect(page).to have_content profile.introduction.to_s
     end
 
     it 'can create a profile without some data' do
@@ -41,7 +41,7 @@ RSpec.describe 'Profiles', type: :system do
       click_button '次へ'
       expect(Profile.count).to eq @number_of_profiles + 1
       visit local_path(local)
-      expect(page).to have_content "#{profile.introduction}"
+      expect(page).to have_content profile.introduction.to_s
       expect(page).to have_selector 'td', text: 'coming soon...'
     end
 
@@ -55,11 +55,11 @@ RSpec.describe 'Profiles', type: :system do
       fill_in '地価', with: -1
       fill_in '平均所得', with: -1
       fill_in '犯罪率', with: -1
-      fill_in '町の紹介文', with: "a" * 1000
+      fill_in '町の紹介文', with: 'a' * 1000
       click_button '次へ'
       expect(Profile.count).to eq @number_of_profiles
       expect(page).to have_current_path '/profiles'
-      expect(page).to have_content "8 箇所のエラーがあります。"
+      expect(page).to have_content '8 箇所のエラーがあります。'
     end
   end
 
@@ -73,8 +73,8 @@ RSpec.describe 'Profiles', type: :system do
       fill_in '平均気温', with: 15
       fill_in '転入数（前年）', with: 100
       fill_in '待機児童数', with: 50
-      fill_in '地価', with: 2000000
-      fill_in '平均所得', with: 5000000
+      fill_in '地価', with: 2_000_000
+      fill_in '平均所得', with: 5_000_000
       fill_in '犯罪率', with: 0.9
       fill_in '町の紹介文', with: '北区はよりいい街に！'
       click_button '確定'

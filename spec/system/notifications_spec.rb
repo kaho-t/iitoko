@@ -1,6 +1,6 @@
 RSpec.describe 'Notifications', type: :system do
-  let(:user) {FactoryBot.create(:user)}
-  let(:local){FactoryBot.create(:local)}
+  let(:user) { FactoryBot.create(:user) }
+  let(:local) { FactoryBot.create(:local) }
 
   before do
     user.confirm
@@ -10,7 +10,7 @@ RSpec.describe 'Notifications', type: :system do
   it 'shows notification about bookmark' do
     sign_in user
     visit local_path(local)
-    find(".bookmark-btn").click
+    find('.bookmark-btn').click
     sign_out user
 
     sign_in local

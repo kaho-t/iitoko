@@ -6,18 +6,18 @@ class TalkroomsController < ApplicationController
   def create
     @local = Local.find_by(id: params[:talkroom][:local_id])
     @talkroom = Talkroom.new(talkroom_params)
-      if @talkroom.save
-        if user_signed_in?
-          @talkroom.create_notification_tkrm(current_user, @talkroom)
-        elsif local_signed_in?
-          @talkroom.create_notification_tkrm(current_local, @talkroom)
-        end
-        flash[:success] = "トークルームが作成されました"
-        redirect_to new_talkroom_message_path(@talkroom)
-      else
-        flash[:danger] = "トークルームの作成に失敗しました"
-        redirect_to local_path(@local)
+    if @talkroom.save
+      if user_signed_in?
+        @talkroom.create_notification_tkrm(current_user, @talkroom)
+      elsif local_signed_in?
+        @talkroom.create_notification_tkrm(current_local, @talkroom)
       end
+      flash[:success] = 'トークルームが作成されました'
+      redirect_to new_talkroom_message_path(@talkroom)
+    else
+      flash[:danger] = 'トークルームの作成に失敗しました'
+      redirect_to local_path(@local)
+    end
     # if user_signed_in?
     #   @local = Local.find(params[:local_id])
     #   current_user.start_talking(@local)
@@ -47,11 +47,12 @@ class TalkroomsController < ApplicationController
 
   def destroy
     @talkroom.destroy
-    flash[:success] = "トークルームを削除しました"
+    flash[:success] = 'トークルームを削除しました'
     redirect_to talkrooms_url
   end
 
   private
+
   def correct_account
     @talkroom = Talkroom.find_by(id: params[:id])
 
@@ -64,9 +65,7 @@ class TalkroomsController < ApplicationController
     end
   end
 
-   def talkroom_params
+  def talkroom_params
     params.require(:talkroom).permit(:local_id, :user_id)
-   end
-
-
+  end
 end

@@ -5,8 +5,14 @@ class Footprint < ApplicationRecord
   belongs_to :visitedlocal, class_name: 'Local', optional: true
 
   def create_notification_visited(current_account, visited_account)
-    if current_account.class == User and visited_account.class == Local
-      notice = Notification.where(["notice_from = ? and is_from_user = ? and notice_to = ? and is_for_user = ? and footprint_id = ? and action = ?", current_account.id, true, visited_account.id, false, id, 'footprint'])
+    if current_account.instance_of?(User) && visited_account.instance_of?(Local)
+      notice = Notification.where([
+                                    'notice_from = ? and is_from_user = ?
+                                    and notice_to = ? and is_for_user = ?
+                                    and footprint_id = ? and action = ?',
+                                    current_account.id, true, visited_account.id,
+                                    false, id, 'footprint'
+                                  ])
       if notice.blank?
         notification = current_account.active_notifications.new(
           footprint_id: id,
@@ -17,8 +23,12 @@ class Footprint < ApplicationRecord
         )
         notification.save if notification.valid?
       end
-    elsif current_account.class == Local and visited_account.class == User
-      notice = Notification.where(["notice_from = ? and is_from_user = ? and notice_to = ? and is_for_user = ? and footprint_id = ? and action = ?", current_account.id, false, visited_account.id, true, id, 'footprint'])
+    elsif current_account.instance_of?(Local) && visited_account.instance_of?(User)
+      notice = Notification.where([
+                                    'notice_from = ? and is_from_user = ? and notice_to = ?
+                                    and is_for_user = ? and footprint_id = ? and action = ?',
+                                    current_account.id, false, visited_account.id, true, id, 'footprint'
+                                  ])
       if notice.blank?
         notification = current_account.active_notifications.new(
           footprint_id: id,
@@ -29,8 +39,6 @@ class Footprint < ApplicationRecord
         )
         notification.save if notification.valid?
       end
-    else
-      return
     end
   end
 end

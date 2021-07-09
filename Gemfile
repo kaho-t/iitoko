@@ -33,8 +33,6 @@ gem 'rexml', '~> 3.2', '>= 3.2.4'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 gem 'mail-iso-2022-jp'
-gem 'rubocop', require: false
-gem 'rubocop-rails', require: false
 gem 'rails-controller-testing'
 gem "devise", git: "https://github.com/heartcombo/devise"
 gem 'omniauth-google-oauth2'
@@ -59,6 +57,10 @@ group :development, :test do
   gem 'rspec-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rspec'
 end
 
 group :development do

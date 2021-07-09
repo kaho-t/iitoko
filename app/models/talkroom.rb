@@ -6,7 +6,8 @@ class Talkroom < ApplicationRecord
 
   def create_notification_tkrm(current_account, tkrm)
     if current_account == tkrm.user
-      tkrm_n = Notification.where("notice_from = ? and is_from_user = ? and talkroom_id = ? and action = ?", current_account.id, true, id, 'talkroom')
+      tkrm_n = Notification.where('notice_from = ? and is_from_user = ? and talkroom_id = ? and action = ?',
+                                  current_account.id, true, id, 'talkroom')
       if tkrm_n.blank?
         notification = current_account.active_notifications.new(
           talkroom_id: id,
@@ -18,7 +19,8 @@ class Talkroom < ApplicationRecord
         notification.save if notification.valid?
       end
     elsif current_account == tkrm.local
-      tkrm_n = Notification.where("notice_from = ? and is_from_user = ? and talkroom_id = ? and action = ?", current_account.id, false, id, 'talkroom')
+      tkrm_n = Notification.where('notice_from = ? and is_from_user = ? and talkroom_id = ? and action = ?',
+                                  current_account.id, false, id, 'talkroom')
       if tkrm_n.blank?
         notification = current_account.active_notifications.new(
           talkroom_id: id,
@@ -31,5 +33,4 @@ class Talkroom < ApplicationRecord
       end
     end
   end
-
 end

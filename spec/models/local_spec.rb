@@ -99,11 +99,11 @@ RSpec.describe Local, type: :model do
       end
     end
   end
-  it "destroies associated articles" do
+  it 'destroies associated articles' do
     local.save
-    local.articles.create!(title: "title", content: "content")
+    local.articles.create!(title: 'title', content: 'content')
     number_of_articles = Article.count
     local.destroy
-    expect(Article.count).to eq number_of_articles -1
+    expect(Article.count).to eq number_of_articles - 1
   end
 end

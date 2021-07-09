@@ -24,5 +24,4 @@ RSpec.describe Footprint, type: :model do
     expect(local.visitedusers).to include user
     expect(user.visitorlocals).to include local
   end
-
 end

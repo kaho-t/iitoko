@@ -6,12 +6,12 @@ class UsersController < ApplicationController
     @score = @user.score
     @profile = @user.user_profile
 
-    if local_signed_in?
-      current_local.visit(@user)
-      localfootprints = Footprint.where(["visitorlocal_id = ? and visiteduser_id = ?", current_local.id, @user.id ])
-      fp = localfootprints.order(created_at: :desc).take
-      fp.create_notification_visited(current_local, @user)
-    end
+    return unless local_signed_in?
+
+    current_local.visit(@user)
+    localfootprints = Footprint.where(['visitorlocal_id = ? and visiteduser_id = ?', current_local.id, @user.id])
+    fp = localfootprints.order(created_at: :desc).take
+    fp.create_notification_visited(current_local, @user)
   end
 
   def bookmarks
@@ -27,6 +27,4 @@ class UsersController < ApplicationController
   def timeline
     @articles = current_user.feed.page(params[:page])
   end
-
-
 end

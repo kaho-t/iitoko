@@ -21,9 +21,9 @@ class Locals::ConfirmationsController < Devise::ConfirmationsController
 
       sign_in(resource) # この一行を加えるのみ
 
-      respond_with_navigational(resource){ redirect_to welcome_url }
+      respond_with_navigational(resource) { redirect_to welcome_url }
     else
-      respond_with_navigational(resource.errors, :status => :unprocessable_entity){ render :new }
+      respond_with_navigational(resource.errors, status: :unprocessable_entity) { render :new }
     end
   end
 

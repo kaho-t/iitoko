@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_07_071526) do
+ActiveRecord::Schema.define(version: 2021_07_08_063839) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -115,13 +115,15 @@ ActiveRecord::Schema.define(version: 2021_07_07_071526) do
 
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "talkroom_id", null: false
-    t.integer "sent_from"
-    t.boolean "is_user"
     t.text "content"
     t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["talkroom_id", "is_user", "created_at"], name: "index_messages_on_talkroom_id_and_is_user_and_created_at"
+    t.string "sender_type"
+    t.bigint "sender_id"
+    t.index ["sender_type", "sender_id"], name: "index_messages_on_sender"
+    t.index ["talkroom_id", "created_at"], name: "index_messages_on_talkroom_id_and_is_user_and_created_at"
+    t.index ["talkroom_id", "sender_type", "created_at"], name: "index_messages_on_talkroom_id_and_sender_type_and_created_at"
   end
 
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

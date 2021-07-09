@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UserProfile, type: :model do
-  let(:user_profile) { FactoryBot.build(:user_profile)}
+  let(:user_profile) { FactoryBot.build(:user_profile) }
 
   it 'has a valid factory' do
     expect(FactoryBot.create(:user_profile)).to be_valid
@@ -11,9 +11,9 @@ RSpec.describe UserProfile, type: :model do
     user = FactoryBot.create(:user)
     user_profile.user = user
     user_profile.save
-    expect {
+    expect do
       user.destroy
-    }.to change(UserProfile, :count).by (-1)
+    end.to change(UserProfile, :count).by(-1)
   end
 
   it 'is invalid with invalid prefecture_code' do
@@ -60,5 +60,4 @@ RSpec.describe UserProfile, type: :model do
     user_profile.valid?
     expect(user_profile.errors[:content]).to include('は255文字以内で入力してください')
   end
-
 end

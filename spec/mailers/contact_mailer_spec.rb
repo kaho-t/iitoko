@@ -1,9 +1,9 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe ContactMailer, type: :mailer do
   describe 'contact_email' do
-    let(:contact) { FactoryBot.create(:contact)}
-    let(:mail) { ContactMailer.send_email(contact)}
+    let(:contact) { FactoryBot.create(:contact) }
+    let(:mail) { ContactMailer.send_email(contact) }
 
     it "sends a contact email to owner's email address" do
       expect(mail.to).to eq ['iitoko47@gmail.com']
@@ -22,4 +22,4 @@ RSpec.describe ContactMailer, type: :mailer do
       expect(mail.text_part.body.encoded).to match contact.email
     end
   end
- end
+end

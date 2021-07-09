@@ -4,7 +4,7 @@ RSpec.describe 'Users', js: true, type: :system do
   describe 'User CRUD' do
     let(:user) { FactoryBot.build(:user) }
     let(:another_user) { FactoryBot.create(:user, email: 'another@example.com') }
-    let(:score) { FactoryBot.create(:score)}
+    let(:score) { FactoryBot.create(:score) }
     before do
       @number_of_users = User.count
       ActionMailer::Base.deliveries.clear
@@ -144,6 +144,5 @@ RSpec.describe 'Users', js: true, type: :system do
         expect(User.count).to eq @number_of_users - 1
       end
     end
-
   end
 end

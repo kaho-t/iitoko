@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   skip_before_action :authenticate_user!, if: :local_signed_in?
-  before_action :correct_local, only: [:edit, :update]
+  before_action :correct_local, only: %i[edit update]
 
   def new
     @profile = Profile.new
@@ -9,15 +9,14 @@ class ProfilesController < ApplicationController
   def create
     @profile = current_local.build_profile(profile_params)
     if @profile.save
-      flash[:success] = "プロフィールが登録されました"
+      flash[:success] = 'プロフィールが登録されました'
       redirect_to new_tag_path
     else
       render 'profiles/new'
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @profile.update(profile_params)

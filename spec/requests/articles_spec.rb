@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Articles", type: :request do
+RSpec.describe 'Articles', type: :request do
   let(:local) { FactoryBot.create(:local) }
   let(:user) { FactoryBot.create(:user) }
   let(:article) { FactoryBot.create(:article, local: local) }
@@ -10,9 +10,8 @@ RSpec.describe "Articles", type: :request do
     local.confirm
   end
 
-
-  describe "GET /index" do
-    it "returns http success" do
+  describe 'GET /index' do
+    it 'returns http success' do
       user.confirm
       sign_in user
       get local_articles_path(local)
@@ -20,17 +19,17 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
-  describe "GET /new" do
-    it "returns http success" do
+  describe 'GET /new' do
+    it 'returns http success' do
       local.confirm
       sign_in local
-      get "/articles/new"
+      get '/articles/new'
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET /edit" do
-    it "returns http success" do
+  describe 'GET /edit' do
+    it 'returns http success' do
       local.confirm
       sign_in local
       get edit_article_path(article)
@@ -38,8 +37,8 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
-  describe "GET /show" do
-    it "returns http success" do
+  describe 'GET /show' do
+    it 'returns http success' do
       local.confirm
       sign_in local
       get article_path(article)

@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Message, type: :model do
   let(:user) { FactoryBot.create(:user) }
-  let(:local) { FactoryBot.create(:local)}
-  let(:talkroom) { FactoryBot.build(:talkroom, user: user, local: local)}
-  let(:message) { FactoryBot.build(:message, talkroom: talkroom) }
+  let(:local) { FactoryBot.create(:local) }
+  let(:talkroom) { FactoryBot.build(:talkroom, user: user, local: local) }
+  let(:message) { FactoryBot.build(:message, talkroom: talkroom, sender_id: user.id) }
 
   before do
     user.confirm
@@ -17,12 +17,12 @@ RSpec.describe Message, type: :model do
   end
 
   it 'is deleted when talkroom was deleted' do
-    expect {
+    expect do
       message.save
-    }.to change(Message, :count).by(1)
-    expect {
+    end.to change(Message, :count).by(1)
+    expect do
       talkroom.destroy
-    }.to change(Message, :count).by(-1)
+    end.to change(Message, :count).by(-1)
   end
 
   describe 'validations' do
@@ -38,5 +38,4 @@ RSpec.describe Message, type: :model do
       expect(message.errors[:category]).to include('は50文字以内で入力してください')
     end
   end
-
 end

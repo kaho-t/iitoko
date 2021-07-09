@@ -17,30 +17,15 @@ class MessagesController < ApplicationController
 
   def create
     @talkroom = Talkroom.find(params[:talkroom_id])
-    @message = Message.new(message_params)
+    # @message = Message.new(message_params)
 
     if user_signed_in?
-      @message.sent_from = current_user.id
-      @message.is_user = true
+      saving_message(current_user)
     elsif local_signed_in?
-      @message.sent_from = current_local.id
-      @message.is_user = false
+      saving_message(current_local)
     else
       redirect_to root_url
     end
-
-    if @message.save
-      if user_signed_in?
-        @message.create_notification_msg(current_user, @message)
-      elsif
-        local_signed_in?
-        @message.create_notification_msg(current_local, @message)
-      end
-      flash[:success] = 'メッセージを送信しました'
-    else
-      flash[:danger] = 'メッセージの送信に失敗しました'
-    end
-    redirect_to talkroom_messages_path(@talkroom)
   end
 
   def destroy
@@ -49,8 +34,21 @@ class MessagesController < ApplicationController
     redirect_to talkroom_messages_path(@talkroom)
   end
 
-
   private
+
+  def saving_message(current_account)
+    # @message.sender_id = current_account.id
+    # @message.sender_type = boolean
+    @message = current_account.messages.build(message_params)
+    if @message.save
+      @message.create_notification_msg(current_account, @message)
+      flash[:success] = 'メッセージを送信しました'
+      redirect_to talkroom_messages_path(@talkroom)
+    else
+      flash[:danger] = 'メッセージの送信に失敗しました'
+    end
+  end
+
   def message_params
     params.require(:message).permit(:category, :content, :talkroom_id)
   end
@@ -59,11 +57,11 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
     @talkroom = Talkroom.find_by(id: @message.talkroom_id)
 
-    if user_signed_in? && @message.is_user
-      @user = User.find_by(id: @message.sent_from)
+    if user_signed_in? && (@message.sender_type == 'User')
+      @user = User.find_by(id: @message.sender_id)
       redirect_to(top_url) unless @user == current_user
-    elsif local_signed_in? && !@message.is_user
-      @local = Local.find_by(id: @message.sent_from)
+    elsif local_signed_in? && (@message.sender_type == 'Local')
+      @local = Local.find_by(id: @message.sender_id)
       redirect_to(root_url) unless @local == current_local
     end
   end

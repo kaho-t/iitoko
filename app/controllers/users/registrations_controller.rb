@@ -40,7 +40,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def after_update_path_for(resource)
+  def after_update_path_for(_resource)
     # 自分で設定した「マイページ」へのパス
     user_path(@user)
   end

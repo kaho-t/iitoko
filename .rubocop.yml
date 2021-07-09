@@ -44,11 +44,19 @@ Metrics/BlockLength:
 Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be a Fixnum or
   # a Float.
-  Max: 25 
+  Max: 30
 
+Metrics/MethodLength:
+  Max: 35
 
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/PerceivedComplexity:
+  Max: 10
 
 Gemspec/DateAssignment: # (new in 1.10)
+  Enabled: true
+Layout/TrailingEmptyLines:
   Enabled: true
 Layout/SpaceBeforeBrackets: # (new in 1.7)
   Enabled: true
