@@ -1,0 +1,38 @@
+
+<tr>
+  <td rowspan="3">
+    <% if local.image? %>
+      <%= image_tag local.image.url, width: '50%' %>
+    <% else %>
+      <%= image_tag 'default.png', width: '50%' %>
+    <% end %>
+    <% if local_assigns[:full] %>
+    <p>マッチ度：　<%= local.difference_rate(current_user) %>%</p>
+    <% end %>
+  </td>
+  <td><%= gravatar_for local, size: 50 %><%= local.prefecture.name %><%= local.name %></td>
+  <td rowspan="3">
+    <%= link_to '詳細はこちら', local_path(local) %>
+  </td>
+</tr>
+<tr>
+  <td>
+    <% if local.profile && local.profile.introduction %>
+    <p><%= local.profile.introduction.gsub(/[\n]/,"").strip.truncate(50) %></p>
+    <% else %>
+    <p>coming soon...</p>
+    <% end %>
+  </td>
+</tr>
+<tr>
+  <td>
+    <% if local.tag %>
+      <% local.tag.i18n_true_tags.each do |local_tag| %>
+        <p class="tag"><%= local_tag %></p>
+      <% end %>
+    <% else %>
+      <p>coming soon...</p>
+    <% end %>
+  </td>
+</tr>
+

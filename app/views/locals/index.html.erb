@@ -1,22 +1,5 @@
 <h1>iitoko</h1>
-
 <p>いいとこだよね、と思える場所で暮らす</p>
-
-
-
 <table>
-<% @locals.each do |local| %>
-  <tr>
-    <td><%= local.prefecture.name %>
-    <td><%= local.name %>
-    <% if local.tag %>
-      <td>
-        <% local.tag.i18n_true_tags.each do |local_tag| %>
-          <p class="tag"><%= local_tag %></p>
-        <% end %>
-      </td>
-    <% end %>
-    <td><%= link_to '詳細はこちら', local_path(local) %></td>
-  </tr>
-<% end %>
+<%= render @locals %>
 </table>

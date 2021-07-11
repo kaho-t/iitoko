@@ -1,10 +1,8 @@
 <h1>おすすめ地域</h1>
-<% if @recommends.any? %>
-  <% @recommends.each do |local| %>
-    <%= link_to local.name, local_path(local) %>
-    <%= local.prefecture.name %>
-    <p>マッチ度：　<%= local.difference_rate(current_user) %>%</p>
-  <% end %>
+<% if @locals.any? %>
+  <table>
+    <%= render @locals, full: true %>
+  </table>
 
 <% else %>
   <p>おすすめ地域はありません。。。</p>

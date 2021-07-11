@@ -16,7 +16,7 @@ class PrefecturesController < ApplicationController
   end
 
   def show
-    locals = Local.all
+    locals = Local.all.includes(%i[profile tag])
     @pref = JpPrefecture::Prefecture.find(params[:id])
     @pref_locals = []
     locals.each do |local|

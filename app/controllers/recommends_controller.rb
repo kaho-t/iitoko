@@ -8,8 +8,8 @@ class RecommendsController < ApplicationController
     #   local.difference_rate(@user) < 60
     # end
 
-    @recommends = []
-    locals = Local.all
+    @locals = []
+    locals = Local.all.includes(%i[score profile tag])
 
     if current_user.score
       locals.each do |local|
@@ -18,10 +18,10 @@ class RecommendsController < ApplicationController
         rate = local.difference_rate(@user)
         local.send('match_rate=', rate)
 
-        @recommends << local if (local.match_rate >= 60) && (@user.bookmarking?(local) == false)
+        @locals << local if (local.match_rate >= 60) && (@user.bookmarking?(local) == false)
       end
     end
 
-    @recommends.sample(10)
+    @locals.sample(10)
   end
 end

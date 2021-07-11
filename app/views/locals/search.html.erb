@@ -129,15 +129,6 @@
 
 <section>
 <table>
-  <tr>
-   <th><%= sort_link(@q, :name, "自治体名") %></th>
-   <th><%= sort_link(@q, :prefecture_code, "都道府県") %></th>
-  </tr>
-  <% @locals.each do |local| %>
-  <tr>
-    <td><%= link_to local.name, local_path(local) %></td>
-    <td><%= local.prefecture.name %></td>
-  </tr>
-  <% end %>
+<%= render @locals %>
 </table>
 </section>

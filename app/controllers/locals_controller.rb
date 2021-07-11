@@ -4,7 +4,13 @@ class LocalsController < ApplicationController
   def show
     @local = Local.find_by(id: params[:id])
     @articles = @local.articles
+
     @talkroom = current_user.talkrooms.build if user_signed_in?
+
+    if user_signed_in? && current_user.talking?(@local)
+      @room = Talkroom.find_by(user_id: current_user.id,
+                               local_id: @local.id)
+    end
 
     @local_headerimage = if @local.image
                            @local.image.url
@@ -26,7 +32,7 @@ class LocalsController < ApplicationController
       redirect_to home_url
     end
 
-    @locals = Local.all.sample(10)
+    @locals = Local.all.includes(%i[profile tag]).sample(10)
   end
 
   def search
@@ -34,7 +40,7 @@ class LocalsController < ApplicationController
     # @locals = @q.result.includes(:tag).page(params[:page])
     @q = Local.ransack(params[:q])
     @q.sorts = 'updated_at desc' if @q.sorts.empty?
-    @locals = @q.result(distinct: true).page(params[:page])
+    @locals = @q.result(distinct: true).page(params[:page]).includes(%i[profile tag])
   end
 
   def bookmarks

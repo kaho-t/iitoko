@@ -1,3 +1,4 @@
+<% provide(:button_text, '次へ') %>
 <h1>ドンナトコ？</h1>
 <% if user_signed_in? %>
   <p>あなたの住みたい場所はドンナトコか教えてください</p>
@@ -9,63 +10,4 @@
 
 <p>０：重視しないー５：とても重視する</p>
 
-
-<%= form_with(model: @score, local: true) do |f| %>
-  <div class="score">
-    【自然】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :nature, num %>
-        <%= f.label "nature_#{num}", "#{num}" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【アクセス】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :accessibility, num %>
-        <%= f.label "accessibility_#{num}", "#{num}" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【お財布事情】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :budget, num %>
-        <%= f.label "budget_#{num}", "#{num}" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【職】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :job_support, num %>
-        <%= f.label "job_support_#{num}", "#{num}" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【ファミリー向け支援】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :family_support, num %>
-        <%= f.label "family_support_#{num}", "#{num}" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【文化】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :culture, num %>
-        <%= f.label "culture_#{num}", "#{num}" %>
-      </div>
-    <% end %>
-  </div>
-
-  <%= f.submit "次へ", class: "btn btn-primary" %>
-
-<% end %>
+<%= render 'form' %>

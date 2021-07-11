@@ -1,7 +1,10 @@
 <div class="header_image" style="background-image: url(<%= @local_headerimage %>); background-size: cover;">
-<h1 class="local_name"><%= @local.name %></h1>
+<h1 class="local_name">
+  <%= gravatar_for @local %>
+  <%= @local.name %>
+</h1>
 <p><%= @local.prefecture.name %></p>
-<% if user_signed_in? && current_user.score %>
+<% if user_signed_in? && current_user.score && @local.score %>
   <p>マッチ度：<%= @local.difference_rate(current_user) %>％</p>
 <% end %>
 </div>
@@ -122,11 +125,14 @@
 
 <% if user_signed_in? %>
   <section class="cv_area">
-
-    <%= form_with(model: @talkroom, loacal: true) do |f| %>
-      <%= f.hidden_field :local_id, value: @local.id %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-      <%= f.submit '話を聞いてみたい', class: 'btn btn-primary' %>
+    <% unless current_user.talking?(@local) %>
+      <%= form_with(model: @talkroom, loacal: true) do |f| %>
+        <%= f.hidden_field :local_id, value: @local.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.submit '話を聞いてみたい', class: 'btn btn-primary' %>
+      <% end %>
+    <% else %>
+      <%= link_to 'トークルームへ', talkroom_messages_path(@room) %>
     <% end %>
   </section>
 <% end %>

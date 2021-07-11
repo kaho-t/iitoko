@@ -5,6 +5,8 @@
 
 body {
   padding-top: 60px;
+  background-image: image-url('bgimage.png');
+  background-size: cover;
 }
 
 section {
@@ -21,6 +23,10 @@ textarea {
 
 .center h1 {
   margin-bottom: 10px;
+}
+
+.logo {
+  width: 100px;
 }
 
 
@@ -153,4 +159,12 @@ img.header_img {
   padding-left: 1rem;
   padding-top: 0rem;
   color: tomato;
+}
+
+.gravatar {
+  margin-right: 10px;
+}
+
+.gravatar_edit {
+  margin-top: 15px;
 }

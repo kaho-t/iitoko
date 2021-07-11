@@ -35,10 +35,10 @@ class TalkroomsController < ApplicationController
 
   def index
     if user_signed_in?
-      @talkrooms = current_user.talkrooms
+      @talkrooms = current_user.talkrooms.includes([:local])
       @talking_withs = current_user.talking_withs
     elsif local_signed_in?
-      @talkrooms = current_local.talkrooms
+      @talkrooms = current_local.talkrooms.includes([:user])
       @talking_withs = current_local.talking_withs
     else
       redirect_to root_path

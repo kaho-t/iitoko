@@ -5,7 +5,7 @@ RSpec.describe 'Scores', type: :request do
     @user = FactoryBot.create(:user)
     @user.confirm
     @user.reload
-    @score = FactoryBot.create(:score)
+    @score = FactoryBot.create(:score, user: @user)
   end
   describe 'GET /new' do
     it 'returns http success' do

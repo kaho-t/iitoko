@@ -1,17 +1,4 @@
+<% provide(:button_text, '確定') %>
 <h1>タグ編集</h1>
 
-<%= form_with(model: @tag, local: true) do |f| %>
-  <%= render "shared/error_messages", object: f.object %>
-
-  <% @tags.each do |key, jp| %>
-  <div class="field">
-    <%= f.label key, jp %><br />
-    <%= f.check_box key, {}, true, false %>
-  </div>
-  <% end %>
-
-  <div class="actions">
-  <%= f.submit "確定" %>
-  </div>
-
-<% end %>
+<%= render 'form' %>
