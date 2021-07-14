@@ -1,0 +1,33 @@
+<footer>
+  <div class="footer-bg"></div>
+  <div class="wrapper">
+    <div class="container">
+      <%= link_to root_path, id: "logo" do %>
+        <%= image_tag 'logo_w.png', class: 'footer-logo' %>
+      <% end %>
+
+      <div class="sns">
+        <i class="fab fa-twitter-square"></i>&nbsp;
+        <i class="fab fa-instagram"></i>
+      </div>
+      <div class="row">
+        <ul class="col-4">
+          <li>利用規約</li>
+          <li>プライバシーポリシー</li>
+          <li><%= link_to 'お問い合わせ', contact_path %></li>
+        </ul>
+        <ul class="col-4">
+          <li>About</li>
+          <li>ご利用ガイド</li>
+          <li>（一般の方 / 自治体の方）</li>
+        </ul>
+        <ul class="col-4">
+          <li>iitoko探し</li>
+          <li><%= link_to 'キーワードから探す', search_path %></li>
+          <li><%= link_to '地域から探す', prefectures_path %></li>
+        </ul>
+      </div>
+      <p>&copy;&nbsp;Kaho Hata. 2021.</p>
+    </div>
+  </div>
+</footer>
