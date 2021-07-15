@@ -17,12 +17,15 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <% if defined? @title_area %>
+      <%= render 'layouts/title_area' %>
+    <% end %>
     <div class="container">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-      <%= yield %>
-      <%= debug(params) if Rails.env.development? %>
-      </div>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+        <%= yield %>
+        <%= debug(params) if Rails.env.development? %>
+    </div>
     <%= render 'layouts/footer' %>
   </body>
 </html>

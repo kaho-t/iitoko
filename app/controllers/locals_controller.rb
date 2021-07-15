@@ -27,6 +27,8 @@ class LocalsController < ApplicationController
   end
 
   def index
+    @title_area = true
+    @title_for_user = true
     if user_signed_in?
       @user = current_user
       redirect_to home_url

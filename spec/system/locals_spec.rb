@@ -14,9 +14,9 @@ RSpec.describe 'Locals', js: true, type: :system do
     context 'when tried to create a new local with invalid info' do
       it 'fails to create without a name' do
         visit root_path
-        click_link '>>自治体の方'
+        click_link '自治体の方'
         expect(page).to have_content '自治体としてログイン'
-        click_link '自治体登録'
+        click_link '新規会員登録'
         expect(page).to have_content '自治体登録'
         select '北海道', from: '都道府県'
         fill_in '自治体名', with: ''
