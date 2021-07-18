@@ -8,6 +8,7 @@ FactoryBot.define do
     land_price { 1 }
     income { 1 }
     crime_rate { 1 }
+    catchphrase {'いいところです！'}
     association :local
   end
 end

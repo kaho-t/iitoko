@@ -1,6 +1,7 @@
 class Profile < ApplicationRecord
   belongs_to :local
   validates :introduction, length: { maximum: 255 }, allow_nil: true
+  validates :catchphrase, length: { maximum: 50 }, allow_nil: true
 
   validates :population, numericality: { only_integer: true,
                                          greater_than_or_equal_to: 0,

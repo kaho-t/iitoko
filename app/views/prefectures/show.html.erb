@@ -1,9 +1,9 @@
-<h1><%= @pref.name %>の地域一覧</h1>
+<div class="container">
+  <h1><%= @pref.name %>の地域一覧</h1>
 
-<% if @locals.any? %>
-<table>
-  <%= render @locals %>
-</table>
-<% else %>
-  <p>まだ登録された地域がありません</p>
-<% end %>
+  <% if @locals.any? %>
+    <%= render @locals %>
+  <% else %>
+    <p>まだ登録された地域がありません</p>
+  <% end %>
+</div>

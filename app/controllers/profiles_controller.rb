@@ -36,7 +36,8 @@ class ProfilesController < ApplicationController
                                     :land_price,
                                     :income,
                                     :crime_rate,
-                                    :introduction)
+                                    :introduction,
+                                    :catchphrase)
   end
 
   def correct_local

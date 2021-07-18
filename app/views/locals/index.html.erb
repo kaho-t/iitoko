@@ -2,6 +2,7 @@
 <% provide(:subtext1, 'いろんな働き方や生活スタイルがあたりまえ。') %>
 <% provide(:subtext2, '都会だけがすべてじゃない。') %>
 <% provide(:subtext3, '自分にあった移住先を見つけよう。') %>
-<table>
-<%= render @locals %>
-</table>
+<div class="container">
+  <h1 class="title">今週のピックアップ</h1>
+  <%= render @locals %>
+</div>

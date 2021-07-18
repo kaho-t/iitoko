@@ -1,141 +1,143 @@
 <div class="header_image" style="background-image: url(<%= @local_headerimage %>); background-size: cover;">
-<h1 class="local_name">
-  <%= gravatar_for @local %>
-  <%= @local.name %>
-</h1>
-<p><%= @local.prefecture.name %></p>
-<% if user_signed_in? && current_user.score && @local.score %>
-  <p>マッチ度：<%= @local.difference_rate(current_user) %>％</p>
-<% end %>
+  <h1 class="local_name">
+    <%= gravatar_for @local %>
+    <%= @local.name %>
+  </h1>
+  <p><%= @local.prefecture.name %></p>
+  <% if user_signed_in? && current_user.score && @local.score %>
+    <p>マッチ度：<%= @local.difference_rate(current_user) %>％</p>
+  <% end %>
 </div>
 
-<%= render 'bookmark_button', local: @local %>
+<div class="container">
+  <%= render 'bookmark_button', local: @local %>
 
-<div class="tags">
-<% if @local.tag %>
-  <% if @local == current_local %>
-    <%= link_to "タグ編集", edit_tag_path(@local.tag.id) %>
-  <% end %>
-    <% @local.tag.i18n_true_tags.each do |local_tag| %>
-      <p class="tag"><%= local_tag %></p>
+  <div class="tags">
+  <% if @local.tag %>
+    <% if @local == current_local %>
+      <%= link_to "タグ編集", edit_tag_path(@local.tag.id) %>
     <% end %>
- <% elsif @local == current_local %>
-    <%= link_to "タグ付けをして移住希望者に見つけてもらいやすくする", new_tag_path %>
-<% end %>
-</div>
-
-<section class="score">
-  <% if local_signed_in? && current_local == @local %>
-    <%= link_to "アカウント情報編集", edit_local_registration_path %>
-  <% end %>
-  <div>
-    <% if @local.score %>
-      <h2>登録スコア</h2>
-      <% if current_local == @local %>
-        <%= link_to "スコア編集", edit_score_path(@local.score.id) %>
+      <% @local.tag.i18n_true_tags.each do |local_tag| %>
+        <p class="tag"><%= local_tag %></p>
       <% end %>
+  <% elsif @local == current_local %>
+      <%= link_to "タグ付けをして移住希望者に見つけてもらいやすくする", new_tag_path %>
+  <% end %>
+  </div>
+
+  <section class="score">
+    <% if local_signed_in? && current_local == @local %>
+      <%= link_to "アカウント情報編集", edit_local_registration_path %>
+    <% end %>
+    <div>
+      <% if @local.score %>
+        <h2>登録スコア</h2>
+        <% if current_local == @local %>
+          <%= link_to "スコア編集", edit_score_path(@local.score.id) %>
+        <% end %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>自然</th>
+              <th>アクセス</th>
+              <th>お財布事情</th>
+              <th>職</th>
+              <th>ファミリー向け支援</th>
+              <th>文化</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @local.score.nature %></td>
+              <td><%= @local.score.accessibility %></td>
+              <td><%= @local.score.budget %></td>
+              <td><%= @local.score.job_support %></td>
+              <td><%= @local.score.family_support %></td>
+              <td><%= @local.score.culture %></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+        <canvas id="myChart"></canvas>
+        </div>
+      <% elsif current_local == @local %>
+        <%= link_to 'あなたの町がドンナトコか登録しましょう', new_score_path %>
+      <% else %>
+        coming soon...
+      <% end %>
+    </div>
+  </section>
+
+  <section class="intro">
+  <% if local_signed_in? && current_local == @local && @local.profile%>
+  <%= link_to "町のプロフィール編集", edit_profile_path(@local.profile.id) %>
+  <% end %>
+    <h2>町の紹介文</h2>
+    <% if @local.profile %>
+      <div class="intro_box">
+        <p><%= @local.profile.introduction ? @local.profile.introduction : 'coming soon...' %></p>
+      </div>
+    <% else %>
+    <p>coming soon...</p>
+    <% end %>
+  </section>
+
+  <section class="numbers">
+    <h2>数字で見るとドンナトコ？</h2>
+    <% if @local.profile %>
+    入力日時：<%= @local.profile.created_at %>
+    更新日時：<%= @local.profile.updated_at %>
       <table class="table">
         <thead>
           <tr>
-            <th>自然</th>
-            <th>アクセス</th>
-            <th>お財布事情</th>
-            <th>職</th>
-            <th>ファミリー向け支援</th>
-            <th>文化</th>
+            <th>人口</th>
+            <th>平均気温</th>
+            <th>転入数（前年）</th>
+            <th>待機児童数</th>
+            <th>地価</th>
+            <th>平均所得</th>
+            <th>犯罪率</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><%= @local.score.nature %></td>
-            <td><%= @local.score.accessibility %></td>
-            <td><%= @local.score.budget %></td>
-            <td><%= @local.score.job_support %></td>
-            <td><%= @local.score.family_support %></td>
-            <td><%= @local.score.culture %></td>
+            <td><%= @local.profile.population ? pluralize(@local.profile.population, "人") : 'coming soon...' %></td>
+            <td><%= @local.profile.temperature ? pluralize(@local.profile.temperature, "度") : 'coming soon...' %></td>
+            <td><%= @local.profile.moved_in ? pluralize(@local.profile.moved_in, "人") : 'coming soon...' %></td>
+            <td><%= @local.profile.waiting_children ? pluralize(@local.profile.waiting_children, "人") : 'coming soon...' %></td>
+            <td><%= @local.profile.land_price ? pluralize(@local.profile.land_price, "円") : 'coming soon...' %></td>
+            <td><%= @local.profile.income ? pluralize(@local.profile.income, "円") : 'coming soon...' %></td>
+            <td><%= @local.profile.crime_rate ? pluralize(@local.profile.crime_rate, "%") : 'coming soon...' %></td>
           </tr>
         </tbody>
       </table>
-      <div>
-      <canvas id="myChart"></canvas>
-      </div>
-    <% elsif current_local == @local %>
-      <%= link_to 'あなたの町がドンナトコか登録しましょう', new_score_path %>
     <% else %>
-      coming soon...
-    <% end %>
-  </div>
-</section>
-
-<section class="intro">
-<% if local_signed_in? && current_local == @local && @local.profile%>
-<%= link_to "町のプロフィール編集", edit_profile_path(@local.profile.id) %>
-<% end %>
-  <h2>町の紹介文</h2>
-  <% if @local.profile %>
-    <div class="intro_box">
-      <p><%= @local.profile.introduction ? @local.profile.introduction : 'coming soon...' %></p>
-    </div>
-  <% else %>
-  <p>coming soon...</p>
-  <% end %>
-</section>
-
-<section class="numbers">
-  <h2>数字で見るとドンナトコ？</h2>
-  <% if @local.profile %>
-  入力日時：<%= @local.profile.created_at %>
-  更新日時：<%= @local.profile.updated_at %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>人口</th>
-          <th>平均気温</th>
-          <th>転入数（前年）</th>
-          <th>待機児童数</th>
-          <th>地価</th>
-          <th>平均所得</th>
-          <th>犯罪率</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= @local.profile.population ? pluralize(@local.profile.population, "人") : 'coming soon...' %></td>
-          <td><%= @local.profile.temperature ? pluralize(@local.profile.temperature, "度") : 'coming soon...' %></td>
-          <td><%= @local.profile.moved_in ? pluralize(@local.profile.moved_in, "人") : 'coming soon...' %></td>
-          <td><%= @local.profile.waiting_children ? pluralize(@local.profile.waiting_children, "人") : 'coming soon...' %></td>
-          <td><%= @local.profile.land_price ? pluralize(@local.profile.land_price, "円") : 'coming soon...' %></td>
-          <td><%= @local.profile.income ? pluralize(@local.profile.income, "円") : 'coming soon...' %></td>
-          <td><%= @local.profile.crime_rate ? pluralize(@local.profile.crime_rate, "%") : 'coming soon...' %></td>
-        </tr>
-      </tbody>
-    </table>
-  <% else %>
-    <p>coming soon...</p>
-  <% end %>
-</section>
-<section class="articles">
-<% if @local.articles.any? %>
-  <ol class="articles">
-    <%= render @articles.first(3), local: @local %>
-  </ol>
-  <%= link_to '記事一覧', local_articles_path(@local) %>
-<% end %>
-</section>
-
-<% if user_signed_in? %>
-  <section class="cv_area">
-    <% unless current_user.talking?(@local) %>
-      <%= form_with(model: @talkroom, loacal: true) do |f| %>
-        <%= f.hidden_field :local_id, value: @local.id %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.submit '話を聞いてみたい', class: 'btn btn-primary' %>
-      <% end %>
-    <% else %>
-      <%= link_to 'トークルームへ', talkroom_messages_path(@room) %>
+      <p>coming soon...</p>
     <% end %>
   </section>
-<% end %>
+  <section class="articles">
+  <% if @local.articles.any? %>
+    <ol class="articles">
+      <%= render @articles.first(3), local: @local %>
+    </ol>
+    <%= link_to '記事一覧', local_articles_path(@local) %>
+  <% end %>
+  </section>
+
+  <% if user_signed_in? %>
+    <section class="cv_area">
+      <% unless current_user.talking?(@local) %>
+        <%= form_with(model: @talkroom, loacal: true) do |f| %>
+          <%= f.hidden_field :local_id, value: @local.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.submit '話を聞いてみたい', class: 'btn btn-primary' %>
+        <% end %>
+      <% else %>
+        <%= link_to 'トークルームへ', talkroom_messages_path(@room) %>
+      <% end %>
+    </section>
+  <% end %>
+</div>
 
   <script>
     <% if @local.score %>

@@ -58,9 +58,10 @@ RSpec.describe 'Recommends', type: :system do
   it 'shows recommended locals' do
     sign_in user
     visit home_path
-
-    expect(page).to have_content local.name
-    expect(page).to have_content local2.name
-    expect(page).to have_no_content local3.name
+    within('div.recommends') do
+      expect(page).to have_content local.name
+      expect(page).to have_content local2.name
+      expect(page).to have_no_content local3.name
+    end
   end
 end

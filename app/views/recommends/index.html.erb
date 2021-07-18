@@ -1,11 +1,17 @@
-<h1>おすすめ地域</h1>
-<% if @locals.any? %>
-  <table>
-    <%= render @locals, full: true %>
-  </table>
 
-<% else %>
-  <p>おすすめ地域はありません。。。</p>
-  <%= link_to 'スコアを登録する', new_score_path unless current_user.score %>
-  <%= link_to '登録スコアを見直す', edit_score_path(current_user)  if current_user.score %>
-<% end %>
+  <div class="slider">
+      <%= render @locals %>
+  </div>
+
+<div class="container recommends">
+  <h1 class="title">あなたへのおすすめ地域</h1>
+  <% if @recommends.any? %>
+      <%= render @recommends, full: true %>
+  <% else %>
+    <p>おすすめ地域はありません。。。</p>
+    <%= link_to 'スコアを登録する', new_score_path unless current_user.score %>
+    <%= link_to '登録スコアを見直す', edit_score_path(current_user)  if current_user.score %>
+  <% end %>
+</div>
+
+

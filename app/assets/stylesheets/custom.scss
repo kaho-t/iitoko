@@ -2,7 +2,7 @@
 @import "bootstrap";
 
 $pc: 1024px; // PC
-$tab: 680px; // タブレット
+$tab: 1024px; // タブレット
 $sp: 480px;  // スマホ
 
 @mixin pc {
@@ -53,6 +53,22 @@ textarea {
 
 .center h1 {
   margin-bottom: 10px;
+}
+
+a.pink_btn {
+  text-decoration: none;
+  font-size: 1.2em;
+  display: inline-block;
+  background-color: $key-coral;
+  color: #fff;
+  border: 2px solid $key-coral;
+  border-radius: 50px;
+  padding: 2% 15%;
+
+  &:hover {
+    background-color: #fff;
+    color: $key-coral;
+  }
 }
 
 
@@ -198,10 +214,32 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.5em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
+  margin: 4% auto 8%;
   text-align: center;
+  position: relative;
+
+  &.title {
+    &:before {
+      content: "";
+      position: absolute;
+      top: -19px;
+      left: 50%;
+      width: 150px;
+      height: 80px;
+      border-radius: 50%;
+      border: 5px solid #a6ddb0;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+    @include sp {
+      font-size: 2em;
+    }
+
+  }
 }
 
 h2 {
@@ -370,6 +408,188 @@ input {
 }
 
 
+// ================
+//    LOCAL_INDEX
+// ================
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 3%;
+  padding: 2%;
+
+  @include pc {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-pack: justify !important;
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+    margin-bottom: 3%;
+    padding: 2% !important;
+  }
+
+}
+
+.slick-slide {
+  .card {
+    margin: 1% 10px 0;
+
+  }
+
+  @include pc {
+    .card {
+      max-width: 1140px;
+      height: 400px;
+    }
+  }
+
+  @include tab {
+    .card {
+      width: 720px;
+    }
+  }
+
+  @include sp {
+    .card {
+      width: 360px;
+    }
+  }
+}
+
+.card_left {
+  flex: 1;
+  margin: 1%;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+}
+
+.matchrate {
+  display: inline-block;
+  color: $key-coral;
+  background-color: #fff;
+  text-align: center;
+  border: 5px solid $key-coral;
+  padding: 3%;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  position: absolute;
+  top: 3%;
+  left: 2%;
+
+  p {
+    margin: 3px 0 0;
+  }
+
+  p.rate {
+    font-size: 2em;
+    font-weight: 600;
+    margin-top: -10px;
+
+  }
+}
+
+.card_right {
+  flex: 1;
+  margin: 1%;
+  position: relative;
+  padding-bottom: 10%;
+
+  .btn_area {
+    position: absolute;
+    bottom: 1%;
+    left: 18%;
+    width: 65%;
+    font-size: 1.2em;
+
+    .pink_btn {
+      padding: 3% 20%;
+    }
+  }
+
+  dl {
+    dt {
+      .gravatar {
+        display: inline-block !important;
+      }
+    }
+  }
+}
+.card_name {
+  font-size: 2em;
+  line-height: 2em;
+}
+.catchphrase {
+  padding: 1%;
+  line-height: 2em;
+  font-weight: 500;
+  font-size: 1.2em;
+}
+
+.fa-chevron-left {
+  font-size: 50px;
+  position: absolute;
+  z-index: 100;
+  left: 8%;
+  top: 42%;
+  color: $font-green;
+  opacity: 0.5;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+.fa-chevron-right {
+  font-size: 50px;
+  position: absolute;
+  z-index: 100;
+  right: 8%;
+  top: 42%;
+  color: $font-green;
+  opacity: 0.5;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
+.slide-dots{
+  text-align: center;
+  padding: 0;
+  li{
+    display: inline-block;
+    line-height: 3em;
+    margin: 0 15px;
+    button{
+      background: none;
+      position: relative;
+      text-indent: -9999px;
+      border: none;
+      &:before{
+        content: '●';
+        color: #999;
+        font-size: 1em;
+        text-indent: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+    &.slick-active{
+      button:before{
+        content: '●';
+        color: $font-green;
+      }
+    }
+  }
+}
+
 
 // ================
 //    LOCAL_SHOW
@@ -379,11 +599,12 @@ input {
 }
 .tag {
   display: inline-block;
-  padding: 1px 3px;
+  padding: 0px 10px 2px;
   margin: 1px 3px;
   justify-content: space-between;
-  color: #fff;
-  background-color: #ffa500;
+  border: 1px solid #aaa;
+  border-radius: 30px;
+  color: #aaa;
 }
 .header_image {
   width: 100%;

@@ -1,5 +1,48 @@
-<div>
-  <%= recommend.name %>
-  <%= recommend.prefecture.name %>
-  <p>マッチ度：<%= recommend.difference_rate(current_user) %>%</p>
+<div class="swiper-slide">
+  <div class="card">
+    <div class="card_left">
+      <% if local.image? %>
+        <%= image_tag local.image.url %>
+      <% else %>
+        <%= image_tag 'default.png' %>
+      <% end %>
+      <% if local_assigns[:full] %>
+        <div class="matchrate">
+          <p>マッチ度</p>
+          <p class="rate"><%= local.difference_rate(current_user) %>%</p>
+        </div>
+      <% end %>
+    </div>
+    <div class="card_right">
+      <dl>
+        <dt>
+          <%= gravatar_for local, size: 50 %>&nbsp;
+          <span class="card_name"><%= local.prefecture.name %>&nbsp;<%= local.name %></span>
+          </dt>
+        <dd>
+          <% if local.profile && local.profile.catchphrase %>
+            <p class="catchphrase"><%= local.profile.catchphrase %></p>
+          <% else %>
+            <p>&nbsp;</p>
+          <% end %>
+          </dd>
+        <dd>
+          <% if local.tag %>
+            <% local.tag.i18n_true_tags.each do |local_tag| %>
+              <p class="tag">#<%= local_tag %></p>
+            <% end %>
+          <% else %>
+            <p>&nbsp;</p>
+          <% end %>
+          </dd>
+      </dl>
+      <div class="btn_area">
+        <%= link_to '詳細はこちら', local_path(local), class: 'pink_btn' %>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+
+

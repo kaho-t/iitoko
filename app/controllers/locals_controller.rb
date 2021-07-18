@@ -34,7 +34,7 @@ class LocalsController < ApplicationController
       redirect_to home_url
     end
 
-    @locals = Local.all.includes(%i[profile tag]).sample(10)
+    @locals = Local.all.includes(%i[profile tag]).sample(8)
   end
 
   def search

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_08_063839) do
+ActiveRecord::Schema.define(version: 2021_07_16_031859) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -122,7 +122,6 @@ ActiveRecord::Schema.define(version: 2021_07_08_063839) do
     t.string "sender_type"
     t.bigint "sender_id"
     t.index ["sender_type", "sender_id"], name: "index_messages_on_sender"
-    t.index ["talkroom_id", "created_at"], name: "index_messages_on_talkroom_id_and_is_user_and_created_at"
     t.index ["talkroom_id", "sender_type", "created_at"], name: "index_messages_on_talkroom_id_and_sender_type_and_created_at"
   end
 
@@ -161,6 +160,7 @@ ActiveRecord::Schema.define(version: 2021_07_08_063839) do
     t.bigint "local_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "catchphrase"
     t.index ["local_id"], name: "index_profiles_on_local_id"
   end
 

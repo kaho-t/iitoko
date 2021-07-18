@@ -13,6 +13,12 @@ RSpec.describe Profile, type: :model do
       expect(profile.errors[:introduction]).to include('は255文字以内で入力してください')
     end
 
+    it 'is invalid with too long catchphrase' do
+      profile.catchphrase = 'a' * 51
+      profile.valid?
+      expect(profile.errors[:catchphrase]).to include('は50文字以内で入力してください')
+    end
+
     it 'is invalid with too big population' do
       profile.population = 5_000_000
       profile.valid?
