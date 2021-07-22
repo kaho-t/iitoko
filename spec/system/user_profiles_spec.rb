@@ -14,10 +14,10 @@ RSpec.describe 'UserProfiles', type: :system do
         select '30', from: '年齢'
         fill_in '興味のある地域・検討中の地域', with: '沖縄県'
         fill_in '職業', with: '会社員'
-        fill_in '家族構成', with: '3人家族（父、母、子一人）'
+        select '3人', from: '家族構成'
         select '3年以内', from: '移住を検討している時期'
         fill_in '移住を検討したきっかけ', with: 'リモートワークが始まったため'
-        click_button '確定'
+        click_button '確定する'
         expect(page).to have_current_path home_path
       end.to change(UserProfile, :count).by(1)
       visit user_path(user)
@@ -25,9 +25,28 @@ RSpec.describe 'UserProfiles', type: :system do
       expect(page).to have_content '東京都'
       expect(page).to have_content '30代'
       expect(page).to have_content '沖縄'
-      expect(page).to have_content '3人家族'
+      expect(page).to have_content '3人'
       expect(page).to have_content '3年以内'
       expect(page).to have_content 'リモートワークが始まったため'
+    end
+    it 'fails to create without any data' do
+      sign_in user
+      visit new_user_profile_path
+      expect do
+        click_button '確定する'
+        expect(page).to have_current_path user_profiles_path
+      end.to change(UserProfile, :count).by(0)
+      expect(page).to have_content '5 箇所のエラーがあります。'
+    end
+    it 'skips creating profile' do
+      sign_in user
+      visit new_user_profile_path
+      expect do
+        click_link 'スキップして早速使う'
+        expect(page).to have_current_path home_path
+      end.to change(UserProfile, :count).by(0)
+      visit user_path(user)
+      expect(page).to have_content 'プロフィールを登録しましょう'
     end
   end
 
@@ -38,7 +57,7 @@ RSpec.describe 'UserProfiles', type: :system do
       visit user_path(user)
       click_link 'プロフィール編集'
       fill_in '興味のある地域・検討中の地域', with: '沖縄県、福岡県、宮崎県'
-      click_button '確定'
+      click_button '確定する'
       expect(page).to have_current_path user_path(user)
       expect(page).to have_content '沖縄県、福岡県、宮崎県'
     end

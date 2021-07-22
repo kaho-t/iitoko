@@ -12,7 +12,7 @@ RSpec.describe 'Tags', type: :system do
     it 'creates tags' do
       sign_in local
       visit new_tag_path
-      expect(page).to have_content '関連ワード登録'
+      expect(page).to have_content 'キーワード登録'
       check '海'
       check '山'
       check '川'
@@ -22,7 +22,7 @@ RSpec.describe 'Tags', type: :system do
       check '南国'
       check '都心へ好アクセス'
       check 'スモールタウン'
-      check '車移動'
+      check '車必須'
       check '電車移動'
       check '物価が安い'
       check '移住支援'
@@ -51,7 +51,7 @@ RSpec.describe 'Tags', type: :system do
       check '南国'
       check '都心へ好アクセス'
       check 'スモールタウン'
-      check '車移動'
+      check '車必須'
       check '電車移動'
       check '物価が安い'
       check '移住支援'
@@ -66,6 +66,15 @@ RSpec.describe 'Tags', type: :system do
       visit local_path(local)
       expect(page).to have_content '海'
       expect(page).to have_no_content '山'
+    end
+    it 'creates tags without any tags' do
+      sign_in local
+      visit new_tag_path
+      expect{
+        click_button '登録する'
+        expect(page).to have_current_path local_path(local)
+      }.to change(Tag, :count).by (1)
+      expect(page).to have_content 'タグ編集'
     end
   end
   describe 'editting a tag' do

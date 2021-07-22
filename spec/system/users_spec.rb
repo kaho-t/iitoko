@@ -56,7 +56,11 @@ RSpec.describe 'Users', js: true, type: :system do
         user.reload
         expect(user.confirmed_at).to_not be_nil
         expect(page).to have_current_path welcome_path
-        expect(page).to have_content 'ようこそ！'
+        visit current_path
+        expect(page).to have_content 'ようこそ、iitokoへ！'
+        expect(page).to have_content '住みたいトコ、ドンナトコ？'
+        expect(page).to have_no_content 'あなたの町、ドンナトコ？'
+        expect(page).to have_no_content 'トップページへ'
 
         expect(User.count).to eq @number_of_users + 1
 

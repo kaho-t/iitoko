@@ -1,13 +1,113 @@
 <% provide(:button_text, '次へ') %>
-<h1>ドンナトコ？</h1>
-<% if user_signed_in? %>
-  <p>あなたの住みたい場所はドンナトコか教えてください</p>
-  <p>移住先に求める条件、下記６項目の重要度をそれぞれ０〜５の星の数で教えてください</p>
-<% else %>
-  <p>あなたの町はドンナトコか教えてください</p>
-  <p>町の特色や力を入れていること、下記６項目の重要度をそれぞれ０〜５の星の数で教えてください</p>
-<% end %>
+<section class="donnatoko">
+  <div class="container">
+    <h1>ドンナトコ？</h1>
+    <% if user_signed_in? %>
+      <p>あなたの住みたい場所はドンナトコか教えてください</p>
+      <p>移住先に求める条件、下記６項目の重要度をそれぞれ０〜５の星の数で教えてください</p>
+    <% else %>
+      <p>あなたの町はドンナトコか教えてください</p>
+      <p>町の特色や力を入れていること、下記６項目の重要度をそれぞれ０〜５の星の数で教えてください</p>
+    <% end %>
 
-<p>０：重視しないー５：とても重視する</p>
+    <p>０(入力なし）：重視しないー５：とても重視する</p>
 
-<%= render 'form' %>
+    <%= form_with(model: @score, local: true) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+      <div class="donnatoko_slider score_wrap">
+        <div class="for_slick">
+          <div class="score_box">
+            <h2>自然</h2>
+            <div class="score">
+              <% @points.reverse_each do |num| %>
+                <%= f.radio_button :nature, num %>
+                <%= f.label "nature_#{num}", class: 'star' do %>
+                  <span class="text"><%= num %></span>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              <% end %>
+              <%= f.radio_button :nature, 0, checked: !!(@score.nature.nil? || @score.nature == 0) %>
+              <%= f.label "nature_0", class: 'zero' %>
+            </div>
+          </div>
+        </div>
+        <div class="for_slick">
+          <div class="score_box">
+            <h2>アクセス</h2>
+            <div class="score">
+              <% @points.reverse_each do |num| %>
+                  <%= f.radio_button :accessibility, num %>
+                  <%= f.label "accessibility_#{num}", class: 'star' do %>
+                    <span class="text"><%= num %></span>
+                    <i class="fas fa-star"></i>
+                  <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="for_slick">
+          <div class="score_box">
+            <h2>お財布事情</h2>
+            <div class="score">
+              <% @points.reverse_each do |num| %>
+                <%= f.radio_button :budget, num %>
+                <%= f.label "budget_#{num}", class: 'star' do %>
+                  <span class="text"><%= num %></span>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="for_slick">
+          <div class="score_box">
+            <h2>職</h2>
+            <div class="score">
+              <% @points.reverse_each do |num| %>
+                <%= f.radio_button :job_support, num %>
+                <%= f.label "job_support_#{num}", class: 'star' do %>
+                  <span class="text"><%= num %></span>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="for_slick">
+          <div class="score_box">
+            <h2>ファミリー向け支援</h2>
+            <div class="score">
+              <% @points.reverse_each do |num| %>
+                <%= f.radio_button :family_support, num %>
+                <%= f.label "family_support_#{num}", class: 'star' do %>
+                  <span class="text"><%= num %></span>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="for_slick">
+          <div class="score_box">
+            <h2>文化</h2>
+            <div class="score">
+              <% @points.reverse_each do |num| %>
+                <%= f.radio_button :culture, num %>
+                <%= f.label "culture_#{num}", class: 'star' do %>
+                  <span class="text"><%= num %></span>
+                  <i class="fas fa-star"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="for_slick">
+          <div class="score_box">
+            <p>&#xFF3C; プロフィール登録に進む！ &#xFF0F;</p>
+            <%= f.submit yield(:button_text), class: "pink_btn" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -1,3 +1,26 @@
 // Place all the styles related to the Profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.notenext {
+  text-align: center;
+  margin-top: 3em;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.form_area_w {
+  .pink_btn {
+    margin-top: 0;
+  }
+  .flex_form_row {
+    .flex_form{
+      .width80 {
+        width: 80%;
+      }
+      span.unit {
+        padding-left: 0.5em;
+      }
+    }
+  }
+}

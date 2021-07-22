@@ -33,7 +33,7 @@ class TagsController < ApplicationController
   def tags
     @tags = { sea: '海', mountain: '山', river: '川', field: '田畑', hotspring: '温泉',
               north: '北国', south: '南国',
-              easy_to_go: '都心へ好アクセス', small_city: 'スモールタウン', car: '車移動', train: '電車移動',
+              easy_to_go: '都心へ好アクセス', small_city: 'スモールタウン', car: '車必須', train: '電車移動',
               low_price: '物価が安い', moving_support: '移住支援', entrepreneur_support: '起業支援',
               child_care_support: '子育て支援', job_change_support: '転職支援',
               park: '公園', education: '教育', food: '食', architecture: '建築・街並み',

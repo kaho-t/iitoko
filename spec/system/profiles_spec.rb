@@ -44,6 +44,16 @@ RSpec.describe 'Profiles', type: :system do
       expect(page).to have_content profile.introduction.to_s
       expect(page).to have_selector 'td', text: 'coming soon...'
     end
+    it 'creates a profile without any data' do
+      sign_in local
+      visit new_profile_path
+      expect{
+        click_button '次へ'
+        expect(page).to have_current_path new_tag_path
+      }.to change(Profile, :count).by(1)
+      visit local_path(local)
+      expect(page).to have_selector 'td', text: 'coming soon...'
+    end
 
     it 'fails to create profile with invalid data' do
       sign_in local

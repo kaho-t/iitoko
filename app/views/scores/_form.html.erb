@@ -1,59 +1,81 @@
 <%= form_with(model: @score, local: true) do |f| %>
   <%= render "shared/error_messages", object: f.object %>
 
-  <div class="score">
-    【自然】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :nature, num %>
-        <%= f.label "nature_#{num}", "#{num}" %>
+  <div class="score_wrap">
+    <div class="score_box">
+      <h2>自然</h2>
+      <div class="score">
+        <% @points.reverse_each do |num| %>
+          <%= f.radio_button :nature, num %>
+          <%= f.label "nature_#{num}", class: 'star' do %>
+            <span class="text"><%= num %></span>
+            <i class="fas fa-star"></i>
+          <% end %>
+        <% end %>
+        <%= f.radio_button :nature, 0, checked: !!(@score.nature.nil? || @score.nature == 0) %>
+        <%= f.label "nature_0", class: 'zero' %>
       </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【アクセス】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :accessibility, num %>
-        <%= f.label "accessibility_#{num}", "#{num}" %>
+    </div>
+    <div class="score_box">
+      <h2>アクセス</h2>
+      <div class="score">
+        <% @points.reverse_each do |num| %>
+            <%= f.radio_button :accessibility, num %>
+            <%= f.label "accessibility_#{num}", class: 'star' do %>
+              <span class="text"><%= num %></span>
+              <i class="fas fa-star"></i>
+            <% end %>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【お財布事情】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :budget, num %>
-        <%= f.label "budget_#{num}", "#{num}" %>
+    </div>
+    <div class="score_box">
+      <h2>お財布事情</h2>
+      <div class="score">
+        <% @points.reverse_each do |num| %>
+          <%= f.radio_button :budget, num %>
+          <%= f.label "budget_#{num}", class: 'star' do %>
+            <span class="text"><%= num %></span>
+            <i class="fas fa-star"></i>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【職】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :job_support, num %>
-        <%= f.label "job_support_#{num}", "#{num}" %>
+    </div>
+    <div class="score_box">
+      <h2>職</h2>
+      <div class="score">
+        <% @points.reverse_each do |num| %>
+          <%= f.radio_button :job_support, num %>
+          <%= f.label "job_support_#{num}", class: 'star' do %>
+            <span class="text"><%= num %></span>
+            <i class="fas fa-star"></i>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【ファミリー向け支援】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :family_support, num %>
-        <%= f.label "family_support_#{num}", "#{num}" %>
+    </div>
+    <div class="score_box">
+      <h2>ファミリー向け支援</h2>
+      <div class="score">
+        <% @points.reverse_each do |num| %>
+          <%= f.radio_button :family_support, num %>
+          <%= f.label "family_support_#{num}", class: 'star' do %>
+            <span class="text"><%= num %></span>
+            <i class="fas fa-star"></i>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-  <div class="score">
-    【文化】
-    <% @points.each do |num| %>
-      <div class="point">
-        <%= f.radio_button :culture, num %>
-        <%= f.label "culture_#{num}", "#{num}" %>
+    </div>
+    <div class="score_box">
+      <h2>文化</h2>
+      <div class="score">
+        <% @points.reverse_each do |num| %>
+          <%= f.radio_button :culture, num %>
+          <%= f.label "culture_#{num}", class: 'star' do %>
+            <span class="text"><%= num %></span>
+            <i class="fas fa-star"></i>
+          <% end %>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>

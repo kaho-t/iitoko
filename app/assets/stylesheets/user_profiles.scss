@@ -1,3 +1,18 @@
 // Place all the styles related to the UserProfiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.flex_wrap {
+  align-items: center;
+}
+p.skip_btn {
+  font-size: 0.9em;
+  .repink_btn {
+    padding: 0.5em 3em;
+  }
+}
+
+.pink_btn {
+  &.without_txt {
+    margin-top: 8% !important;
+  }
+}

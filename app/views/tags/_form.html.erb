@@ -1,15 +1,20 @@
 <%= form_with(model: @tag, local: true) do |f| %>
   <%= render "shared/error_messages", object: f.object %>
 
-  <% @tags.each do |key, jp| %>
-  <div class="field">
-    <%= f.label key, jp %><br />
-    <%= f.check_box key, {}, true, false %>
+  <div class="tags">
+    <% @tags.each do |key, jp| %>
+    <div class="field">
+      <%= f.check_box key, {}, 'true', 'false' %>
+      <%= f.label key, "##{jp}", class: 'tag' %>
+    </div>
+    <% end %>
   </div>
-  <% end %>
 
+  <% if local_assigns[:withcomment] %>
+    <p class="notenext">&#xFF3C; お疲れ様でした！ &#xFF0F;</p>
+  <% end %>
   <div class="actions">
-  <%= f.submit yield(:button_text) %>
+  <%= f.submit yield(:button_text), class: 'pink_btn' %>
   </div>
 
 <% end %>

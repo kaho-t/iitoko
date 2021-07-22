@@ -1,3 +1,70 @@
 // Place all the styles related to the Tags controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+$key-green: #2D5D24;
+$font-green: #003300;
+$key-coral: #E38692;
+$key-blue: #86c1e3;
+$key-ocean: #0048AE;
+
+$pc: 1024px; // PC
+$tab: 1024px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 5%;
+
+  input[type='checkbox']{
+    display: none;
+  }
+
+  label.tag {
+    @include sp {
+      padding: 0.5em 1em;
+      margin: 1em 0;
+    }
+
+    display: inline-block;
+    padding: 0px 10px 2px;
+    margin: 1px 3px;
+    justify-content: space-between;
+    border: 2px solid $key-ocean;
+    border-radius: 30px;
+    color: $key-ocean;
+    background-color: #fff;
+    padding: 0.5em 2em;
+    margin: 1em;
+
+  }
+  label:hover,
+  input[type='checkbox']:checked+label {
+    color: #fff;
+    background-color: $key-ocean;
+  }
+}
+
+.notenext {
+  text-align: center;
+  margin-top: 3em;
+  font-size: 1em;
+  font-weight: 500;
+}

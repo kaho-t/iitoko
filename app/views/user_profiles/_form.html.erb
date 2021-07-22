@@ -1,27 +1,70 @@
-<%= form_with model: @user_profile, local: true do |f| %>
-  <%= render "shared/error_messages", object: f.object %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
+<div class="form_area_w">
+  <%= form_with model: @user_profile, local: true do |f| %>
+    <%= render "shared/error_messages", object: f.object %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
 
-  <%= f.label :prefecture_code, '居住地' %><br />
-  <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name %>
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :prefecture_code, '居住地' %>
+      </div>
+      <div class="flex_form">
+        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name,
+        {prompt: "都道府県を選択"} %>
+      </div>
+    </div>
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :age, '年齢' %>
+      </div>
+      <div class="flex_form">
+        <%= f.select :age, [[10],[20],[30],[40],[50],[60],[70],[80],[90]], {prompt: "年代を選択"}, { autofocus: 'true', class: 'width80' } %>&nbsp;代
+      </div>
+    </div>
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :proposed_site, '興味のある地域・検討中の地域' %>
+      </div>
+      <div class="flex_form">
+        <%= f.text_field :proposed_site, placeholder: "ex. 〇〇県、〇〇県〇〇市、海の見える町..." %>
+        <p class="help_note">50文字以内で入力してください</p>
+      </div>
+    </div>
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :job, '職業' %>
+      </div>
+      <div class="flex_form">
+        <%= f.text_field :job %>
+        <p class="help_note">50文字以内で入力してください</p>
+      </div>
+    </div>
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :family_structure, '家族構成' %>
+      </div>
+      <div class="flex_form">
+        <%= f.select :family_structure, [['1人'],['2人'],['3人'],['4人'],['5人'],['6人'],['7人'],['8人'],['9人'],['10人以上']], prompt: "世帯の人数を選択" %>
+      </div>
+    </div>
 
-  <%= f.label :age, '年齢' %>
-  <%= f.select :age, [[10],[20],[30],[40],[50],[60],[70],[80],[90]], prompt: "年代を選択してください" %>代
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :timing, '移住を検討している時期' %>
+      </div>
+      <div class="flex_form">
+        <%= f.select :timing, [['条件があえばすぐにでも'],['3年以内'],['10年以内'],['定年後'],['きっかけがあれば'],['決まっていないがいつかは'],['未定']], prompt: "移住を検討している時期を選択" %>
+      </div>
+    </div>
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :content, '移住を検討したきっかけ' %>
+      </div>
+      <div class="flex_form">
+        <%= f.text_area :content %>
+        <p class="help_note">255文字以内で入力してください</p>
+      </div>
+    </div>
 
-  <%= f.label :proposed_site, '興味のある地域・検討中の地域' %>
-  <%= f.text_field :proposed_site %>
-
-  <%= f.label :job, '職業' %>
-  <%= f.text_field :job %>
-
-  <%= f.label :family_structure, '家族構成' %>
-  <%= f.text_field :family_structure %>
-
-  <%= f.label :timing, '移住を検討している時期,' %>
-  <%= f.select :timing, [['条件があえばすぐにでも'],['3年以内'],['10年以内'],['定年後'],['きっかけがあれば'],['決まっていないがいつかは'],['未定']], prompt: "移住を検討している時期を選択してください" %>
-
-  <%= f.label :content, '移住を検討したきっかけ' %>
-  <%= f.text_field :content %>
-
-  <%= f.submit '確定' %>
-<% end %>
+    <%= f.submit '確定する', class: 'pink_btn without_txt' %>
+  <% end %>
+</div>

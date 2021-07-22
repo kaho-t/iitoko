@@ -1,6 +1,11 @@
 <% provide(:button_text, '次へ') %>
-<h1>数字で見るとあなたの町はドンナトコ？</h1>
-<p>あなたの町がドンナトコか、登録しましょう！</p>
-<p>※データの入力率が高いほど移住希望者とのマッチング成功率が高まります</p>
 
-<%= render 'form' %>
+<section class="donnatoko">
+  <div class="container">
+    <h1>あなたの町はドンナトコ？</h1>
+    <p>あなたの町がドンナトコか、登録しましょう！</p>
+    <p>※データの入力率が高いほど移住希望者とのマッチング成功率が高まります</p>
+
+    <%= render 'form', withcomment: true %>
+  </div>
+</section>

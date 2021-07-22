@@ -62,7 +62,12 @@ RSpec.describe 'Locals', js: true, type: :system do
       local.reload
       expect(local.confirmed_at).to_not be_nil
       expect(page).to have_current_path welcome_path
-      expect(page).to have_content 'ようこそ！'
+      expect(page).to have_content 'ようこそ、iitokoへ！'
+      expect(page).to have_content 'あなたの町の特色を登録しましょう'
+      expect(page).to have_content 'あなたの町、ドンナトコ？'
+      expect(page).to have_no_content 'ドンナトコは登録ずみです'
+      expect(page).to have_no_content '住みたいトコ、ドンナトコ？'
+      expect(page).to have_no_content 'トップページへ'
 
       expect(Local.count).to eq @number_of_locals + 1
     end

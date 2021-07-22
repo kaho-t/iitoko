@@ -5,7 +5,7 @@ class ScoresController < ApplicationController
   def new
     @score = Score.new
     @user = current_user
-    @points = 0..5
+    @points = 1..5
   end
 
   def create
@@ -14,6 +14,7 @@ class ScoresController < ApplicationController
     elsif current_local
       current_account = current_local
     end
+
     @score = current_account.build_score(score_params)
     if @score.save
       if current_account == current_local
@@ -33,7 +34,7 @@ class ScoresController < ApplicationController
       @current_account = current_local
     end
     @score = @current_account.score
-    @points = 0..5
+    @points = 1..5
   end
 
   def update

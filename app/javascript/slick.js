@@ -21,7 +21,8 @@ document.addEventListener("turbolinks:load"
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
-          dots: true
+          dots: true,
+          centerMode: true,
         }
       },
       {
@@ -44,6 +45,46 @@ document.addEventListener("turbolinks:load"
       // settings: "unslick"
       // instead of a settings object
     ]
-  })
+  });
+  $('.donnatoko_slider').slick({
+    dots: true,
+    dotsClass: 'slide-dots',
+    speed: 300,
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    prevArrow: '<i class="fas fa-caret-square-left"></i>',
+    nextArrow: '<i class="fas fa-caret-square-right"></i>',
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+        }
+      }
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+  });
 
 });

@@ -1,3 +1,127 @@
 // Place all the styles related to the Score controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+$key-green: #2D5D24;
+$font-green: #003300;
+$key-coral: #E38692;
+$key-blue: #86c1e3;
+
+$pc: 1024px; // PC
+$tab: 1024px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+.score_wrap {
+  @include pc {
+    display: flex;
+  	-ms-flex-wrap: wrap;
+  	flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+  @include tab {
+    display: flex;
+  	-ms-flex-wrap: wrap;
+  	flex-wrap: wrap;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+  }
+
+  .score_box {
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 10px;
+    padding: 3%;
+    margin-bottom: 5%;
+
+    h2 {
+      color: $font-green;
+      font-size: 1.5em;
+      font-weight: 500;
+    }
+  }
+  .for_slick {
+    .score_box {
+      padding: 10% 10% 20%;
+
+      @include sp {
+        padding-top: 5%;
+      }
+
+      p {
+        margin: 20px 0 30px;
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: 500;
+      }
+      .pink_btn {
+        margin-top: 4%;
+      }
+    }
+  }
+}
+
+
+
+/*インプットタイプ★★★★★*/
+.score {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+
+  @include sp {
+    margin-bottom: 5%;
+  }
+
+  .score_zero {
+    display: none;
+  }
+
+  input[type='radio']{
+  display: none;
+  }
+
+  label.star {
+    position: relative;
+    padding: 20px 10px 0;
+    color: gray;
+    cursor: pointer;
+    font-size: 2.5em;
+
+    span.text{
+      position: absolute;
+      left: -20px;
+      top: 0;
+      right: 0;
+      text-align: center;
+      font-size: 12px;
+      color: gray;
+      width: 100px;
+    }
+  }
+
+  label:hover,
+  label:hover~label,
+  input[type='radio']:checked~ label{
+  color: #ffcc00;
+  }
+  label.zero {
+    display: none;
+  }
+}

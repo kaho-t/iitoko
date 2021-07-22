@@ -1,5 +1,11 @@
-<% provide(:button_text, '登録') %>
-<h1>関連ワード登録</h1>
-<p>あなたの町の特徴やあなたの町が力を入れていることに関連するタグにチェックを入れて登録しましょう</p>
+<% provide(:button_text, '登録する') %>
 
-<%= render 'form' %>
+<section class="donnatoko">
+  <div class="container">
+    <h1>キーワード登録</h1>
+    <p>あなたの町の特徴やあなたの町が力を入れていることに関連するタグにチェックを入れて登録しましょう</p>
+    <div class="form_area_w">
+      <%= render 'form', withcomment: true %>
+    </div>
+  </div>
+</section>

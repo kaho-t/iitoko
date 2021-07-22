@@ -27,7 +27,20 @@
           <div class="title_btn pink_btn">
             <%= link_to '新規会員登録', new_local_registration_path %>
           </div>
+        <% elsif @welcome && user_signed_in? && !current_user.score%>
+            <div class="title_btn pink_btn">
+              <%= link_to '住みたいトコ、ドンナトコ？', new_score_path %>
+            </div>
+        <% elsif @welcome && local_signed_in? && !current_local.score %>
+          <div class="title_btn pink_btn">
+            <%= link_to 'あなたの町、ドンナトコ？', new_score_path %>
+          </div>
+          <% elsif @welcome %>
+            <div class="title_btn pink_btn">
+              <%= link_to 'トップページへ', root_path %>
+            </div>
         <% end %>
+
       </div>
 
   </div>
