@@ -1,16 +1,33 @@
-<h2>Resend unlock instructions</h2>
+<div class="separate">
+  <div class="signin-up">
+    <div class="loginlogo_area">
+      <%= link_to root_path, id: "logo" do%>
+        <%= image_tag 'logo.png', class: 'loginlogo' %>
+      <% end %>
+    </div>
+    <h1 class="signin-txt">ロック解除メール再送</h1>
+    <div class="txt-center">
+        <p class="font-b">ご登録のメールアドレスを入力してください。</p>
+        <p class="font-b">ロック解除用URLがメールで届きます。</p>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="field mb-3 pass_field">
+        <%= f.label :email, class: 'form-label' %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "送信する", class: 'pink_btn' %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= render "users/shared/links" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Resend unlock instructions" %>
+  <div class="title_area">
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

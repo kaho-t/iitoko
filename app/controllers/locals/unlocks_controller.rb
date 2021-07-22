@@ -2,9 +2,10 @@
 
 class Locals::UnlocksController < Devise::UnlocksController
   # GET /resource/unlock/new
-  # def new
-  #   super
-  # end
+  def new
+    @no_header = true
+    super
+  end
 
   # POST /resource/unlock
   # def create

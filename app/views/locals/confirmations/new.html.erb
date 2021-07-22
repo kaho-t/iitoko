@@ -1,16 +1,32 @@
-<h2>Resend confirmation instructions</h2>
+<div class="separate">
+  <div class="signin-up">
+    <div class="loginlogo_area">
+      <%= link_to root_path, id: "logo" do%>
+        <%= image_tag 'logo.png', class: 'loginlogo' %>
+      <% end %>
+    </div>
+    <h1 class="signin-txt">認証メール再送</h1>
+    <div class="txt-center">
+        <p class="font-b">ご登録のメールアドレスを入力してください。</p>
+        <p class="font-b">認証用URLがメールで届きます。</p>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "locals/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "locals/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+      <div class="field mb-3 pass_field">
+        <%= f.label :email, class: 'form-label' %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control' %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "送信する", class: 'pink_btn' %>
+      </div>
+    <% end %>
+    <div>
+      <%= render "locals/shared/links" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
+  <div class="title_area">
   </div>
-<% end %>
-
-<%= render "locals/shared/links" %>
+</div>

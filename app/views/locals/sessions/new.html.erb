@@ -1,26 +1,38 @@
-<h2>自治体としてログイン</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email, 'メールアドレス' %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, 'パスワード' %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me, 'ログインを記憶する'%>
+<div class="separate">
+  <div class="signin-up">
+    <div class="loginlogo_area">
+    <%= link_to root_path, id: "logo" do%>
+      <%= image_tag 'logo.png', class: 'loginlogo' %>
+    <% end %>
     </div>
-  <% end %>
+    <h1 class="signin-txt">ステキな人たちとの<br>出会いがありますように</h1>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+        <%= f.label :email, 'メールアドレス', class: 'form-label' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, 'パスワード', class: 'form-label' %>
+        <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, 'ログインを記憶する'%>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "ログイン", class: 'pink_btn' %>
+      </div>
+    <% end %>
+    <div>
+      <%= render "locals/shared/links" %>
+    </div>
   </div>
-<% end %>
-
-<%= render "locals/shared/links" %>
+  <div class="title_area">
+  </div>
+</div>

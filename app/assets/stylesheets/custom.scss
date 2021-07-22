@@ -28,9 +28,16 @@ $key-coral: #E38692;
 $key-blue: #86c1e3;
 
 /* universal */
+html {
+  @include pc {
+    height: 100%;
+  }
+}
 
 body {
-  padding-top: 60px;
+  @include pc {
+  height: 100%;
+  }
   background-image: image-url('bgimage.png');
   background-size: cover;
   font-family: 'Noto Sans JP', sans-serif;
@@ -90,14 +97,52 @@ textarea {
   display: flex;
   justify-content: space-between;
 }
+.separate {
 
-a { 
+  @include pc {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  }
+  div {
+    @include pc{
+    flex: 1;
+    width: 485px;
+    margin: auto;
+    }
+    padding: 15px;
+  }
+  .title_area {
+    @include pc {
+    align-self: stretch;
+    margin: 0;
+    padding: 0;
+    display: block;
+    }
+    display: none;
+  }
+}
+
+a {
   text-decoration: none;
   &:hover {
     text-decoration: none;
   }
 }
 
+.top60 {
+  padding-top: 60px;
+}
+.top5per {
+  margin-top: 5% !important;
+}
+.txt-center {
+  text-align: center;
+}
+.font-b {
+  font-size: 1.4em;
+  font-weight: 400;
+}
 
 // ================
 //    header
@@ -266,6 +311,9 @@ h1 {
     }
 
   }
+  &.signin-txt {
+    line-height: 1.5em;
+  }
 }
 
 h2 {
@@ -312,6 +360,18 @@ $gray-medium-light: #eaeaea;
 //   @include box_sizing;
 // }
 
+
+select.prefecture {
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+
+}
 .form_area_w {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
@@ -327,9 +387,6 @@ $gray-medium-light: #eaeaea;
     @include sp {
       display: block;
       .flex_form {
-        input, textarea, select, .uneditable-input {
-          width: 100%;
-        }
         select.width80 {
           width: 80%;
         }
@@ -356,11 +413,7 @@ $gray-medium-light: #eaeaea;
         border-radius: 5px;
         width: 100%;
       }
-      p.help_note {
-        color: #777;
-        font-size: 0.9em;
-        margin: 0;
-      }
+      
     }
 
   }
@@ -370,6 +423,12 @@ $gray-medium-light: #eaeaea;
     display: block;
     margin: 8% auto 3%;
   }
+}
+
+.help_note {
+  color: #777;
+  font-size: 0.9em;
+  margin: 0;
 }
 
 input {
@@ -775,3 +834,34 @@ img.header_img {
   display: none !important;
 }
 
+
+.separate {
+  .signin-up {
+    margin-top: 0;
+    .loginlogo_area {
+      padding: 0 0 0 15px;
+      margin-bottom: 10%;
+    }
+  }
+  &.h-auto {
+    height: auto;
+  }
+}
+
+
+.separate {
+  .signin-up {
+    .pink_btn {
+      padding: 0.6em 5em;
+    }
+  }
+}
+
+.loginlogo {
+  width: 100px;
+}
+
+.pass_field {
+  margin: 5% auto !important;
+  padding: 0 4% !important;
+}

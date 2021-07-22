@@ -17,13 +17,12 @@ RSpec.describe 'Locals', js: true, type: :system do
         click_link '自治体の方'
         expect(page).to have_content '自治体としてログイン'
         click_link '新規会員登録'
-        expect(page).to have_content '自治体登録'
         select '北海道', from: '都道府県'
         fill_in '自治体名', with: ''
         fill_in 'メールアドレス', with: local.email
         fill_in 'パスワード', with: local.password
         fill_in 'パスワード（確認用）', with: local.password_confirmation
-        click_button '自治体登録'
+        click_button '無料で会員登録する'
 
         expect(Local.count).to eq @number_of_locals
         expect(page).to have_current_path '/locals'
@@ -36,7 +35,7 @@ RSpec.describe 'Locals', js: true, type: :system do
         fill_in 'メールアドレス', with: local.email
         fill_in 'パスワード', with: local.password
         fill_in 'パスワード（確認用）', with: 'invalid'
-        click_button '自治体登録'
+        click_button '無料で会員登録する'
         expect(Local.count).to eq @number_of_locals
         expect(page).to have_current_path '/locals'
         expect(page).to have_css 'div#error_explanation'
@@ -49,7 +48,7 @@ RSpec.describe 'Locals', js: true, type: :system do
       fill_in 'パスワード', with: local.password
       fill_in 'パスワード（確認用）', with: local.password_confirmation
 
-      expect { click_button '自治体登録' }.to change { ActionMailer::Base.deliveries.size }.by(1)
+      expect { click_button '無料で会員登録する' }.to change { ActionMailer::Base.deliveries.size }.by(1)
       # 画面上に「送信成功」のメッセージが表示されていることを検証する
       expect(page).to have_content '本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。'
       expect(local.confirmed_at).to be_nil
@@ -77,7 +76,7 @@ RSpec.describe 'Locals', js: true, type: :system do
       fill_in 'メールアドレス', with: local.email
       fill_in 'パスワード', with: local.password
       fill_in 'パスワード（確認用）', with: local.password_confirmation
-      click_button '自治体登録'
+      click_button '無料で会員登録する'
 
       # 有効化せずにログイン
       log_in_as_local(local)
@@ -89,7 +88,7 @@ RSpec.describe 'Locals', js: true, type: :system do
       fill_in 'メールアドレス', with: local.email
       fill_in 'パスワード', with: local.password
       fill_in 'パスワード（確認用）', with: local.password_confirmation
-      click_button '自治体登録'
+      click_button '無料で会員登録する'
       # トークンが不正
       visit local_confirmation_path(confirmation_token: 'invalid')
       expect(page).to have_content 'Confirmation tokenは不正な値です'

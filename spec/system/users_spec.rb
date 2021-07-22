@@ -17,7 +17,7 @@ RSpec.describe 'Users', js: true, type: :system do
         fill_in 'メールアドレス', with: user.email
         fill_in 'パスワード', with: user.password
         fill_in 'パスワード（確認）', with: user.password_confirmation
-        click_button 'ユーザー登録'
+        click_button '無料で会員登録する'
 
         expect(User.count).to eq @number_of_users
         expect(page).to have_current_path '/users'
@@ -30,7 +30,7 @@ RSpec.describe 'Users', js: true, type: :system do
         fill_in 'メールアドレス', with: user.email
         fill_in 'パスワード', with: user.password
         fill_in 'パスワード（確認）', with: 'invalid'
-        click_button 'ユーザー登録'
+        click_button '無料で会員登録する'
 
         expect(User.count).to eq @number_of_users
         expect(page).to have_current_path '/users'
@@ -43,7 +43,7 @@ RSpec.describe 'Users', js: true, type: :system do
         fill_in 'パスワード', with: user.password
         fill_in 'パスワード（確認）', with: user.password_confirmation
 
-        expect { click_button 'ユーザー登録' }.to change { ActionMailer::Base.deliveries.size }.by(1)
+        expect { click_button '無料で会員登録する' }.to change { ActionMailer::Base.deliveries.size }.by(1)
         # 画面上に「送信成功」のメッセージが表示されていることを検証する
         expect(page).to have_content '本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。'
         expect(user.confirmed_at).to be_nil
@@ -77,7 +77,7 @@ RSpec.describe 'Users', js: true, type: :system do
         fill_in 'メールアドレス', with: user.email
         fill_in 'パスワード', with: user.password
         fill_in 'パスワード（確認）', with: user.password_confirmation
-        click_button 'ユーザー登録'
+        click_button '無料で会員登録する'
 
         # 有効化せずにログイン
         log_in_as_user(user)
@@ -89,7 +89,7 @@ RSpec.describe 'Users', js: true, type: :system do
         fill_in 'メールアドレス', with: user.email
         fill_in 'パスワード', with: user.password
         fill_in 'パスワード（確認）', with: user.password_confirmation
-        click_button 'ユーザー登録'
+        click_button '無料で会員登録する'
         # トークンが不正
         visit user_confirmation_path(confirmation_token: 'invalid')
         expect(page).to have_content 'パスワード確認用トークンは不正な値です'

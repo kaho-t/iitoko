@@ -2,9 +2,10 @@
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
   # GET /resource/confirmation/new
-  # def new
-  #   super
-  # end
+  def new
+    @no_header = true
+    super
+  end
 
   # POST /resource/confirmation
   # def create

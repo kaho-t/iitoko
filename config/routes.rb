@@ -8,7 +8,8 @@ Rails.application.routes.draw do
     sessions: 'locals/sessions',
     passwords: 'locals/passwords',
     registrations: 'locals/registrations',
-    confirmations: 'locals/confirmations'
+    confirmations: 'locals/confirmations',
+    unlocks: 'locals/unlocks'
   }
   resources :articles, only: [:show, :new, :create, :edit, :update, :destroy]
 
@@ -26,7 +27,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
      omniauth_callbacks: 'users/omniauth_callbacks',
      registrations: "users/registrations",
-     confirmations: 'users/confirmations'
+     confirmations: 'users/confirmations',
+     sessions: 'users/sessions',
+     passwords: 'users/passwords'
     }
   #get 'users/:id', to: 'users#show', as: 'user'
   resources :users, only: [:show] do

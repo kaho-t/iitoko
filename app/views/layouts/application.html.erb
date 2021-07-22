@@ -19,14 +19,13 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
-    <% if defined? @title_area %>
-      <%= render 'layouts/title_area' %>
-    <% end %>
+    <%= render 'layouts/header' unless defined? @no_header %>
+    <%= render 'layouts/title_area' if defined? @title_area %>
+    <% if notice || alert %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+    <% end %>
         <%= yield %>
-        <%= debug(params) if Rails.env.development? %>
-    <%= render 'layouts/footer' %>
+    <%= render 'layouts/footer' unless defined? @no_header %>
   </body>
 </html>
