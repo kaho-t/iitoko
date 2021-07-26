@@ -1,6 +1,6 @@
 <%= form_with(model: current_user.bookmarks.build, remote: true, local: false) do |f| %>
   <%= hidden_field_tag :local_id, @local.id %>
-  <%= button_tag :type => "submit", style: 'color: orange; border: none; background: none;', class: 'bookmark-btn' do %>
-    <i class="far fa-bookmark"></i>
+  <%= button_tag :type => "submit", class: 'bookmark-btn' do %>
+    <i class="far fa-star"></i> お気に入り登録する
   <% end %>
 <% end %>

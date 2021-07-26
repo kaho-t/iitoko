@@ -21,6 +21,7 @@
   <body>
     <%= render 'layouts/header' unless defined? @no_header %>
     <%= render 'layouts/title_area' if defined? @title_area %>
+    <%= render 'layouts/local_title_area' if defined? @local_title_area %>
     <% if notice || alert %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>

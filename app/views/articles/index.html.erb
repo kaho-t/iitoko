@@ -1,9 +1,13 @@
+
 <div class="container top60">
-  <h1><%= @local.name %> 記事一覧</h1>
+  <%= render 'shared/breadcrumb' %>
   <% if @local.articles.any? %>
-    <ol class="articles">
-      <%= render @articles, local: @local %>
-    </ol>
+    <div>
+      <span class="sort_btn clicked">新着順</span> <span class="sort_btn smart-btn">人気順</span>
+    </div>
+    <div class="articles">
+      <%= render @articles, local: @local, full: true %>
+    </div>
     <%= paginate @articles %>
   <% end %>
 </div>

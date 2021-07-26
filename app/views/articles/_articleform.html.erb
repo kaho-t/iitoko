@@ -1,32 +1,40 @@
-<%= form_with(model: @article, local: true) do |form| %>
-  <%= render "shared/error_messages", object: form.object %>
-  <div class="field">
-    <%= form.label :title, 'タイトル' %>
-    <%= form.text_field :title %>
-  </div>
-  <div class="field">
-    <%= form.label :main_image, 'サムネイル画像' %>
-    <%= form.file_field :main_image, accept: "image/png, image/jpg, image/gif, image/jpeg" %>
-  </div>
-  <div class="field">
-    <%= form.label :content, '本文' %>
-    <%= form.rich_text_area :content %>
-  </div>
-  <p>タグ付け</p>
-  <div style="display: flex; flex-wrap: wrap;">
-    <%= form.fields_for :tag do |tag_form| %>
-      <% @tags.each do |key, jp| %>
-        <div class="field" style="padding: 5px;">
-          <%= tag_form.label key, jp %>
-          <%= tag_form.check_box key, {}, true, false %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="actions">
-    <%= form.submit yield(:button_text), class: "btn btn-primary" %>
-  </div>
-<% end %>
+<div class="white_wrap">
+  <%= form_with(model: @article, local: true) do |form| %>
+    <%= render "shared/error_messages", object: form.object %>
+    <div class="field mb-3">
+      <%= form.label :title, 'タイトル', class: 'form-label', style: 'display: none' %>
+      <%= form.text_field :title, class: 'form-control', placeholder: 'タイトル' %>
+    </div>
+
+    <div class="field form-floating mb-3">
+      <%= form.label :content, '本文', class: 'form-label', style: 'display: none' %>
+      <%= form.rich_text_area :content, class: 'form-control', placeholder: 'あなたの町のイイトコをアピールしませんか？' %>
+    </div>
+
+    <div class="field" style="display: flex; flex-wrap: wrap;">
+    <p><i class="fas fa-tag"></i>&nbsp;記事にタグ付けして読んでもらいやすくしましょう</p>
+      <div class="form_area_w">
+        <%= form.fields_for :tag do |tag_form| %>
+          <div class="tags">
+            <% @tags.each do |key, jp| %>
+              <div style="padding: 5px;">
+                <%= tag_form.check_box key, {}, 'true', 'false' %>
+                <%= tag_form.label key, "##{jp}", class: 'tag small' %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="field mb-3">
+      <%= form.label :main_image, ' サムネイル画像を選択', class: 'far fa-image form-label' %>
+      <%= form.file_field :main_image, accept: "image/png, image/jpg, image/gif, image/jpeg", class: 'form-control' %>
+    </div>
+    <div class="actions">
+      <%= form.submit yield(:button_text), class: "pink_btn smart_btn" %>
+    </div>
+  <% end %>
+</div>
 
 <script type="text/javascript">
   $("#article_main_image").bind("change", function() {

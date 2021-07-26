@@ -1,17 +1,4 @@
-<div class="header_image" style="background-image: url(<%= @local_headerimage %>); background-size: cover;">
-  <h1 class="local_name">
-    <%= gravatar_for @local %>
-    <%= @local.name %>
-  </h1>
-  <p><%= @local.prefecture.name %></p>
-  <% if user_signed_in? && current_user.score && @local.score %>
-    <p>マッチ度：<%= @local.difference_rate(current_user) %>％</p>
-  <% end %>
-</div>
-
 <div class="container">
-  <%= render 'bookmark_button', local: @local %>
-
   <div class="tags">
   <% if @local.tag %>
     <% if @local == current_local %>
@@ -127,7 +114,7 @@
   <% if user_signed_in? %>
     <section class="cv_area">
       <% unless current_user.talking?(@local) %>
-        <%= form_with(model: @talkroom, loacal: true) do |f| %>
+        <%= form_with(model: @talkroom, local: true) do |f| %>
           <%= f.hidden_field :local_id, value: @local.id %>
           <%= f.hidden_field :user_id, value: current_user.id %>
           <%= f.submit '話を聞いてみたい', class: 'btn btn-primary' %>

@@ -1,3 +1,320 @@
 // Place all the styles related to the articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$pc: 1024px; // PC
+$tab: 1024px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+$key-green: #2D5D24;
+$font-green: #003300;
+$key-coral: #E38692;
+$key-blue: #86c1e3;
+
+.white_wrap {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 5%;
+  margin-bottom: 10%;
+
+  input, trix-editor {
+    border: none;
+    padding: 1em;
+    font-size: 16px;
+  }
+
+  trix-editor {
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  .field {
+    margin-bottom: 5%;
+
+    .form_area_w {
+      padding: 3%;
+      font-size: 1em;
+
+      .tags {
+        justify-content: flex-start;
+        margin: auto;
+        label.tag {
+          &.small {
+            padding: 0.3em 1em;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .fa-image {
+    font-weight: 600;
+    font-size: 1.1em;
+  }
+}
+
+.article-txtarea {
+  padding: 1em;
+  a {
+    color: $font-green;
+  }
+  h3 {
+    margin-top: 0.4em;
+  }
+  p.content {
+    margin-bottom: 2em;
+  }
+  .timestamp {
+    display: block;
+    float: right;
+    font-size: 1em;
+    margin-top: -1px;
+  }
+  .txt-right {
+    font-size: 1.3em;
+    margin-top: 10px;
+    margin-bottom: 0;
+    a {
+      color: #969696;
+    }
+  }
+}
+
+
+.article {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 3% auto;
+  .article_main {
+    img {
+      width: 100%;
+      border-radius: 10px 10px 0px 0px;
+    }
+  }
+}
+
+@include pc {
+
+  .articles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .article {
+      width: 47%;
+
+    }
+
+  }
+}
+
+.sort_btn {
+  display: inline-block;
+  padding: 0.3em 1.5em;
+  border-radius: 30px;
+  color: #fff;
+  background: #969696;
+  margin: 1em 0em 1em 1em;
+  &.clicked {
+    background: $key-green;
+  }
+
+}
+
+.fa-edit {
+  padding-right: 0.5em;
+}
+
+.articleshow {
+  .breadcrumb {
+    padding-left: 0;
+  }
+}
+
+h1.article_title {
+  margin: 1.2em 0;
+  text-align: left;
+}
+
+p.date {
+  font-size: 1.3em;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.writersbox {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  p.txt-right {
+    font-size: 1.5em;
+    a {
+      color: #969696;
+    }
+  }
+}
+
+section.article {
+  padding: 2em 1.5em;
+  font-size: 1.3em;
+
+  .trix-content {
+    line-height: 1.7em;
+
+    img {
+      margin: 1.5em 0;
+    }
+  }
+}
+
+.flex_wrap {
+  &.for_articles{
+    align-items: flex-start;
+    section.article {
+      flex: 2.5;
+      @include pc {
+        // margin-right: 1em;
+      }
+    }
+    section.pickups {
+      flex: 1;
+      .title {
+        font-size: 0.8em;
+      }
+    }
+    @include tab{
+      display: block;
+    } 
+    @include sp {
+      display: block;
+    }
+  }
+}
+
+.pickups {
+  h2 {
+    font-size: 1.5em;
+    color: $font-green;
+    font-weight: 500;
+    margin-top: 1.5em;
+  }
+  .article {
+    margin: 3% 10px;
+  }
+}
+h2.lined {
+  position: relative;
+  display: inline-block;
+  padding: 0 55px;
+  margin-top: 2em;
+  font-size: 2em;
+}
+h2.lined:before, h2.lined:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  display: inline-block;
+  width: 45px;
+  height: 3px;
+  border-top: solid 1px $key-green;
+  border-bottom: solid 1px $key-green;
+}
+
+h2.lined:before {
+  left:0;
+}
+h2.lined:after {
+  right: 0;
+}
+
+.tags { 
+  &.article_tags {
+    justify-content: flex-start;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+}
+
+.flex_wrap {
+  &.cv_area {
+    justify-content: center;
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    margin: 0%;
+    width: 100%;
+
+
+    .bookmark-btn, .pink_btn {
+      padding: 1em ;
+      flex:1;
+      margin: 0 1em;
+    }
+
+    .bookmark-btn {
+      margin-top: 0;
+    }
+
+    @include sp {
+      display: block;
+
+      .bookmark-btn, .pink_btn {
+        padding: 0.5em 1em;
+        flex:1;
+        margin: 1em auto;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.article_list {
+  margin-top: 5%;
+}
+
+.card_right {
+  &.in_articlelist {
+    padding-bottom: 8%;
+    padding-left: 1em;
+  }
+  .mini-info {
+    margin-top: -1em;
+  }
+}
+.article_list {
+  .btn_area {
+    text-align: center;
+    .pink_btn {
+      color: #fff;
+      display: inline-block;
+      font-size: 1em;
+      &:hover {
+        color: $key-coral;
+      }
+    }
+  }
+}

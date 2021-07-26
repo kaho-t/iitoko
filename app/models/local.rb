@@ -61,4 +61,8 @@ class Local < ApplicationRecord
   def visited?(user)
     visitedusers.include?(user)
   end
+
+  def full_name
+    "#{self.prefecture.name} #{self.name}"
+  end
 end

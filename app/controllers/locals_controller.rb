@@ -2,21 +2,17 @@ class LocalsController < ApplicationController
   skip_before_action :authenticate_user!
   skip_before_action :authenticate_local!
   def show
+    @local_title_area = true
     @local = Local.find_by(id: params[:id])
-    @articles = @local.articles
-
+    @articles = @local.articles.includes([:main_image_attachment], [:rich_text_content])
     @talkroom = current_user.talkrooms.build if user_signed_in?
-
+    @local_headerimage = @local.image ? @local.image.url : asset_path('default.png')
     if user_signed_in? && current_user.talking?(@local)
       @room = Talkroom.find_by(user_id: current_user.id,
                                local_id: @local.id)
     end
 
-    @local_headerimage = if @local.image
-                           @local.image.url
-                         else
-                           '/assets/default.png'
-                         end
+    
 
     return unless user_signed_in?
 

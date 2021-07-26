@@ -66,7 +66,7 @@ class User < ApplicationRecord
 
   def feed
     # Article.where(local_id: self.local_ids)
-    Article.where(local_id: local_ids)
+    Article.where(local_id: local_ids).includes([:main_image_attachment], [:local])
   end
 
   def talking?(local)

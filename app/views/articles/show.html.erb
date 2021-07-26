@@ -1,19 +1,62 @@
-<div class="header_image top60" style="background-image: url(<%= @article.main_image if @article.main_image.attached? %>); background-size: cover;">
-  <h1><%= @article.title %></h1>
-</div>
-<div class="container top60">
-<% if @article.local == current_local %>
-  <%= link_to '削除', @article, method: :delete, data: {confirm: "'#{@article.title}' を削除します"} %>
-  <%= link_to '編集', edit_article_path(@article)%>
-<% end %>
-<div class="tags">
-  <% if @article.tag %>
-    <% @article.tag.i18n_true_tags.each do |local_tag| %>
-      <p class="tag"><%= local_tag %></p>
+<div class="container top60 articleshow">
+  <%= render 'shared/breadcrumb', full: true %>
+  <h1 class="article_title"><%= @article.title %></h1>
+
+  <div class="writersbox">
+    <p class="date"><%= @article.created_at.to_s(:simpledate) %> </p>
+    <% if @local == current_local  %>
+      <p class="txt-right f-right">
+        <%= link_to edit_article_path(@article) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+        <%= link_to @article, method: :delete, data: {confirm: "'#{@article.title}' を削除します"} do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+      </p>
     <% end %>
+  </div>
+  <div class="header_image" style="background: url('<%= @article.main_image.attached? ? url_for(@article.main_image) : asset_path('article_default.png') %>') center center / cover;">
+  </div>
+  <div class="tags article_tags">
+    <% if @article.tag %>
+      <% @article.tag.i18n_true_tags.each do |local_tag| %>
+        <p class="tag">#<%= local_tag %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="flex_wrap for_articles">
+    <section class="article">
+      <%= @article.content %>
+    </section>
+    <% if user_signed_in? %>
+    <section class="pickups">
+        <h2><%= @local.name %>の最新記事</h2>
+        <%= render @articles %>
+    </section>
+    <% end %>
+  </div>
+  <% if user_signed_in? %>
+    <section class="pickups">
+      <div class="center">
+        <h2 class="lined">iitokoピックアップ記事</h2>
+      </div>
+        <div class="flex_wrap">
+          <%= render @pickups %>
+        </div>
+    </section>
   <% end %>
 </div>
-<section>
-  <%= @article.content %>
-</section>
-</div>
+<% if user_signed_in? %>
+  <div class="flex_wrap cv_area">
+    <% unless current_user.talking?(@local) %>
+      <%= form_with(model: @talkroom, local: true) do |f| %>
+        <%= f.hidden_field :local_id, value: @local.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.submit 'ちょっと話を聞いてみたい！', class: 'pink_btn' %>
+      <% end %>
+    <% else %>
+      <%= link_to 'トークルームへ', talkroom_messages_path(@room), class: 'pink_btn' %>
+    <% end %>
+    <%= render 'locals/bookmark_button', local: @local %>
+  </div>
+<% end %>

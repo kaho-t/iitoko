@@ -76,7 +76,7 @@ RSpec.describe 'Articles', js: true, type: :system do
       article.save
       sign_in local
       visit local_articles_path(local)
-      click_link '編集'
+      find('.fa-edit').click
       expect(page).to have_current_path edit_article_path(article)
       fill_in_rich_text_area '本文', with: '更新しました'
       click_button '更新'
@@ -87,7 +87,7 @@ RSpec.describe 'Articles', js: true, type: :system do
       article.save
       sign_in local
       visit article_path(article)
-      click_link '編集'
+      find('.fa-edit').click
       expect(page).to have_current_path edit_article_path(article)
       fill_in_rich_text_area '本文', with: '更新しました'
       click_button '更新'
@@ -98,7 +98,7 @@ RSpec.describe 'Articles', js: true, type: :system do
       article.save
       sign_in local
       visit article_path(article)
-      click_link '編集'
+      find('.fa-edit').click
       expect(page).to have_current_path edit_article_path(article)
       fill_in 'タイトル', with: ' '
       click_button '更新'
@@ -113,8 +113,8 @@ RSpec.describe 'Articles', js: true, type: :system do
       visit local_articles_path(local)
       expect do
         accept_alert do
-          within "li#article-#{article.id}" do
-            click_link '削除'
+          within "div#article-#{article.id}" do
+            find('.fa-trash-alt').click
           end
         end
         expect(page).to have_current_path local_articles_path(local)
@@ -127,7 +127,7 @@ RSpec.describe 'Articles', js: true, type: :system do
       visit article_path(article)
       expect do
         accept_alert do
-          click_link '削除'
+          find('.fa-trash-alt').click
         end
         expect(page).to have_current_path local_articles_path(local)
         expect(page).to have_no_content article.title

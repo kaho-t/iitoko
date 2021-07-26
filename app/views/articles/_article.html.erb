@@ -1,13 +1,64 @@
-<li id="article-<%= article.id %>">
-  <% if article.main_image.attached? && article.main_image.variable? %>
-    <%= image_tag article.main_image.variant(resize_to_fill:[120,120], crop:("120x120+0+0")).processed %>
-  <% end %>
-  <span class="local"><%= link_to article.local.name, article.local %></span>
-  <span class="title"><%= link_to article.title, article_path(article) %></span>
-  <span class="content"><%= link_to strip_tags(article.content.to_s).gsub(/[\n]/,"").strip.truncate(100), article_path(article) %></span>
-  <span class="timestamp">投稿日：<%= time_ago_in_words(article.created_at) %> 前</span>
-  <% if article.local == current_local  %>
-    <%= link_to '編集', edit_article_path(article) %>
-    <span class="delete_button"><%= link_to '削除', article, method: :delete, data: {confirm: "'#{article.title}' を削除します"} %>
-  <% end %>
-</li>
+<% unless local_assigns[:one_column] %>
+  <a href="<%= article_path(article) %>">
+    <div class="article" id="article-<%= article.id %>">
+        <div class="article_main">
+          <% if article.main_image.attached? && article.main_image.variable? %>
+            <%= image_tag article.main_image.variant(resize_to_fill:[470,233], crop:("470x233+0+0")).processed %>
+          <% else %>
+            <%= image_tag 'article_default.png' %>
+          <% end %>
+        </div>
+      <div class ="article-txtarea">
+        <h3><span class="title"><%= article.title %></span></h3>
+        <% if local_assigns[:full] %>
+          <p class="content"><%= strip_tags(article.content.to_s).gsub(/[\n]/,"").strip.truncate(100) %>...</p>
+        <% end %>
+        <div class="clearfix">
+          <%= link_to local_path(article.local) do %>
+                <%= gravatar_for article.local, size: 20 %> <%= article.local.full_name %>
+              <% end %>
+          <p class="timestamp">投稿日：<%= time_ago_in_words(article.created_at) %> 前</p>
+        </div>
+        <% if article.local == current_local  %>
+          <p class="txt-right">
+            <%= link_to edit_article_path(article) do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
+            <%= link_to article, method: :delete, data: {confirm: "'#{article.title}' を削除します"} do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </a>
+<% else %>
+<a href= "<%= article_path(article) %>">
+  <div class="card article_list">
+    <div class="card_left">
+    <% if article.main_image.attached? && article.main_image.variable? %>
+      <%= image_tag article.main_image.variant(resize_to_fill:[470,233], crop:("470x233+0+0")).processed %>
+    <% else %>
+      <%= image_tag 'article_default.png' %>
+    <% end %>
+    </div>
+    <div class="card_right in_articlelist article-txtarea">
+      <dl>
+      <dd>
+          <div class="clearfix mini-info">
+            <%= link_to local_path(article.local) do %>
+                <%= gravatar_for article.local, size: 20 %> <%= article.local.full_name %>
+            <% end %>
+            <p class="timestamp">投稿日：<%= time_ago_in_words(article.created_at) %> 前</p>
+          </div>
+          </dd>
+        <dt><h3><span class="title"><%= article.title %></span></h3></dt>
+        <dd><p class="content"><%= strip_tags(article.content.to_s).gsub(/[\n]/,"").strip.truncate(100) %>...</p></dd>
+      </dl>
+      <div class="btn_area">
+        <%= link_to '全文を読む', article_path(article), class: 'pink_btn smart_btn' %>
+      </div>
+    </div>
+  </div>
+</a>
+<% end %>

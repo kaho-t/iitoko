@@ -1,7 +1,8 @@
-<h1>タイムライン</h1>
+<div class="container top60">
+<h1 class="with_info"><i class="fas fa-stream"></i> タイムライン</h1>
+<p class="page_info">お気に入り登録した自治体の新着記事をこちらで見ることができます。</p>
 <% if @articles.any? %>
-  <ol class="articles">
-    <%= render @articles %>
-  </ol>
+    <%= render @articles, one_column: true %>
   <%= paginate @articles %>
 <% end %>
+</div>

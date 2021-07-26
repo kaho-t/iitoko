@@ -1,14 +1,22 @@
 class ArticlesController < ApplicationController
+  include Rails.application.routes.url_helpers
+
   skip_before_action :authenticate_user!, if: :local_signed_in?
   skip_before_action :authenticate_local!, if: :user_signed_in?, only: %i[index show]
   before_action :correct_local, only: %i[edit update destroy]
   def index
+    @local_title_area = true
     @local = Local.find(params[:local_id])
-    @articles = @local.articles.order(created_at: :desc).page(params[:page])
+    @articles = @local.articles.includes([:main_image_attachment, :rich_text_content]).order(created_at: :desc).page(params[:page])
+    @talkroom = Talkroom.new
+    @local_headerimage = @local.image ? @local.image.url : asset_path('default.png')
   end
 
   def show
     @article = Article.find_by(id: params[:id])
+    @local = @article.local
+    @articles = Article.where('local_id = ?', @local.id).includes([:main_image_attachment],[:local]).order(created_at: :desc).limit(5)
+    @pickups = Article.all.includes([:main_image_attachment],[:local]).sample(3)
   end
 
   def new

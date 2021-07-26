@@ -1,0 +1,30 @@
+<section class="local_title_area" style="background: #fff url('<%= @local_headerimage %>') no-repeat center center;">
+  <div class="container">
+    <h1 class="local_name"><%= gravatar_for @local %> <%= @local.full_name %></h1>
+    <p class="catchphrase"><%= @local.profile.catchphrase if @local.profile && @local.profile.catchphrase %></p>
+    <% if user_signed_in? %>
+    <div class="flex_wrap">
+      <div class="right_zone">
+      <% if @local.score && current_user.score %>
+        <div class="matchrate">
+          <p>マッチ度</p>
+          <p class="rate"><%= @local.difference_rate(current_user) %>%</p>
+        </div>
+      <% end %>
+      </div>
+      <div class="left_btns">
+        <% unless current_user.talking?(@local) %>
+          <%= form_with(model: @talkroom, local: true) do |f| %>
+            <%= f.hidden_field :local_id, value: @local.id %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.submit 'ちょっと話を聞いてみたい！', class: 'pink_btn' %>
+          <% end %>
+        <% else %>
+          <%= link_to 'トークルームへ', talkroom_messages_path(@room), class: 'pink_btn' %>
+        <% end %>
+        <%= render 'locals/bookmark_button', local: @local %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</section>
