@@ -16,7 +16,9 @@ class UserProfilesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @user = current_user
+  end
 
   def update
     if @user_profile.update(user_profile_params)

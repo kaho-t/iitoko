@@ -64,8 +64,7 @@ RSpec.describe 'Scores', type: :system do
       choose 'score_culture_5'
       click_button '変更'
       expect(page).to have_current_path user_path(user)
-      tds = page.all('td')
-      expect(tds[0]).to have_content '5'
+      expect(page).to have_selector 'dd', text: '5'
     end
     it 'doesnt show link to locals edit_score_path' do
       local_score.save

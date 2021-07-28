@@ -1,79 +1,174 @@
-<%= gravatar_for @user %>
-<%= @user.name %>
-<% if user_signed_in? && current_user == @user %>
-  <%= link_to "アカウント設定", edit_user_registration_path %>
-<% end %>
-<div>
-<h2>登録スコア</h2>
-  <% if @score %>
-    <% if current_user == @user %>
-      <%= link_to "スコア編集", edit_score_path(@user.score.id) %>
-    <% end %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>自然</th>
-          <th>アクセス</th>
-          <th>お財布事情</th>
-          <th>職</th>
-          <th>ファミリー向け支援</th>
-          <th>文化</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= @score.nature %></td>
-          <td><%= @score.accessibility %></td>
-          <td><%= @score.budget %></td>
-          <td><%= @score.job_support %></td>
-          <td><%= @score.family_support %></td>
-          <td><%= @score.culture %></td>
-        </tr>
-      </tbody>
-    </table>
-  <% elsif @user == current_user %>
-    <%= link_to '移住に求める条件を登録しましょう', new_score_path %>
-  <% else %>
-    coming soon...
-  <% end %>
-</div>
-<div>
-  <h2>プロフィール</h2>
-  <% if @user.user_profile %>
-    <%= link_to 'プロフィール編集', edit_user_profile_path(@profile) if @user == current_user %>
-    <table class="table">
-      <tr>
-        <th>居住地</th>
-        <td><%= @profile.prefecture.name %></td>
-      </tr>
-      <tr>
-        <th>年齢</th>
-        <td><%= @profile.age %>代</td>
-      </tr>
-      <tr>
-        <th>興味のある地域・検討中の地域</th>
-        <td><%= @profile.proposed_site %></td>
-      </tr>
-      <tr>
-        <th>職業</th>
-        <td><%= @profile.job %></td>
-      </tr>
-      <tr>
-        <th>家族構成</th>
-        <td><%= @profile.family_structure %></td>
-      </tr>
-      <tr>
-        <th>移住を検討している時期</th>
-        <td><%= @profile.timing %></td>
-      </tr>
-      <tr>
-        <th>移住を検討したきっかけ</th>
-        <td><%= @profile.content %></td>
-      </tr>
-    </table>
-  <% else %>
-    <p>coming soon...</p>
-    <%= link_to 'プロフィールを登録しましょう', new_user_profile_path if @user == current_user %>
-  <% end %>
+<div class="container top60 btm10per">
+  <section class="user_profile_top">
+    <div class="u_image"><%= gravatar_for(@user, size:100) %></div>
+    <h1 class="username"><%= @user.name %></h1>
+  </section>
 
+
+  <div class="user_main">
+  <% if @user == current_user %>
+    <div class="edit_btn">
+      <a href="#" class="dropdown-toggle navItem" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fas fa-edit"></i> 編集
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><%= link_to 'アカウント設定', edit_user_registration_path(current_user), class: 'dropdown-item navItem' %></li>
+        <% if @user.user_profile %>
+          <li><%= link_to 'プロフィール編集', edit_user_profile_path(@user.user_profile.id), class: 'dropdown-item navItem' %></li>
+          <% else %>
+          <li><%= link_to 'プロフィール登録', new_user_profile_path, class: 'dropdown-item navItem' %></li>
+        <% end %>
+        <% if @user.score %>
+          <li><%= link_to "スコア編集", edit_score_path(@user.score.id), class: 'dropdown-item navItem' %></li>
+        <% else %>
+          <li><%= link_to "スコア登録", new_score_path, class: 'dropdown-item navItem' %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <h2><i class="far fa-star"></i> 登録スコア</h2>
+  <section class="score score_area">
+      <% if @user.score %>
+        <div class="score_lists">
+          <dl class="score_list">
+            <dt>自然</dt>
+            <dd><%= @user.score.nature %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>アクセス</dt>
+              <dd><%= @user.score.accessibility %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>お財布事情</dt>
+              <dd><%= @user.score.budget %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>職</dt>
+              <dd><%= @user.score.job_support %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>ファミリー向け支援</dt>
+              <dd><%= @user.score.family_support %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>文化</dt>
+              <dd><%= @user.score.culture %></dd>
+          </dl>
+        </div>
+        <div class="item3">
+          <div class="score_chart">
+            <canvas id="myChart", width="50%"></canvas>
+          </div>
+        </div>
+    <% elsif @user == current_user %>
+      <p class="txt-center"><%= link_to '移住に求める条件を登録しましょう', new_score_path %></p>
+    <% else %>
+      coming soon...
+    <% end %>
+    </section>
+    <h2><i class="far fa-address-card"></i> プロフィール</h2>
+    <section>
+    <% if @user.user_profile %>
+      <table class="table txt-left">
+        <tr>
+          <th>居住地</th>
+          <td><%= @profile.prefecture.name %></td>
+        </tr>
+        <tr>
+          <th>年齢</th>
+          <td><%= @profile.age %>代</td>
+        </tr>
+        <tr>
+          <th>興味のある地域・検討中の地域</th>
+          <td><%= @profile.proposed_site %></td>
+        </tr>
+        <tr>
+          <th>職業</th>
+          <td><%= @profile.job %></td>
+        </tr>
+        <tr>
+          <th>家族構成</th>
+          <td><%= @profile.family_structure %></td>
+        </tr>
+        <tr>
+          <th>移住を検討している時期</th>
+          <td><%= @profile.timing %></td>
+        </tr>
+        <tr>
+          <th>移住を検討したきっかけ</th>
+          <td><%= @profile.content %></td>
+        </tr>
+      </table>
+    <% else %>
+      <p class="txt-center">coming soon...</p>
+      <p class="txt-center"><%= link_to 'プロフィールを登録しましょう', new_user_profile_path if @user == current_user %></p>
+    <% end %>
+    </section>
+  </div>
 </div>
+
+
+
+<script>
+    <% if @user.score %>
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ["自然", "アクセス", "財政支援", "職", "ファミリー", "文化"],
+          <% if local_signed_in? && current_local.score %>
+            datasets: 
+            [
+                {
+                label: '町の登録スコア',
+                backgroundColor: 'rgba(227,182,188,0.5)',
+                borderColor: 'rgba(227,134,146,1)',
+                data: [<%= @user.score.nature %>,
+                        <%= @user.score.accessibility %>,
+                        <%= @user.score.budget %>,
+                        <%= @user.score.job_support %>,
+                        <%= @user.score.family_support %>,
+                        <%= @user.score.culture %>]
+                },
+                {
+                label: '自分の登録スコア',
+                backgroundColor: 'rgba(146,227,134,0.5)',
+                borderColor: 'rgba(146,227,134,1)',
+                data: [<%= current_user.score.nature %>,
+                        <%= current_user.score.accessibility %>,
+                        <%= current_user.score.budget %>,
+                        <%= current_user.score.job_support %>,
+                        <%= current_user.score.family_support %>,
+                        <%= current_user.score.culture %>]
+                }
+              ]
+          <% else %>
+          datasets: 
+            [
+                {
+                label: 'ユーザーの登録スコア',
+                backgroundColor: 'rgba(227,182,188,0.5)',
+                borderColor: 'rgba(227,134,146,1)',
+                data: [<%= @user.score.nature %>,
+                        <%= @user.score.accessibility %>,
+                        <%= @user.score.budget %>,
+                        <%= @user.score.job_support %>,
+                        <%= @user.score.family_support %>,
+                        <%= @user.score.culture %>]
+                }
+            ]
+          <% end %>
+        },
+        options: {
+          responsive: true,
+            scale: {
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 5
+                }
+            }
+        }
+      });
+
+    <% end %>
+  </script>

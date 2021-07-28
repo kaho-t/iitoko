@@ -1,2 +1,7 @@
-<h1>プロフィール編集</h1>
+<div class="container top60 btm10per">
+<section class="user_profile_top">
+<div class="u_image"><%= gravatar_for(@user, size:100) %></div>
+<h1 class="username"><%= @user.name %></h1>
+</section>
 <%= render 'form' %>
+</div>

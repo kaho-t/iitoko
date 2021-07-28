@@ -1,3 +1,55 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+$pc: 1024px; // PC
+$tab: 1024px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+
+$key-green: #2D5D24;
+$font-green: #003300;
+$key-coral: #E38692;
+$key-blue: #86c1e3;
+
+section.user_profile_top {
+  background: #fff url('article_default.png') no-repeat center center;
+  background-size: cover;
+  padding: 10%;
+  border-radius: 10px 10px 0 0;
+}
+
+.u_image {
+  text-align: center;
+}
+
+h1.username {
+  margin: 4% auto;
+}
+
+.user_main {
+  background: #fff;
+  padding: 5%;
+  border-radius: 0 0 10px 10px;
+  font-size: 1.1em;
+  text-align: center;
+
+  h2 {
+    color: $font-green;
+    font-size: 2em;
+    font-weight: 500;
+    margin-bottom: 2em;
+  }
+}
