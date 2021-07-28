@@ -1,6 +1,6 @@
 
 <div class="container top60">
-  <%= render 'shared/breadcrumb' %>
+  <%= render 'shared/breadcrumb', article_list: true %>
   <% if @local.articles.any? %>
     <div>
       <span class="sort_btn clicked">新着順</span> <span class="sort_btn smart-btn">人気順</span>

@@ -1,4 +1,4 @@
-<section class="local_title_area" style="background: #fff url('<%= @local_headerimage %>') no-repeat center center;">
+<section class="local_title_area" style="background: #fff url('<%= @local_headerimage ? @local_headerimage : asset_path('article_default.png') %>') no-repeat center center;">
   <div class="container">
     <h1 class="local_name"><%= gravatar_for @local %> <%= @local.full_name %></h1>
     <p class="catchphrase"><%= @local.profile.catchphrase if @local.profile && @local.profile.catchphrase %></p>

@@ -14,7 +14,9 @@ RSpec.describe 'Messages', js: true, type: :system do
   it 'creates a new message' do
     sign_in user
     visit local_path(local)
-    click_button '話を聞いてみたい'
+    within 'div.left_btns' do
+      click_button '話を聞いてみたい'
+    end
     expect do
       select '資料請求したい', from: 'カテゴリ'
       fill_in with: '子育て支援や保育園の情報がわかる資料があればいただきたいです。'

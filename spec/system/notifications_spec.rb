@@ -10,7 +10,9 @@ RSpec.describe 'Notifications', type: :system do
   it 'shows notification about bookmark' do
     sign_in user
     visit local_path(local)
-    find('.bookmark-btn').click
+    within 'div.left_btns' do
+      find('.bookmark-btn').click
+    end
     sign_out user
 
     sign_in local

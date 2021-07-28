@@ -13,7 +13,9 @@ RSpec.describe 'Talkrooms', js: true, type: :system do
     sign_in user
     visit local_path(local)
     expect do
-      click_button '話を聞いてみたい'
+      within 'div.left_btns' do
+        click_button '話を聞いてみたい'
+      end
     end.to change(Talkroom, :count).by(1).and change(Notification, :count).by(1)
   end
 

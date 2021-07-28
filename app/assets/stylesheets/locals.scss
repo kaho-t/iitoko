@@ -1,3 +1,160 @@
 // Place all the styles related to the Locals controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+$pc: 1024px; // PC
+$tab: 1024px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+
+$key-green: #2D5D24;
+$font-green: #003300;
+$key-coral: #E38692;
+$key-blue: #86c1e3;
+
+.local_main {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 5%;
+  text-align: center;
+
+  h2 {
+    color: $font-green;
+    font-size: 2em;
+    font-weight: 500;
+    margin-bottom: 2em;
+  }
+  section {
+    margin-bottom: 10%;
+  }
+  .separate {
+    justify-content: space-between;
+    img {
+      width: 48%;
+      @include sp {
+        width: 100%;
+      }
+    }
+    p {
+      font-size: 1.3em;
+      width: 48%;
+      @include sp {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.score_area {
+  @include pc {
+  margin: 0 10% 10%;
+  }
+}
+
+.score_lists{
+  flex: 1;
+  @include sp {
+    display: none;
+  }
+}
+
+.score_list {
+  text-align: left;
+  dt, dd {
+    display: inline-block;
+  }
+}
+.score_chart {
+  @include pc {
+  margin-left: -25%;
+  }
+}
+
+.local-numbers {
+  padding: 0 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.number-item {
+  font-size: 1.2em;
+  background: #efefef;
+  padding-top: 4%;
+  padding-bottom: 4%;
+  margin-bottom: 1em;
+}
+.item1 {
+  width: 32%;
+}
+.item2 {
+  width: 49%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p.number-icon {
+    margin: 0 1em 0 0;
+  }
+  div {
+    margin: 0 1em;
+  }
+}
+.item3 {
+  width: 66%;
+}
+
+
+.number-icon {
+  text-align: center;
+  font-size: 3em;
+}
+.local-number {
+  font-size: 2.3em;
+  font-weight: 500;
+}
+
+
+@include sp {
+  .local-numbers{
+    display: block;
+  }
+  .item1, .item2, .item3 {
+    width: 100%;
+  }
+}
+
+.edit_btn {
+  display: inline-block;
+  margin-bottom: 2em;
+  a.dropdown-toggle {
+    display: inline-block;
+    text-align: right;
+    font-size: 1em;
+    background: $key-green;
+    color: #fff;
+    border: 1px solid $key-green;
+    border-radius: 30px;
+    padding-bottom: 0;
+
+    &:hover {
+      background: #fff;
+      color: $key-green;
+    }
+  }
+}

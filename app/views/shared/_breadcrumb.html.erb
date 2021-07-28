@@ -1,12 +1,12 @@
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 <ol class="breadcrumb">
   <li class="breadcrumb-item"><%= link_to 'TOP', root_path %></li>
-  <li class="breadcrumb-item"><%= link_to @local.prefecture.name, prefecture_path(@local.prefecture) %></li>
+  <li class="breadcrumb-item"><%= link_to @local.prefecture.name, prefecture_path(@local.prefecture.code) %></li>
   <li class="breadcrumb-item"><%= link_to @local.full_name, local_path(@local) %></li>
   <% if local_assigns[:full] %>
     <li class="breadcrumb-item"><%= link_to "#{@local.name} 記事一覧", local_articles_path(@local) %></li>
     <li class="breadcrumb-item active" aria-current="page"><%= @article.title %></li>
-  <% else %>
+  <% elsif local_assigns[:article_list] %>
     <li class="breadcrumb-item active" aria-current="page"><%= @local.name %> 記事一覧</li>
   <% end %>
 </ol>

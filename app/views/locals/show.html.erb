@@ -1,9 +1,11 @@
+
+
+
 <div class="container">
-  <div class="tags">
+  <%= render 'shared/breadcrumb' %>
+
+  <div class="tags article_tags">
   <% if @local.tag %>
-    <% if @local == current_local %>
-      <%= link_to "タグ編集", edit_tag_path(@local.tag.id) %>
-    <% end %>
       <% @local.tag.i18n_true_tags.each do |local_tag| %>
         <p class="tag"><%= local_tag %></p>
       <% end %>
@@ -12,119 +14,214 @@
   <% end %>
   </div>
 
-  <section class="score">
-    <% if local_signed_in? && current_local == @local %>
-      <%= link_to "アカウント情報編集", edit_local_registration_path %>
-    <% end %>
-    <div>
-      <% if @local.score %>
-        <h2>登録スコア</h2>
-        <% if current_local == @local %>
-          <%= link_to "スコア編集", edit_score_path(@local.score.id) %>
+  <div class="local_main btm10per">
+
+  <% if @local == current_local %>
+    <div class="edit_btn">
+      <a href="#" class="dropdown-toggle navItem" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fas fa-edit"></i> 編集
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <% if @local.profile %>
+          <li><%= link_to 'プロフィール編集', edit_profile_path(@local.profile.id), class: 'dropdown-item navItem' %></li>
+          <% else %>
+          <li><%= link_to 'プロフィール登録', new_profile_path, class: 'dropdown-item navItem' %></li>
         <% end %>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>自然</th>
-              <th>アクセス</th>
-              <th>お財布事情</th>
-              <th>職</th>
-              <th>ファミリー向け支援</th>
-              <th>文化</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><%= @local.score.nature %></td>
-              <td><%= @local.score.accessibility %></td>
-              <td><%= @local.score.budget %></td>
-              <td><%= @local.score.job_support %></td>
-              <td><%= @local.score.family_support %></td>
-              <td><%= @local.score.culture %></td>
-            </tr>
-          </tbody>
-        </table>
-        <div>
-        <canvas id="myChart"></canvas>
+        <% if @local.tag %>
+          <li><%= link_to "タグづけ編集", edit_tag_path(@local.tag.id), class: 'dropdown-item navItem' %></li>
+        <% else %>
+          <li><%= link_to "タグ登録", new_tag_path, class: 'dropdown-item navItem' %></li>
+        <% end %>
+        <% if @local.score %>
+          <li><%= link_to "スコア編集", edit_score_path(@local.score.id), class: 'dropdown-item navItem' %></li>
+        <% else %>
+          <li><%= link_to "スコア登録", new_score_path, class: 'dropdown-item navItem' %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <h2><%= @local.full_name %>はこんなtoko</h2>
+    <section class="separate">
+      <% if @local.image? %>
+        <%= image_tag @local.image.url %>
+      <% else %>
+      <%= image_tag 'article_default.png' %>
+      <% end %>
+
+      <% if @local.profile && @local.profile.introduction %>
+        <p class="txt-left"><%= @local.profile.introduction %></p>
+      <% elsif current_local == @local %>
+        <p class="txt-center"><%= link_to 'あなたの町がドンナトコか登録しましょう', new_profile_path%></p>
+      <% else %>
+        <p class="txt-center">coming soon...</p>
+      <% end %>
+    </section>
+
+    <h2><i class="fas fa-map-marker-alt"></i> 場所を確認</h2>
+    <section>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13755921.802890059!2d129.42164090240496!3d32.675956666524435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34674e0fd77f192f%3A0xf54275d47c665244!2z5pel5pys!5e0!3m2!1sja!2sjp!4v1627342613410!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
+    <%= link_to "#{@local.name}の記事をみてみる", local_articles_path(@local), class: 'pink_btn inline btm10per' if @local.articles.any? %>
+
+    <h2><i class="far fa-star"></i> 登録スコア</h2>
+    <section class="score score_area">
+
+      <% if @local.score %>
+        <div class="score_lists">
+          <dl class="score_list">
+            <dt>自然</dt>
+            <dd><%= @local.score.nature %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>アクセス</dt>
+              <dd><%= @local.score.accessibility %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>お財布事情</dt>
+              <dd><%= @local.score.budget %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>職</dt>
+              <dd><%= @local.score.job_support %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>ファミリー向け支援</dt>
+              <dd><%= @local.score.family_support %></dd>
+          </dl>
+          <dl class="score_list">
+              <dt>文化</dt>
+              <dd><%= @local.score.culture %></dd>
+          </dl>
         </div>
+        <div class="item3">
+          <div class="score_chart">
+            <canvas id="myChart", width="50%"></canvas>
+          </div>
+        </div>
+
       <% elsif current_local == @local %>
         <%= link_to 'あなたの町がドンナトコか登録しましょう', new_score_path %>
       <% else %>
-        coming soon...
-      <% end %>
-    </div>
-  </section>
-
-  <section class="intro">
-  <% if local_signed_in? && current_local == @local && @local.profile%>
-  <%= link_to "町のプロフィール編集", edit_profile_path(@local.profile.id) %>
-  <% end %>
-    <h2>町の紹介文</h2>
-    <% if @local.profile %>
-      <div class="intro_box">
-        <p><%= @local.profile.introduction ? @local.profile.introduction : 'coming soon...' %></p>
-      </div>
-    <% else %>
-    <p>coming soon...</p>
-    <% end %>
-  </section>
-
-  <section class="numbers">
-    <h2>数字で見るとドンナトコ？</h2>
-    <% if @local.profile %>
-    入力日時：<%= @local.profile.created_at %>
-    更新日時：<%= @local.profile.updated_at %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>人口</th>
-            <th>平均気温</th>
-            <th>転入数（前年）</th>
-            <th>待機児童数</th>
-            <th>地価</th>
-            <th>平均所得</th>
-            <th>犯罪率</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @local.profile.population ? pluralize(@local.profile.population, "人") : 'coming soon...' %></td>
-            <td><%= @local.profile.temperature ? pluralize(@local.profile.temperature, "度") : 'coming soon...' %></td>
-            <td><%= @local.profile.moved_in ? pluralize(@local.profile.moved_in, "人") : 'coming soon...' %></td>
-            <td><%= @local.profile.waiting_children ? pluralize(@local.profile.waiting_children, "人") : 'coming soon...' %></td>
-            <td><%= @local.profile.land_price ? pluralize(@local.profile.land_price, "円") : 'coming soon...' %></td>
-            <td><%= @local.profile.income ? pluralize(@local.profile.income, "円") : 'coming soon...' %></td>
-            <td><%= @local.profile.crime_rate ? pluralize(@local.profile.crime_rate, "%") : 'coming soon...' %></td>
-          </tr>
-        </tbody>
-      </table>
-    <% else %>
-      <p>coming soon...</p>
-    <% end %>
-  </section>
-  <section class="articles">
-  <% if @local.articles.any? %>
-    <ol class="articles">
-      <%= render @articles.first(3), local: @local %>
-    </ol>
-    <%= link_to '記事一覧', local_articles_path(@local) %>
-  <% end %>
-  </section>
-
-  <% if user_signed_in? %>
-    <section class="cv_area">
-      <% unless current_user.talking?(@local) %>
-        <%= form_with(model: @talkroom, local: true) do |f| %>
-          <%= f.hidden_field :local_id, value: @local.id %>
-          <%= f.hidden_field :user_id, value: current_user.id %>
-          <%= f.submit '話を聞いてみたい', class: 'btn btn-primary' %>
-        <% end %>
-      <% else %>
-        <%= link_to 'トークルームへ', talkroom_messages_path(@room) %>
+        <p class="txt-center">coming soon...</p>
       <% end %>
     </section>
-  <% end %>
+
+    <%= link_to "#{@local.name}の記事をみてみる", local_articles_path(@local), class: 'pink_btn inline btm10per' if @local.articles.any? %>
+
+    <h2><i class="fas fa-chart-bar"></i> 数字でみてみる</h2>
+    <section>
+      <% if @local.profile %>
+        <div class="local-numbers">
+          <div class="number-item item1">
+            <p class="number-icon"><i class="fas fa-user-friends"></i></p>
+            <h3>人口</h3>
+            <% if @local.profile.population? %>
+                <span class="local-number"><%= add_units(@local.profile.population.to_s) %></span> 人
+            <% else %>
+              coming soon...
+            <% end %>
+          </div>
+          <div class="number-item item1">
+            <p class="number-icon"><i class="fas fa-temperature-high"></i></p>
+            <h3>平均気温</h3>
+            <% if @local.profile.temperature? %>
+                <span class="local-number"><%= number_to_human(@local.profile.temperature, units: {million: "00万"}, delimiter: ",") %></span> &#x2103;
+            <% else %>
+              coming soon...
+            <% end %>
+          </div>
+          <div class="number-item item1">
+            <p class="number-icon"><i class="fas fa-truck-moving"></i></p>
+            <h3>転入数<span class="font-s">（前年）</span></h3>
+            <% if @local.profile.moved_in? %>
+                <span class="local-number"><%= number_to_human(@local.profile.moved_in, units: {million: "00万"}, delimiter: ",") %></span> 人
+            <% else %>
+              coming soon...
+            <% end %>
+          </div>
+          <div class="number-item item2">
+            <p class="number-icon"><i class="fas fa-baby"></i></p>
+            <div>
+              <h3>待機児童数</h3>
+              <% if @local.profile.waiting_children? %>
+                  <span class="local-number"><%= number_to_human(@local.profile.waiting_children, units: {million: "00万"}, delimiter: ",") %></span> 人
+              <% else %>
+                <p>coming soon...</p>
+              <% end %>
+            </div>
+          </div>
+          <div class="number-item item2">
+            <p class="number-icon"><i class="fas fa-home"></i></p>
+              <div>
+                <h3>平均家賃</h3>
+                <% if @local.profile.land_price? %>
+                    <span class="local-number"><%= add_units(@local.profile.land_price.to_s) %></span> 円
+                <% else %>
+                  <p>coming soon...</p>
+                <% end %>
+            </div>
+          </div>
+          <div class="number-item item1">
+            <p class="number-icon"><i class="fas fa-yen-sign"></i></p>
+              <h3>平均所得</h3>
+              <% if @local.profile.income? %>
+                  <span class="local-number"><%= add_units(@local.profile.income.to_s) %></span> 円
+              <% else %>
+                <p>coming soon...</p>
+              <% end %>
+          </div>
+          <div class="number-item item2 item3">
+            <p class="number-icon"><i class="fas fa-exclamation-triangle"></i></p>
+            <div>
+              <h3>犯罪率</h3>
+              <% if @local.profile.crime_rate? %>
+                <span class="local-number"><%= number_to_human(@local.profile.crime_rate, units: {million: "00万"}, delimiter: ",") %></span> %
+              <% else %>
+                <p>coming soon...</p>
+              <% end %>
+              <p>全国平均：0.9%</p>
+            </div>
+          </div>
+        </div>
+
+        更新日時：<%= @local.profile.updated_at.to_s(:datetime_jp) %>
+      <% elsif current_local == @local %>
+        <p class="txt-center"><%= link_to 'あなたの町がドンナトコか登録しましょう', new_profile_path%></p>
+      <% else %>
+        <p>coming soon...</p>
+      <% end %>
+    </section>
+
+    <section class="txt-left">
+      <h2><i class="far fa-newspaper"></i> 最近の投稿</h2>
+      <% if @local.articles.any? %>
+          <%= render @articles.first(3), one_column: true, local: @local %>
+      <% else %>
+          <p class="txt-center">coming soon...</p>
+      <% end %>
+    </section>
+
+    <%= link_to "#{@local.name}の他の記事をみてみる", local_articles_path(@local), class: 'pink_btn inline btm10per' if @local.articles.any? %>
+  </div>
 </div>
+
+<% if user_signed_in? %>
+  <div class="flex_wrap cv_area">
+    <% unless current_user.talking?(@local) %>
+      <%= form_with(model: @talkroom, local: true) do |f| %>
+        <%= f.hidden_field :local_id, value: @local.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.submit 'ちょっと話を聞いてみたい！', class: 'pink_btn' %>
+      <% end %>
+    <% else %>
+      <%= link_to 'トークルームへ', talkroom_messages_path(@room), class: 'pink_btn to_room' %>
+    <% end %>
+    <%= render 'locals/bookmark_button', local: @local %>
+  </div>
+<% end %>
+
 
   <script>
     <% if @local.score %>
@@ -132,14 +229,14 @@
       var myChart = new Chart(ctx, {
         type: 'radar',
         data: {
-          labels: ["自然", "アクセス", "財政支援", "職", "ファミリー支援", "文化"],
+          labels: ["自然", "アクセス", "財政支援", "職", "ファミリー", "文化"],
           <% if user_signed_in? && current_user.score %>
             datasets: 
             [
                 {
                 label: '町の登録スコア',
-                backgroundColor: 'rgba(102,255,129,0.2)',
-                borderColor: 'rgba(122,255,129,0.2)',
+                backgroundColor: 'rgba(227,182,188,0.5)',
+                borderColor: 'rgba(227,134,146,1)',
                 data: [<%= @local.score.nature %>,
                         <%= @local.score.accessibility %>,
                         <%= @local.score.budget %>,
@@ -149,8 +246,8 @@
                 },
                 {
                 label: '自分の登録スコア',
-                backgroundColor: 'rgba(122,205,129,0.2)',
-                borderColor: 'rgba(122,255,129,0.2)',
+                backgroundColor: 'rgba(146,227,134,0.5)',
+                borderColor: 'rgba(146,227,134,1)',
                 data: [<%= current_user.score.nature %>,
                         <%= current_user.score.accessibility %>,
                         <%= current_user.score.budget %>,
@@ -164,8 +261,8 @@
             [
                 {
                 label: '町の登録スコア',
-                backgroundColor: 'rgba(102,255,129,0.2)',
-                borderColor: 'rgba(122,255,129,0.2)',
+                backgroundColor: 'rgba(227,182,188,0.5)',
+                borderColor: 'rgba(227,134,146,1)',
                 data: [<%= @local.score.nature %>,
                         <%= @local.score.accessibility %>,
                         <%= @local.score.budget %>,
@@ -177,6 +274,7 @@
           <% end %>
         },
         options: {
+          responsive: true,
             scale: {
                 ticks: {
                     suggestedMin: 0,
@@ -185,5 +283,6 @@
             }
         }
       });
-      <% end %>
-    </script>
+
+    <% end %>
+  </script>

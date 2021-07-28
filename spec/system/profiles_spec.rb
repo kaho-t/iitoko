@@ -42,7 +42,7 @@ RSpec.describe 'Profiles', type: :system do
       expect(Profile.count).to eq @number_of_profiles + 1
       visit local_path(local)
       expect(page).to have_content profile.introduction.to_s
-      expect(page).to have_selector 'td', text: 'coming soon...'
+      expect(page).to have_selector 'div.number-item', text: 'coming soon...'
     end
     it 'creates a profile without any data' do
       sign_in local
@@ -52,7 +52,7 @@ RSpec.describe 'Profiles', type: :system do
         expect(page).to have_current_path new_tag_path
       }.to change(Profile, :count).by(1)
       visit local_path(local)
-      expect(page).to have_selector 'td', text: 'coming soon...'
+      expect(page).to have_selector 'p', text: 'coming soon...'
     end
 
     it 'fails to create profile with invalid data' do
@@ -78,7 +78,8 @@ RSpec.describe 'Profiles', type: :system do
       profile.save
       sign_in local
       visit local_path(local)
-      click_link '町のプロフィール編集'
+      click_link '編集'
+      click_link 'プロフィール編集'
       fill_in '人口', with: 200
       fill_in '平均気温', with: 15
       fill_in '転入数（前年）', with: 100

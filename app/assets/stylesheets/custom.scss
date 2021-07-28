@@ -136,12 +136,18 @@ a {
 .top5per {
   margin-top: 5% !important;
 }
+.btm10per{
+  margin-bottom: 10% !important;
+}
 .txt-center {
   text-align: center;
 }
 .font-b {
   font-size: 1.4em;
   font-weight: 400;
+}
+.font-s {
+  font-size: 0.5em;
 }
 .txt-right {
   text-align: right;
@@ -163,6 +169,9 @@ a {
 h1.with_info {
   margin: 4% auto;
   text-align: left;
+}
+.inline {
+  display: inline-block;
 }
 
 // ================

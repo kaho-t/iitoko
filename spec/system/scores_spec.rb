@@ -101,7 +101,6 @@ RSpec.describe 'Scores', type: :system do
     it 'shows link to new_score_path when a user doesnt have any score' do
       sign_in local
       visit local_path(local)
-      expect(page).to_not have_content '登録スコア'
       expect(page).to have_content 'あなたの町がドンナトコか登録しましょう'
     end
     it 'shows link to top when a local has scores' do
@@ -126,8 +125,7 @@ RSpec.describe 'Scores', type: :system do
       choose 'score_culture_5'
       click_button '変更'
       expect(page).to have_current_path local_path(local)
-      tds = page.all('td')
-      expect(tds[0]).to have_content '5'
+      expect(page).to have_selector 'dd', text: '5'
     end
     it 'doesnt see users score editor link' do
       user_score.save

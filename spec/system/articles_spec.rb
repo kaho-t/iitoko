@@ -64,8 +64,9 @@ RSpec.describe 'Articles', js: true, type: :system do
       sign_in local
       article.save
       visit local_path(local)
-      within 'section.articles' do
-        click_link '記事一覧'
+      execute_script('window.scrollBy(0,10000)')
+      within 'div.local_main' do
+        click_link "#{local.name}の他の記事をみてみる"
       end
       expect(page).to have_current_path local_articles_path(local)
       expect(page).to have_content article.title

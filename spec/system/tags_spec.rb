@@ -74,7 +74,8 @@ RSpec.describe 'Tags', type: :system do
         click_button '登録する'
         expect(page).to have_current_path local_path(local)
       }.to change(Tag, :count).by (1)
-      expect(page).to have_content 'タグ編集'
+      click_link '編集'
+      expect(page).to have_content 'タグづけ編集'
     end
   end
   describe 'editting a tag' do
@@ -85,7 +86,8 @@ RSpec.describe 'Tags', type: :system do
       sign_in local
       visit local_path(local)
       expect(page).to have_content '海'
-      click_link 'タグ編集'
+      click_link '編集'
+      click_link 'タグづけ編集'
       uncheck '海'
       click_button '確定'
       expect(page).to have_current_path local_path(local)

@@ -271,12 +271,16 @@ h2.lined:after {
 
     .bookmark-btn, .pink_btn {
       padding: 1em ;
-      flex:1;
       margin: 0 1em;
     }
 
     .bookmark-btn {
       margin-top: 0;
+    }
+
+    .to_room {
+      padding: 1em 4em;
+      text-align: center;
     }
 
     @include sp {
@@ -287,6 +291,10 @@ h2.lined:after {
         flex:1;
         margin: 1em auto;
         width: 100%;
+      }
+      .to_room {
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
       }
     }
   }

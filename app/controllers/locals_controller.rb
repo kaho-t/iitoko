@@ -11,11 +11,7 @@ class LocalsController < ApplicationController
       @room = Talkroom.find_by(user_id: current_user.id,
                                local_id: @local.id)
     end
-
-    
-
     return unless user_signed_in?
-
     current_user.visit(@local)
     userfootprints = Footprint.where(['visitoruser_id = ? and visitedlocal_id = ?', current_user.id, @local.id])
     fp = userfootprints.order(created_at: :desc).take

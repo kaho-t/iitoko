@@ -13,8 +13,10 @@ RSpec.describe 'Bookmarks', js: true, type: :system do
     sign_in user
     visit local_path(local)
     expect do
-      find('.bookmark-btn').click
-      expect(page).to have_css '.bookmarked-btn'
+      within 'div.left_btns' do
+        click_button 'お気に入り登録する'
+        expect(page).to have_css '.bookmarked-btn'
+      end
     end.to change(Notification, :count).by(1)
     visit bookmarks_user_path(user)
     expect(page).to have_content local.name
@@ -24,7 +26,9 @@ RSpec.describe 'Bookmarks', js: true, type: :system do
     expect(page).to have_content article.title
 
     visit local_path(local)
-    find('.bookmarked-btn').click
+    within 'div.left_btns' do
+      find('.bookmarked-btn').click
+    end
     expect(page).to have_css '.bookmark-btn'
     visit bookmarks_user_path(user)
     expect(page).to have_no_content local.name
