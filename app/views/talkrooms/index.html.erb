@@ -1,20 +1,38 @@
-<div class="container top60">
+<div class="container top60 txt-left btm10per">
 
-<h1>トークルーム</h1>
+<h1 class="with_info"><i class="far fa-comments"></i> メッセージ</h1>
+<% if user_signed_in? %>
+<p class="page_info">自治体の担当者と直接やりとりができます</p>
+<% else %>
+<p class="page_info">移住希望者と直接やりとりができます</p>
+<% end %>
 
 <% if @talkrooms %>
   <% @talkrooms.each do |room| %>
-    <div>
-      <% if user_signed_in? %>
-        <%= link_to room.local.name, talkroom_messages_path(room) %>
-        <span>
-          <%=link_to 'トークルームを削除',
-                          room, method: :delete, 
-                          data: {confirm: "#{room.local.name}とのトークルームを削除します。削除すると相手からもトークルームは見れなくなります。"} %>
-        </span>
-      <% elsif local_signed_in? %>
-        <%= link_to room.user.name, talkroom_messages_path(room) %>
-      <% end %>
+    <div class="room_area">
+      <% user_signed_in? ? talkwith = room.local : talkwith = room.user %>
+      <%= link_to room, method: :delete,
+                        data: {confirm: "#{talkwith.name}とのトークルームを削除します。削除すると相手からもトークルームは見れなくなります。"} do %>
+                        <div class="x_btn"><i class="fas fa-times-circle"></i></div>
+                        <% end %>
+
+      <div class="room_box box_withlink">
+        <div class="roomicon"><%= gravatar_for(talkwith, size:80) %></div>
+        <div class="roomtxt_area">
+          <h2 class="talkwith"><%= talkwith.prefecture.name if talkwith == room.local %><%= talkwith.name %></h2>
+          <hr>
+          <p class="lastmsg">
+            <% if room.messages.any? %>
+            <%= room.messages.last.category %>:
+            <%= room.messages.last.content.truncate(20) if room.messages.last.content %>
+            （送信者： <%= room.messages.last.sender.name %>）
+            <% else %>
+            まだメッセージのやり取りがありません。メッセージを送ってみましょう！
+            <% end %>
+          </p>
+        </div>
+      <%= link_to '', talkroom_messages_path(room), class: 'linkinbox' %>
+      </div>
     </div>
   <% end %>
 <% else %>

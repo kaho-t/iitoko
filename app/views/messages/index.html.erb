@@ -1,56 +1,66 @@
-<div class="msg-contents">
-  <% if user_signed_in? %>
-    <h1><%= @local.name %></h1>
+<div class="container top100 brm10per">
+  <div class="msg-contents">
+    <% user_signed_in? ? talkwith = @local : talkwith = @user %>
+    <div class="room_box">
+      <h1><%= gravatar_for(talkwith, size:50) %> <%= talkwith.prefecture.name if talkwith == @local %><%= talkwith.name %></h1>
+    </div>
+    <div class="allmsg_area">
+      <% user_signed_in? ? current_account = current_user : current_account = current_local %>
+      <% @messages.each do |message| %>
+        <% unless message.sender_type == current_account.class.to_s %>
+          <div class="msg_item with_item">
+            <div class="sender_icon"><%= gravatar_for(talkwith, size:40) %></div>
+            <div class="msgtxt">
+              <p>カテゴリ：<%= message.category %></p>
+              <div class="from_talkingwith">
+                <p><%= message.content %></p>
+              </div>
+              <p><%= time_ago_in_words(message.created_at) %>前</p>
+            </div>
+          </div>
+        <% else %>
+          <div class="msg_item  my_item">
+            <div class="msgtxt">
+              <p class="txt-right">カテゴリ：<%= message.category %></p>
+              <div class="from_me">
+                <p><%= message.content %></p>
+              </div>
+              <p class="txt-right"><%= time_ago_in_words(message.created_at) %>前 | <%= link_to '削除', message, method: :delete, data: {confirm: '送信したメッセージを削除しますか'} %></p>
+            </div>
+            <div class="me_icon"><%= gravatar_for(current_account, size:40) %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="msgform_area">
+      <%= form_with(model: [@talkroom, @message], local: true) do |f| %>
+        <%= render "shared/error_messages", object: f.object %>
+        <%= f.hidden_field :talkroom_id, value: @talkroom.id %>
 
-    <% @messages.each do |message| %>
-      <% unless message.sender_type == 'User' %>
-        <div class="from_talkingwith">
-          <p>カテゴリ：<%= message.category %></p>
-          <p><%= message.content %></p>
-          <p><%= time_ago_in_words(message.created_at) %>前</p>
-        </div>
-      <% else %>
-        <div class="from_me">
-          <p>カテゴリ：<%= message.category %></p>
-          <p><%= message.content %></p>
-          <p><%= time_ago_in_words(message.created_at) %>前</p>
-          <p><%= link_to '削除', message, method: :delete, data: {confirm: '送信したメッセージを削除しますか'} %>
+        <div class="flex_wrap">
+          <div class="msgclips">
+            <%= f.label :pdfs do %>
+              <i class="fas fa-paperclip msg_btn"></i>
+              <%= f.file_field :pdfs, style: 'display: none' %>
+            <% end %>
+            <%=f.label :photos do %>
+              <i class="far fa-image msg_btn"></i>
+              <%= f.file_field :photos, style: 'display: none' %>
+            <% end %>
+          </div>
+
+          <div class="msgform">
+            <div class="mb-3" style="margin-bottom: 0.5em">
+              <%= f.select :category, [["返信"],["資料請求したい"],["質問がある"],["移住の相談をしたい"],["直接話を聞いてみたい"],["その他"]], {prompt: "カテゴリを選択してください"}, {class: 'form-select'} %> *必須
+            </div>
+            <div class="mb-3">
+              <%= f.text_area :content, class: 'form-control' %>
+            </div>
+          </div>
+
+          <%= f.submit "送信する", class: "green_btn" %>
         </div>
       <% end %>
-    <% end %>
-
-  <% elsif local_signed_in? %>
-    <h1><%= @user.name %></h1>
-    <% @messages.each do |message| %>
-      <% if message.sender_type == 'Local' %>
-        <div class="from_talkingwith">
-          <p>カテゴリ：<%= message.category %></p>
-          <p><%= message.content %></p>
-          <p><%= time_ago_in_words(message.created_at) %>前</p>
-        </div>
-      <% else %>
-        <div class="from_me">
-          <p>カテゴリ：<%= message.category %></p>
-          <p><%= message.content %></p>
-          <p><%= time_ago_in_words(message.created_at) %>前</p>
-          <p><%= link_to '削除', message, method: :delete, data: {confirm: '送信したメッセージを削除しますか'} %>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
 </div>
-<div class="msgform_area">
-<%= form_with(model: [@talkroom, @message], local: true) do |f| %>
-  <%= render "shared/error_messages", object: f.object %>
-    <%= f.hidden_field :talkroom_id, value: @talkroom.id %>
-
-    <%= f.label :category, 'カテゴリ' %> *必須
-    <%= f.select :category, [["返信"],["資料請求したい"],["質問がある"],["移住の相談をしたい"],["直接話を聞いてみたい"],["その他"]], prompt: "カテゴリを選択してください" %>
-
-    <%= f.label :content, '本文' %>
-    <%= f.text_area :content %>
-
-    <%= f.submit "送信" %>
-  <% end %>
-</div>
-

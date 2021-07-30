@@ -1,14 +1,22 @@
-<h1>話を聞いてみたい</h1>
-<p>メッセージのカテゴリを洗濯してください</p>
-<%= form_with(model: [@talkroom, @message], local: true) do |f| %>
-  <%= render "shared/error_messages", object: f.object %>
-  <%= f.hidden_field :talkroom_id, value: @talkroom.id %>
+<div class="container top60">
+  <h1 class="txt-center" style="margin-bottom: 4%">ちょっと話を聞いてみたい</h1>
+  <p class="page_info txt-center">こちらから、自治体の担当者の方へ直接メッセージが送れます。<br>
+  まずは質問のカテゴリを選んで、はじめの挨拶をしてみましょう！</p>
 
-  <%= f.label :category, 'カテゴリ' %> *必須
-  <%= f.select :category, [["資料請求したい"],["質問がある"],["移住の相談をしたい"],["直接話を聞いてみたい"],["その他"]], prompt: "カテゴリを選択してください" %>
+  <div class="newmsg_area">
+  <%= form_with(model: [@talkroom, @message], local: true) do |f| %>
+    <%= render "shared/error_messages", object: f.object %>
+    <%= f.hidden_field :talkroom_id, value: @talkroom.id %>
+    <div class="mb-3">
+      <%= f.label :category, 'カテゴリ', class: 'form-label' %> *必須<br>
+      <%= f.select :category, [["資料請求したい"],["質問がある"],["移住の相談をしたい"],["直接話を聞いてみたい"],["その他"]], {prompt: "カテゴリを選択してください"}, {class: 'form-select category'} %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :content, '備考', class: 'form-label' %>　任意
+      <%= f.text_area :content, class: 'form-control' %>
+    </div>
 
-  <%= f.label :content, '備考欄' %>　任意
-  <%= f.text_area :content %>
-
-  <%= f.submit "送信" %>
-<% end %>
+    <%= f.submit "メッセージを送る", class: 'pink_btn smart_btn' %>
+  <% end %>
+  </div>
+</div>

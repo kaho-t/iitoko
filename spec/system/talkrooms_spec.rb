@@ -33,7 +33,7 @@ RSpec.describe 'Talkrooms', js: true, type: :system do
     expect(page).to have_content local.name
     expect do
       accept_alert do
-        click_link 'トークルームを削除'
+        find('.fa-times-circle').click
       end
       expect(page).to have_current_path talkrooms_path
     end.to change(Talkroom, :count).by(-1)

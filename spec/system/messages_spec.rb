@@ -20,7 +20,7 @@ RSpec.describe 'Messages', js: true, type: :system do
     expect do
       select '資料請求したい', from: 'カテゴリ'
       fill_in with: '子育て支援や保育園の情報がわかる資料があればいただきたいです。'
-      click_button '送信'
+      click_button 'メッセージを送る'
       expect(page).to have_content local.name
     end.to change(Message, :count).by(1).and change(Notification, :count).by(1)
   end

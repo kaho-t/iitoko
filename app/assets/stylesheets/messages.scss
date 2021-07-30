@@ -1,29 +1,64 @@
-// Place all the styles related to the Messages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+$key-green: #2D5D24;
+$font-green: #003300;
+$key-coral: #E38692;
+$key-blue: #86c1e3;
+
+
 .msg-contents{
   box-sizing: border-box;
+  background: #fff;
+  border-radius: 10px;
+
+  .room_box {
+    border-radius: 10px 10px 0 0 ;
+    box-shadow: 1px 1px 10px #cecece;
+    h1 {
+      margin: 0.5em 1em;
+      font-size: 2em;
+    }
+  }
+}
+.msgtxt {
+  margin-right: 2em;
+  margin-left: 2em;
+  min-width: 300px;
+}
+
+.allmsg_area {
+  padding: 2% 5%;
+}
+
+.msg_item {
+  display: flex;
+
+  &.my_item {
+    justify-content: flex-end;
+  }
+}
+.me_icon {
+  text-align: right;
 }
 
 .from_talkingwith {
   position: relative;
   display: block;
-  margin: 1.5em 0 1.5em 15px;
-  padding: 7px 10px;
-  min-width: 120px;
+  padding: 0.5em 1em;
   max-width: 100%;
   color: #555;
   font-size: 16px;
-  background: #ddd;
+  background: #E8E8E8;
+  border-radius: 10px;
+  width: 60%;
+  margin: 0 auto 0 0;
 }
 .from_talkingwith:before {
   content: "";
   position: absolute;
-  top: 50%;
-  left: -30px;
-  margin-top: -15px;
-  border: 15px solid transparent;
-  border-right: 15px solid #ddd;
+  top: -5px;
+  right: 98%;
+  border: 7px solid transparent;
+  border-right: 23px solid #E8E8E8;
+  transform: rotate(18deg);
 }
 .from_talkingwith p {
   margin: 0; 
@@ -33,23 +68,24 @@
 .from_me {
   position: relative;
   display: block;
-  margin: 1.5em 15px 1.5em 0;
-  padding: 7px 10px;
-  min-width: 120px;
+  padding: 0.5em 1em;
   max-width: 100%;
-  color: #555;
+  color: #fff;
   font-size: 16px;
-  background: #e0edff;
+  background: $key-green;
+  border-radius: 10px;
+  width: 60%;
+  margin: 0 0 0 auto;
 }
 
 .from_me:before {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 100%;
-  margin-top: -15px;
-  border: 15px solid transparent;
-  border-left: 15px solid #e0edff;
+  top: -5px;
+  left: 98%;
+  border: 7px solid transparent;
+  border-left: 23px solid $key-green;
+  transform: rotate(-18deg);
 }
 
 .from_me p {
@@ -58,7 +94,77 @@
 }
 
 .msgform_area {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   background-color: #fff;
+  width: 100%;
+  box-shadow: 1px 1px 10px #cecece;
+  border-radius: 0 0 10px 10px;
+  padding: 1em;
+  margin-bottom: 10%;
+
+  .green_btn {
+    background: $key-green;
+    border-radius: 30px;
+    border: 2px solid $key-green;
+    font-size: 1.3em;
+    color: #fff;
+    padding: 0.3em 1em;
+    margin-bottom: 1em;
+
+    &:hover {
+      background-color: #fff;
+      color: $key-green;
+    }
+  }
+  .flex_wrap {
+    align-items: flex-end;
+  }
+}
+
+.msg_btn {
+  font-size: 2em;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px #cecece;
+  padding: 0.5em;
+  cursor: pointer;
+
+  &:hover {
+    margin-top: 1px;
+    margin-bottom: 0;
+    box-shadow: inset 1px 1px 3px #cecece;
+  }
+}
+.msgform {
+  flex: 1;
+  margin: 1em;
+}
+.msgclips {
+  margin-bottom: 1em;
+}
+
+.newmsg_area {
+  background: #fff;
+  border-radius: 10px;
+  padding: 5%;
+  margin: 5%;
+  div {
+    margin-bottom: 2em;
+  }
+  label {
+    font-size: 1.3em;
+  }
+  textarea {
+    height: 100px;
+  }
+}
+
+select.category {
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }

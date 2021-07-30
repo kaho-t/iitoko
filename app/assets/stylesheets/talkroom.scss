@@ -1,3 +1,85 @@
-// Place all the styles related to the talkroom controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+
+$pc: 1024px; // PC
+$tab: 1024px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+
+$key-green: #2D5D24;
+$font-green: #003300;
+$key-coral: #E38692;
+$key-blue: #86c1e3;
+
+.room_box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #eee;
+  padding: 1em;
+  display: flex;
+  font-size: 1.1em;
+  margin-bottom: 1em;
+}
+/*div要素全体にリンクをつけるために必要な要素*/
+.box_withlink {
+  position: relative;
+}
+.box_withlink a.linkinbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height:100%;
+  width: 100%;
+}
+
+.roomicon {
+  padding: 1em;
+  margin-right: 1em;
+}
+
+.roomtxt_area {
+  margin-right: 2.5em;
+}
+
+h2.talkwith {
+  text-align: left;
+  color: $font-green;
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+p.lastmsg {
+  margin-bottom: 10px;
+  color: #777;
+}
+
+.room_area{
+  position: relative;
+}
+.x_btn {
+  position: absolute;
+  top: 0;
+  right: 1%;
+  font-size: 2.5em;
+  z-index: 1000;
+  color: #ccc;
+
+  a {
+    text-decoration: none;
+  }
+}
