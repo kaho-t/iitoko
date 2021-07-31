@@ -1,8 +1,12 @@
-<h1>通知一覧</h1>
+<div class="container top60 btm10per">
+<h1 class="with_info"> <i class="fas fa-bell"></i> お知らせ</h1>
 
 <% if @notifications.any? %>
-  <%= render @notifications %>
+  <div class="notice_list">
+    <%= render @notifications %>
+  </div>
   <%= paginate @notifications %>
 <% else %>
-  <p>通知はありません</p>
+  <p class="page_info">通知はありません</p>
 <% end %>
+</div>

@@ -17,6 +17,6 @@ RSpec.describe 'Notifications', type: :system do
 
     sign_in local
     visit notifications_path
-    expect(page).to have_content "#{user.name}さんが あなたをブックマークしました"
+    expect(page).to have_content "#{user.name}さんが あなたをお気に入り登録しました"
   end
 end

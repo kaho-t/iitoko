@@ -1,10 +1,12 @@
-
-<% notice_to = notification.notice_to %>
-
-<% if user_signed_in? %>
-<% from = Local.find_by(id: notification.notice_from) %>
+<% user_signed_in? ? from = Local.find_by(id: notification.notice_from) : from = User.find_by(id: notification.notice_from) %>
+<p class="font-m">
   <span>
-    <%= link_to from.name, local_path(from.id) %>さんが
+  <%= gravatar_for(from, size:40) %>&nbsp;
+    <% if user_signed_in? %>
+      <%= link_to from.name, local_path(from.id) %>さんが
+    <% elsif local_signed_in? %>
+      <%= link_to from.name, user_path(from.id) %>さんが
+    <% end %>
   </span>
 
   <% case notification.action %>
@@ -17,26 +19,10 @@
     <%= link_to 'あなたとのトークルームを作成しました', talkroom_messages_path(notification.talkroom) %>
   <% when 'footprint' %>
     <%= 'あなたのページを訪問しました' %>
-  <% end %>
-  <p><%= time_ago_in_words(notification.created_at) %>前</p>
-  <hr>
-<% elsif local_signed_in? %>
-  <% from = User.find_by(id: notification.notice_from) %>
-  <span>
-  <%= link_to from.name, user_path(from.id) %>さんが
-  </span>
-
-  <% case notification.action %>
   <% when 'bookmark' %>
-    <%= 'あなたをブックマークしました' %>
-  <% when 'message' %>
-    <%= link_to 'あなた宛のメッセージを送信しました', talkroom_messages_path(notification.message.talkroom) %>
-    <%= notification.message.content.truncate(10) %>
-  <% when 'talkroom' %>
-    <%= link_to 'あなたとのトークルームを作成しました', talkroom_messages_path(notification.talkroom) %>
-  <% when 'footprint' %>
-    <%= 'あなたのページを訪問しました' %>
+    <%= 'あなたをお気に入り登録しました' %>
   <% end %>
-  <p><%= time_ago_in_words(notification.created_at) %>前</p>
-  <hr>
-<% end %>
+</p>
+<p class="txt-right"><%= time_ago_in_words(notification.created_at) %>前</p>
+<hr>
+
