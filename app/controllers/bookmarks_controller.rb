@@ -11,11 +11,28 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    @local = Local.find(params[:local_id])
-    current_user.unbookmark_local(@local)
-    respond_to do |format|
-      format.html { redirect_to @local }
-      format.js
+    if params[:local_id]
+      @local = Local.find(params[:local_id])
+      current_user.unbookmark_local(@local)
+      respond_to do |format|
+        format.html { redirect_to @local }
+        format.js
+      end
+    else
+      @bookmark = Bookmark.find_by(id: params[:id])
+      @user = User.find_by(id: @bookmark.user_id)
+      redirect_to(top_url) unless @user == current_user
+
+      @bookmark.destroy
+      redirect_to bookmarks_user_path(@user)
     end
+  end
+
+  private
+
+  def correct_account
+    @bookmark = Bookmark.find_by(id: params[:id])
+    @user = User.find_by(id: @bookmark.user_id)
+    redirect_to(top_url) unless @user == current_user
   end
 end

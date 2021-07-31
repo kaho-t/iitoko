@@ -5,15 +5,21 @@
   <% if @bookmarked_locals.any? %>
     <div class="bk_list">
       <% @bookmarked_locals.each do |local| %>
-
-        <div class="bk_item box_withlink">
-          <div class="roomicon"><%= gravatar_for(local, size:80) %></div>
-          <div class="roomtxt_area">
-            <h2 class="talkwith"><%= local.full_name %></h2>
-            <hr>
-            <p class="lastmsg"><%= local.profile.catchphrase if local.profile && local.profile.catchphrase %></p>
+        <div class="bk_area">
+          <% bkmk = Bookmark.find_by(user: @user, local: local) %>
+          <%= link_to bookmark_path(bkmk), method: :delete,
+            data: {confirm: "#{local.name}をお気に入りから削除します。"} do %>
+            <div class="x_btn"><i class="fas fa-times-circle"></i></div>
+          <% end %>
+          <div class="bk_item box_withlink">
+            <div class="roomicon"><%= gravatar_for(local, size:80) %></div>
+            <div class="roomtxt_area">
+              <h2 class="talkwith"><%= local.full_name %></h2>
+              <hr>
+              <p class="lastmsg"><%= local.profile.catchphrase if local.profile && local.profile.catchphrase %></p>
+            </div>
+            <%= link_to '', local_path(local), class: 'linkinbox' %>
           </div>
-          <%= link_to '', local_path(local), class: 'linkinbox' %>
         </div>
       <% end %>
     </div>
