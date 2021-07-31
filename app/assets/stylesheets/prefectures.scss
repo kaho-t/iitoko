@@ -1,17 +1,39 @@
-// Place all the styles related to the prefectures controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+
+$pc: 1024px; // PC
+$tab: 1024px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+
+$key-green: #2D5D24;
+$font-green: #003300;
+$key-coral: #E38692;
+$key-blue: #86c1e3;
+
 .japan_map{
   position: relative;
   box-sizing: border-box;
   margin: 0 auto;
   display: table;
-  background-color: #adf6ff;
 }
 
 .map_img {
-  width: 70%;
-  height: 70%;
+  width: 100%;
   display: block;
   margin: 0 auto;
 }
@@ -29,45 +51,75 @@
   z-index: 1;
   box-sizing: border-box;
   cursor: pointer;
-  border: 3px solid #333333;
-  border-radius: 5px;
-  background-color: #FFF;
-  padding: 0.2em auto;
-  font-weight: bold;
+  padding: 3em;
   text-align: center;
   white-space: nowrap;
+  border-radius: 50% 50% 50% 70%/50% 50% 70% 60%;
+  font-size: 1.5em;
+  color: #FFF;
+  font-weight: 700;
+
+  @include sp {
+    padding: 1.5em;
+  }
 }
 
 /* ボタン配置（使用する日本地図画像により微調整） */
 .japan_map .area_btn.area1{
-  top: 25%;
-  right: 12%;
-  width: 30%;
+  background-color: rgba(100, 149, 237, 0.8);
+  top: 15%;
+  right: 5%;
+
+  &:hover {
+    background-color: rgba(100, 149, 237, 1);
+    transition: 1.0s;
+  }
 }
 .japan_map .area_btn.area2{
-  top: 50%;
-  right: 20%;
-  width: 13%;
+  background-color: rgba(102, 205, 170, 0.8);
+  top: 60%;
+  right: 3%;
+
+  &:hover {
+    background-color: rgba(102, 205, 170, 1);
+    transition: 1.0s;
+  }
 }
 .japan_map .area_btn.area3{
-  top: 45%;
-  right: 33%;
-  width: 13%;
+  background-color: rgba(46, 139, 87, 0.8);
+  top: 42%;
+  right: 24%;
+  &:hover {
+    background-color: rgba(46, 139, 87, 1);
+    transition: 1.0s;
+  }
 }
 .japan_map .area_btn.area4{
-  top: 54%;
-  left: 43%;
-  width: 13%;
+  background-color: rgba(255, 215, 0, 0.8);
+  top: 67%;
+  left: 45%;
+  &:hover {
+    background-color: rgba(255, 215, 0, 1);
+    transition: 1.0s;
+  }
 }
 .japan_map .area_btn.area5{
-  top: 50%;
-  left: 30%;
-  width: 15%;
+  background-color: rgba(210, 105, 30, 0.8);
+  top: 52%;
+  left: 23%;
+  &:hover {
+    background-color: rgba(210, 105, 30, 1);
+    transition: 1.0s;
+  }
 }
 .japan_map .area_btn.area6{
-  top: 60%;
-  left: 8%;
-  width: 25%;
+  background-color: rgba(178, 34, 34, 0.8);
+  top: 65%;
+  left: -2%;
+  &:hover {
+    background-color: rgba(178, 34, 34, 1);
+    transition: 1.0s;
+  }
 }
 /* オーバーレイ */
 .japan_map .area_overlay{
@@ -112,8 +164,27 @@
   border: 1px solid #CCC;
   font-weight: bold;
   text-align: center;
-  padding: 0.5em;
+  padding: 1em;
   cursor: pointer;
+
+  p {
+    margin: 0;
+    font-size: 1.2em;
+  }
+}
+
+.pref_xbtn {
+  top: 3%;
+  right: 5%;
+  position: absolute;
+  font-size: 3em;
+  color: #eee;
+  z-index: 4;
+  cursor: pointer;
+
+  @include sp {
+    font-size: 2em;
+  }
 }
 
 @media screen and (max-width: 480px){

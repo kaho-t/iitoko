@@ -1,59 +1,75 @@
-<h1>都道府県名で探す</h1>
-<section>
-<div class="japan_map">
-    <%= image_tag "jp_map.png", class: 'map_img' %>
-    <span class="area_btn area1" data-area="1">北海道・東北</span>
-    <span class="area_btn area2" data-area="2">関東</span>
-    <span class="area_btn area3" data-area="3">中部</span>
-    <span class="area_btn area4" data-area="4">近畿</span>
-    <span class="area_btn area5" data-area="5">中国・四国</span>
-    <span class="area_btn area6" data-area="6">九州・沖縄</span>
+<div class="container top60 btm10per">
+  <h1 class="with_info"><i class="fas fa-map-marker-alt"></i> 都道府県名で探す</h1>
+  <p class="page_info">気になる地域をクリックして都道府県を選択してください</p>
 
-    <div class="area_overlay"></div>
-    <div class="pref_area">
-        <div class="pref_list" data-list="1">
-          <% @hokkaido_tohoku.each do |key, value| %>
-            <div data-id="<%= key %>"><%= link_to value, prefecture_path(id: key) %></div>
-          <% end %>
-          <div></div>
-        </div>
+  <div class="japan_map">
+      <%= image_tag "jp_map.png", class: 'map_img' %>
+      <span class="area_btn area1" data-area="1">北海道/<br>東北</span>
+      <span class="area_btn area2" data-area="2">関東</span>
+      <span class="area_btn area3" data-area="3">中部</span>
+      <span class="area_btn area4" data-area="4">近畿</span>
+      <span class="area_btn area5" data-area="5">中国/<br>四国</span>
+      <span class="area_btn area6" data-area="6">九州/<br>沖縄</span>
 
-        <div class="pref_list" data-list="2">
-          <% @kanto.each do |key, value| %>
-            <div data-id="<%= key %>"><%= link_to value, prefecture_path(id: key) %></div>
-          <% end %>
-          <div></div>
-        </div>
+      <div class="area_overlay"></div>
+      <div class="pref_area">
+      <i class="fas fa-times-circle pref_xbtn"></i>
+          <div class="pref_list" data-list="1">
+            <% @hokkaido_tohoku.each do |key, value| %>
+              <div data-id="<%= key %>", class="box_withlink"><%= link_to '', prefecture_path(id: key), class: 'linkinbox' %>
+                <p><%= value %></p>
+              </div>
+              <% end %>
+            <div></div>
+          </div>
 
-        <div class="pref_list" data-list="3">
-          <% @chubu.each do |key, value| %>
-            <div data-id="<%= key %>"><%= link_to value, prefecture_path(id: key) %></div>
-          <% end %>
-          <div></div>
-        </div>
+          <div class="pref_list" data-list="2">
+            <% @kanto.each do |key, value| %>
+              <div data-id="<%= key %>", class="box_withlink"><%= link_to '', prefecture_path(id: key), class: 'linkinbox' %>
+                <p><%= value %></p>
+              </div>
+              <% end %>
+            <div></div>
+          </div>
 
-        <div class="pref_list" data-list="4">
-          <% @kansai.each do |key, value| %>
-            <div data-id="<%= key %>"><%= link_to value, prefecture_path(id: key) %></div>
-          <% end %>
-          <div></div>
-        </div>
+          <div class="pref_list" data-list="3">
+            <% @chubu.each do |key, value| %>
+              <div data-id="<%= key %>", class="box_withlink"><%= link_to '', prefecture_path(id: key), class: 'linkinbox' %>
+                <p><%= value %></p>
+              </div>
+              <% end %>
+            <div></div>
+          </div>
 
-        <div class="pref_list" data-list="5">
-          <% @chushikoku.each do |key, value| %>
-            <div data-id="<%= key %>"><%= link_to value, prefecture_path(id: key) %></div>
-          <% end %>
-          <div></div>
-        </div>
+          <div class="pref_list" data-list="4">
+            <% @kansai.each do |key, value| %>
+              <div data-id="<%= key %>", class="box_withlink"><%= link_to '', prefecture_path(id: key), class: 'linkinbox' %>
+                <p><%= value %></p>
+              </div>
+              <% end %>
+            <div></div>
+          </div>
 
-        <div class="pref_list" data-list="6">
-          <% @kyusyu_okinawa.each do |key, value| %>
-            <div data-id="<%= key %>"><%= link_to value, prefecture_path(id: key) %></div>
-          <% end %>
-        <div></div>
-    </div>
+          <div class="pref_list" data-list="5">
+            <% @chushikoku.each do |key, value| %>
+              <div data-id="<%= key %>", class="box_withlink"><%= link_to '', prefecture_path(id: key), class: 'linkinbox' %>
+                <p><%= value %></p>
+              </div>
+              <% end %>
+            <div></div>
+          </div>
+
+          <div class="pref_list" data-list="6">
+            <% @kyusyu_okinawa.each do |key, value| %>
+              <div data-id="<%= key %>", class="box_withlink"><%= link_to '', prefecture_path(id: key), class: 'linkinbox' %>
+                <p><%= value %></p>
+              </div>
+              <% end %>
+            <div></div>
+          </div>
+      </div>
+  </div>
 </div>
-
 
 <script>
 $(function(){
