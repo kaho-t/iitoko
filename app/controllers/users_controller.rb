@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def bookmarks
     @user = User.find_by(id: params[:id])
-    @bookmarked_locals = @user.locals.page(params[:page])
+    @bookmarked_locals = @user.locals.includes([:profile]).page(params[:page])
   end
 
   # def timeline

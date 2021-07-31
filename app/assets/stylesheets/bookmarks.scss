@@ -1,3 +1,39 @@
-// Place all the styles related to the bookmarks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+$pc: 1024px; // PC
+$tab: 1024px; // タブレット
+$sp: 480px;  // スマホ
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+
+$key-green: #2D5D24;
+$font-green: #003300;
+$key-coral: #E38692;
+$key-blue: #86c1e3;
+
+
+.bk_item {
+  background: #fff;
+  padding: 1em 2em;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px #eee;
+  display: flex;
+  margin-bottom: 3%;
+  &:hover {
+    opacity: 0.8;
+  }
+
+}

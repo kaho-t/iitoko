@@ -43,7 +43,7 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><%= link_to "マイページ", current_user, class: 'dropdown-item navItem' %></li>
                 <li><%= link_to "アカウント設定", edit_user_registration_path, class: 'dropdown-item navItem' %></li>
-                <li><%= link_to "ブックマーク", bookmarks_user_path(current_user), class: 'dropdown-item navItem' %></li>
+                <li><%= link_to "お気に入り一覧", bookmarks_user_path(current_user), class: 'dropdown-item navItem' %></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                   <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'dropdown-item navItem' %>
@@ -82,7 +82,7 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><%= link_to 'マイページ', current_local, class: 'dropdown-item navItem' %></li>
                 <li><%= link_to "アカウント設定", edit_local_registration_path, class: 'dropdown-item navItem' %></li>
-                <li><%= link_to "ブックマークしているユーザー", bookmarks_local_path(current_local), class: 'dropdown-item navItem' %></li>
+                <li><%= link_to "お気に入り一覧", bookmarks_local_path(current_local), class: 'dropdown-item navItem' %></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                   <%= link_to "ログアウト", destroy_local_session_path, method: :delete, class: 'dropdown-item navItem' %>

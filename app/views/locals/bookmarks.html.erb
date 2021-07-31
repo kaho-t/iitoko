@@ -1,14 +1,28 @@
-<div class="container">
-  <h1><%= @local.name %>をブックマークしているユーザー一覧</h1>
+<div class="container top60 btm10per">
+  <h1 class="with_info"><i class="fas fa-star"></i> <%= @local.name %>をお気に入りのユーザー</h1>
 
-  <p>ユーザー数：　<%= @users.count %>人</p>
+  <p class="page_info">ユーザー数：　<%= @users.count %>人</p>
   <% if @users.any? %>
-    <ul>
+    <div class="bk_list">
       <% @users.each do |user| %>
-        <li><%= link_to user.name, user_path(user) %></li>
+        <div class="bk_item box_withlink">
+          <div class="roomicon"><%= gravatar_for(user, size:80) %></div>
+          <div class="roomtxt_area">
+            <h2 class="talkwith"><%= user.name %></h2>
+            <hr>
+            <p class="lastmsg"><%= user.user_profile.content.truncate(20) if user.user_profile && user.user_profile.content %></p>
+          </div>
+          <%= link_to '', user_path(user), class: 'linkinbox' %>
+        </div>
       <% end %>
-    </ul>
+    </div>
   <% else %>
-  まだブックマークされていません。
+    <p>まだブックマークされていません。</p>
+    <% if @local == current_local %>
+      <p>プロフィールを見直したり、記事を投稿してみましょう！</p>
+      <%= link_to 'マイページ', local_path(current_local) %>
+      <%= link_to '新規記事作成', new_article_path %>
+    <% end %>
   <% end %>
+  <%= paginate @users %>
 </div>

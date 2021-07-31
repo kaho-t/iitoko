@@ -39,7 +39,7 @@ class LocalsController < ApplicationController
 
   def bookmarks
     @local = Local.find(params[:id])
-    @users = @local.users.page(params[:page])
+    @users = @local.users.page(params[:page]).per(10)
   end
 
   private

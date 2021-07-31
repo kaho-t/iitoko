@@ -1,16 +1,28 @@
-<h1>ブックマーク一覧</h1>
+<div class="container top60 btm10per">
+  <h1 class="with_info"><i class="fas fa-star"></i> お気に入り地域</h1>
 
-<p>ブックマーク：　<%= @bookmarked_locals.count %>件</p>
-<% if @bookmarked_locals.any? %>
-  <ul>
-    <% @bookmarked_locals.each do |local| %>
-      <li><%= link_to local.name, local_path(local) %></li>
-    <% end %>
-  </ul>
-<% else %>
-  まだブックマークしていません。
-  <ul>
-    <li><%= link_to 'iitoko 検索', search_path %></li>
-    <li><%= link_to 'おすすめの町をチェック', top_path %></li>
-  </ul>
-<% end %>
+  <p class="page_info">お気に入り：　<%= @bookmarked_locals.count %>件</p>
+  <% if @bookmarked_locals.any? %>
+    <div class="bk_list">
+      <% @bookmarked_locals.each do |local| %>
+
+        <div class="bk_item box_withlink">
+          <div class="roomicon"><%= gravatar_for(local, size:80) %></div>
+          <div class="roomtxt_area">
+            <h2 class="talkwith"><%= local.full_name %></h2>
+            <hr>
+            <p class="lastmsg"><%= local.profile.catchphrase if local.profile && local.profile.catchphrase %></p>
+          </div>
+          <%= link_to '', local_path(local), class: 'linkinbox' %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    まだブックマークしていません。あなたのイイトコ見つけましょう！
+    <ul>
+      <li><%= link_to 'iitoko 検索', search_path %></li>
+      <li><%= link_to 'おすすめの町をチェック', top_path %></li>
+    </ul>
+  <% end %>
+  <%= paginate @bookmarked_locals %>
+</div>
