@@ -516,6 +516,34 @@ input {
 
 
 // ================
+//    TO_B_LP
+// ================
+
+.lp_section {
+  font-size: 1.5em;
+  font-weight: 500;
+  padding: 10%;
+
+  h2 {
+    color: $key-green;
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 1.5em;
+  }
+
+  p {
+    margin-bottom: 3em;
+  }
+
+  a {
+    display: inline-block;
+    font-size: 1em;
+    margin-top: 10%;
+  }
+}
+
+
+// ================
 //    title area
 // ================
 .title_area {

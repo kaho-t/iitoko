@@ -1,16 +1,24 @@
-<h1>お問い合わせ</h1>
-<p>Find me in app/views/contacts/new.html.erb</p>
-<%= form_with(model: @contact, local: true) do |f| %>
-  <%= render "shared/error_messages", object: f.object %>
+<div class="container top60 btm10per">
+  <h1>お問い合わせ</h1>
 
-  <%= f.label :category, 'カテゴリ' %> *必須
-  <%= f.select :category, [["お問い合わせ"],["資料請求"],["その他"]], prompt: "カテゴリを選択してください" %>
+  <div class="newmsg_area">
+    <%= form_with(model: @contact, local: true) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
 
-  <%= f.label :email, 'メールアドレス' %>
-  <%= f.email_field :email, autocomplete: "email" %>
+      <div class="mb-3">
+        <%= f.label :category, 'カテゴリ', class: 'form-label' %> *必須<br>
+        <%= f.select :category, [["お問い合わせ"],["資料請求"],["その他"]], {prompt: "カテゴリを選択してください"}, {class: 'form-select category'} %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :email, 'メールアドレス', class: 'form-label' %> *必須
+        <%= f.email_field :email, autocomplete: "email", class: 'form-control', placeholder: 'iitoko@example.com' %>
+      </div>
 
-  <%= f.label :content, '備考欄' %>　任意
-  <%= f.text_area :content %>
-
-  <%= f.submit "送信" %>
-<% end %>
+      <div class="mb-3">
+        <%= f.label :content, '備考欄', class: 'form-label' %>　任意
+        <%= f.text_area :content, class: 'form-control' %>
+      </div>
+      <%= f.submit "送信", class: 'pink_btn smart_btn' %>
+    <% end %>
+  </div>
+</div>

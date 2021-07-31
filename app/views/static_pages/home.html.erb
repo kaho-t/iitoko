@@ -2,8 +2,10 @@
 <% provide(:subtext1, '自分の街のいいところを再発見') %>
 <% provide(:subtext2, '住みたい人とあなたの町をつなぐ。') %>
 
-<%= link_to "自治体としてログインこちら", new_local_session_path %>
-
-<%= link_to "自治体として新規登録はこちら", new_local_registration_path %>
-
-<%= link_to "お問い合わせはこちら", contact_path %>
+<section class="lp_section txt-center">
+  <h2>iitokoで未来の住民に出会う</h2>
+  <p>期間限定ではなく、ずっと住んでくれる人と出会いたい<br>
+    iitokoならあなたの町がたくさんの人のふるさとになります。</p>
+  <div><%= image_tag 'lp_img01.png' %></div>
+  <%= link_to '無料で新規会員登録', new_local_registration_path, class: 'pink_btn smart_btn' %>
+</section>
