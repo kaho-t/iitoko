@@ -16,7 +16,9 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @local_headerimage = @local.image ? @local.image.url : asset_path('default.png')
+  end
 
   def update
     if @profile.update(profile_params)

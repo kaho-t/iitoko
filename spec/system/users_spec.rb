@@ -107,7 +107,6 @@ RSpec.describe 'Users', js: true, type: :system do
         fill_in 'パスワード', with: user.password
         fill_in 'パスワード（確認）', with: user.password_confirmation
         click_button '確定する'
-        expect(page).to have_content 'アカウント情報編集'
         expect(page).to have_content '名前を入力してください'
         expect(page).to have_css 'div#error_explanation'
       end

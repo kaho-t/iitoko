@@ -1,53 +1,59 @@
-<h2>アカウント情報編集 <%= resource_name.to_s.humanize %></h2>
+<div class="container top60 btm10per">
+  <section class="user_profile_top">
+    <div class="u_image"><%= gravatar_for(@user, size:100) %></div>
+    <div class="gravatar_edit txt-center">
+      <a href="https://gravatar.com/emails" target="_blank">変更</a>
+    </div>
+    <h1 class="username"><%= @user.name %></h1>
+  </section>
+  <div class="user_main">
+    <h2><i class="fas fa-cog"></i> アカウント設定</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'accountform' }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="field mb-3">
+        <%= f.label :name, class: "form-label" %><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
+      <div class="field mb-3">
+        <%= f.label :email, class: "form-label" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <h2><i class="fas fa-key"></i> パスワード設定</h2>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="field mb-3">
+        <%= f.label :password, class: "form-label" %> <i>(パスワードを変更しない場合は空欄)</i><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+
+      <div class="field mb-3">
+        <%= f.label :password_confirmation, class: "form-label" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <div class="field mb-3 current_pw">
+        <%= f.label :current_password, class: "form-label" %> <i>(変更内容を確認したら現在のパスワードを入力して確定しましょう)</i><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "確定する", class: 'pink_btn smart_btn' %>
+      </div>
     <% end %>
-  </div>
+    <%= link_to "<< 元の画面に戻る", :back %>
+      <hr>
+      <br>
+    <%= button_to "退会する", registration_path(resource_name), data: { confirm: "本当に退会しますか?" }, method: :delete %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "確定する" %>
-  </div>
-<% end %>
-
-<div class="gravatar_edit">
-<%= gravatar_for @user %>
-<a href="https://gravatar.com/emails" target="_blank">change</a>
 </div>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "退会する", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>

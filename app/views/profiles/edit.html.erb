@@ -1,8 +1,8 @@
 <%= provide(:button_text, '確定する') %>
-<h1>プロフィール編集</h1>
-<p>※データの入力率が高いほど移住希望者とのマッチング成功率が高まります</p>
-
-
-  <div class="container">
+<div class="container top60">
+<section class="local_title_area localprofile_top" style="background: #fff url('<%= @local_headerimage ? @local_headerimage : asset_path('article_default.png') %>') no-repeat center center;">
+  <div class="u_image"><%= gravatar_for(@local, size:100) %></div>
+  <h1 class="username"><%= @local.full_name %></h1>
+</section>
     <%= render 'form' %>
   </div>

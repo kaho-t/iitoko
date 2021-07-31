@@ -16,9 +16,10 @@ class Locals::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    @local_headerimage = @local.image ? @local.image.url : asset_path('default.png')
+    super
+  end
 
   # PUT /resource
   # def update

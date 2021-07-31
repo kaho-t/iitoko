@@ -107,7 +107,6 @@ RSpec.describe 'Locals', js: true, type: :system do
         fill_in 'パスワード', with: local.password
         fill_in 'パスワード（確認用）', with: local.password_confirmation
         click_button '確定する'
-        expect(page).to have_content 'アカウント情報編集'
         expect(page).to have_content 'Nameを入力してください'
         expect(page).to have_css 'div#error_explanation'
       end

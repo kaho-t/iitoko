@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+.localprofile_top {
+  padding-top: 10%;
+  border-radius: 10px 10px 0 0;
+  margin-top: 0;
+  h1 {
+    color: #fff;
+    text-shadow: #777 1px 0 10px;
+  }
+}
+
 .notenext {
   text-align: center;
   margin-top: 3em;
