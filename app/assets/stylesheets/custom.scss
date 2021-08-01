@@ -237,9 +237,12 @@ nav {
   color: $key-green;
   padding: 2px 10px !important;
   margin: 5px;
+  font-size: 1.1em;
+  font-weight: 500;
   &:hover {
     background-color: transparent !important;
     border-bottom: 2px solid $key-blue;
+
   }
 }
 .navText {
@@ -577,6 +580,41 @@ input {
   }
 }
 
+// ================
+// FLASH
+// ================
+
+.flash {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  z-index: 100;
+  color: #fff;
+  width: 30%;
+  text-align: center;
+  padding: 5em 2em;
+  border-radius: 10px;
+
+  &.notice {
+    background: -moz-linear-gradient( top left rgba(98, 204, 80, 0.8), rgba(74, 153, 60, 0.8));
+    background: -webkit-linear-gradient(top left rgba(98, 204, 80, 0.8), rgba(74, 153, 60, 0.8));
+    background: linear-gradient(to bottom right, rgba(98, 204, 80, 0.8), rgba(74, 153, 60, 0.8));
+  }
+
+  &.danger {
+    background: -moz-linear-gradient( top left rgba(255, 176, 60, 0.8), rgba(255, 112, 141, 0.8));
+    background: -webkit-linear-gradient(top left rgba(255, 176, 60, 0.8), rgba(255, 112, 141, 0.8));
+    background: linear-gradient(to bottom right, rgba(255, 176, 60, 0.8), rgba(255, 112, 141, 0.8));
+  }  p {
+    margin: 0;
+    padding: 1em;
+  }
+
+  .fa-check-circle {
+    font-size: 5em;
+  }
+}
+
 
 // ================
 //    TO_B_LP
@@ -813,7 +851,7 @@ input {
   z-index: 100;
   left: 0;
   top: 42%;
-  color: $font-green;
+  color: $key-green;
   opacity: 0.5;
 
   &:hover {
@@ -827,7 +865,7 @@ input {
   z-index: 100;
   right: 0;
   top: 42%;
-  color: $font-green;
+  color: $key-green;
   opacity: 0.5;
 
   &:hover {
@@ -860,7 +898,7 @@ input {
     &.slick-active{
       button:before{
         content: '●';
-        color: $font-green;
+        color: $key-green
       }
     }
   }
@@ -1004,7 +1042,7 @@ img.header_img {
   z-index: 100;
   left: 40%;
   top: 60%;
-  color: $font-green;
+  color: $key-green;
   opacity: 0.5;
 
   &:hover {
@@ -1022,7 +1060,7 @@ img.header_img {
   z-index: 100;
   right: 40%;
   top: 60%;
-  color: $font-green;
+  color: $key-green;
   opacity: 0.5;
 
   &:hover {
@@ -1086,12 +1124,12 @@ img.header_img {
   li + li:before {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='9'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E");
 
-    color: $font-green;
+    color: $key-green;
   }
   li {
     a {
       text-decoration: none;
-      color: $font-green;
+      color: $key-green;
       font-weight: 500;
     }
   }

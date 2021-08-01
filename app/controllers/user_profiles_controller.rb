@@ -9,7 +9,7 @@ class UserProfilesController < ApplicationController
     @user_profile = UserProfile.new(user_profile_params)
 
     if @user_profile.save
-      flash[:success] = 'プロフィールの登録が完了しました。マイページからいつでも編集できます'
+      flash[:notice] = 'プロフィールの登録が完了しました。マイページからいつでも編集できます'
       redirect_to home_url
     else
       render 'new'
@@ -22,7 +22,7 @@ class UserProfilesController < ApplicationController
 
   def update
     if @user_profile.update(user_profile_params)
-      flash[:success] = 'プロフィールを更新しました'
+      flash[:notice] = 'プロフィールを更新しました'
       redirect_to user_path(current_user)
     else
       render 'edit'

@@ -23,6 +23,4 @@ class Profile < ApplicationRecord
 
   validates :crime_rate, numericality: { greater_than_or_equal_to: 0.0,
                                          less_than_or_equal_to: 100.0 }, allow_nil: true
-
-
 end

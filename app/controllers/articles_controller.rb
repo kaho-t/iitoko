@@ -7,7 +7,8 @@ class ArticlesController < ApplicationController
   def index
     @local_title_area = true
     @local = Local.find(params[:local_id])
-    @articles = @local.articles.includes([:main_image_attachment, :rich_text_content]).order(created_at: :desc).page(params[:page])
+    @articles = @local.articles.includes(%i[main_image_attachment
+                                            rich_text_content]).order(created_at: :desc).page(params[:page])
     @talkroom = Talkroom.new
     @local_headerimage = @local.image ? @local.image.url : asset_path('default.png')
     @room = Talkroom.find_by(local: @local, user: current_user)
@@ -16,8 +17,9 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find_by(id: params[:id])
     @local = @article.local
-    @articles = Article.where('local_id = ?', @local.id).includes([:main_image_attachment],[:local]).order(created_at: :desc).limit(5)
-    @pickups = Article.all.includes([:main_image_attachment],[:local]).sample(3)
+    @articles = Article.where(local_id: @local.id).includes([:main_image_attachment],
+                                                            [:local]).order(created_at: :desc).limit(5)
+    @pickups = Article.all.includes([:main_image_attachment], [:local]).sample(3)
   end
 
   def new
@@ -31,7 +33,7 @@ class ArticlesController < ApplicationController
     tags
     if @article.save
       @article.create_notification_feed(current_local)
-      flash[:success] = '投稿が完了しました'
+      flash[:notice] = '投稿が完了しました'
       redirect_to @article
     else
       render 'new'
@@ -45,7 +47,7 @@ class ArticlesController < ApplicationController
   def update
     tags
     if @article.update(article_params)
-      flash[:success] = '記事を更新しました'
+      flash[:notice] = '記事を更新しました'
       redirect_to @article
     else
       render 'edit'
@@ -54,7 +56,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    flash[:success] = '記事を削除しました'
+    flash[:notice] = '記事を削除しました'
     redirect_to local_articles_url(current_local)
   end
 

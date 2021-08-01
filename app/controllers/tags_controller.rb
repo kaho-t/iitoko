@@ -9,7 +9,7 @@ class TagsController < ApplicationController
   def create
     @tag = current_local.build_tag(tag_params)
     if @tag.save
-      flash[:success] = 'タグが登録されました'
+      flash[:notice] = 'タグが登録されました'
       redirect_to current_local
     else
       render 'tags/new'
@@ -22,6 +22,7 @@ class TagsController < ApplicationController
 
   def update
     if @tag.update(tag_params)
+      flash[:notice] = 'タグが更新されました'
       redirect_to current_local
     else
       render 'edit'

@@ -63,6 +63,6 @@ class Local < ApplicationRecord
   end
 
   def full_name
-    "#{self.prefecture.name} #{self.name}"
+    "#{prefecture.name} #{name}"
   end
 end

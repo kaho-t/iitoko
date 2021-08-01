@@ -17,6 +17,7 @@ class ScoresController < ApplicationController
 
     @score = current_account.build_score(score_params)
     if @score.save
+      flash[:notice] = 'スコアが登録されました'
       if current_account == current_local
         redirect_to new_profile_url
       else
@@ -45,6 +46,7 @@ class ScoresController < ApplicationController
     end
     @score = @current_account.score
     if @score.update(score_params)
+      flash[:notice] = 'スコアが変更されました'
       redirect_to @current_account
     else
       render 'edit'

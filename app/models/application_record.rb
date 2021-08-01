@@ -4,7 +4,7 @@ class ApplicationRecord < ActiveRecord::Base
   def difference_rate(account)
     u_score = account.score.attributes.except('id', 'created_at', 'updated_at', 'user_id', 'local_id')
     # l_score = Score.where.not(local_id: nil)
-    l_score = self.score.attributes.except('id', 'created_at', 'updated_at', 'user_id', 'local_id')
+    l_score = score.attributes.except('id', 'created_at', 'updated_at', 'user_id', 'local_id')
     diffs = []
 
     l_score.each do |key, value|

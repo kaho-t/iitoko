@@ -12,7 +12,7 @@ class TalkroomsController < ApplicationController
       elsif local_signed_in?
         @talkroom.create_notification_tkrm(current_local, @talkroom)
       end
-      flash[:success] = 'トークルームが作成されました'
+      flash[:notice] = 'トークルームが作成されました'
       redirect_to new_talkroom_message_path(@talkroom)
     else
       flash[:danger] = 'トークルームの作成に失敗しました'
@@ -47,7 +47,7 @@ class TalkroomsController < ApplicationController
 
   def destroy
     @talkroom.destroy
-    flash[:success] = 'トークルームを削除しました'
+    flash[:notice] = 'トークルームを削除しました'
     redirect_to talkrooms_url
   end
 

@@ -30,7 +30,7 @@ class MessagesController < ApplicationController
 
   def destroy
     @message.destroy
-    flash[:success] = 'メッセージを削除しました'
+    flash[:notice] = 'メッセージを削除しました'
     redirect_to talkroom_messages_path(@talkroom)
   end
 
@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
     @message = current_account.messages.build(message_params)
     if @message.save
       @message.create_notification_msg(current_account, @message)
-      flash[:success] = 'メッセージを送信しました'
+      flash[:notice] = 'メッセージを送信しました'
       redirect_to talkroom_messages_path(@talkroom)
     else
       flash[:danger] = 'メッセージの送信に失敗しました'

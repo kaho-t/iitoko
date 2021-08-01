@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
 
     if @contact.save
       ContactMailer.send_email(@contact).deliver_now
-      flash[:success] = 'お問い合わせを送信しました。入力いただいたメールアドレスに2~3営業日以内に返信いたします。'
+      flash[:notice] = 'お問い合わせを送信しました。入力いただいたメールアドレスに2~3営業日以内に返信いたします。'
       redirect_to contact_url
     else
       render 'new'

@@ -21,6 +21,4 @@ class UserProfile < ApplicationRecord
   validates :family_structure, presence: true, length: { maximum: 50 }, allow_nil: true
   validates :timing, presence: true, length: { maximum: 50 }, allow_nil: true
   validates :content, presence: true, length: { maximum: 255 }, allow_nil: true
-
-
 end

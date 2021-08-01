@@ -23,10 +23,24 @@
     <%= render 'layouts/title_area' if defined? @title_area %>
     <%= render 'layouts/local_title_area' if defined? @local_title_area %>
     <% if notice || alert %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <div class="flash notice">
+      <i class="far fa-check-circle"></i>
+      <p><%= notice if notice %><%= alert if alert %></p>
+    </div>
     <% end %>
-        <%= yield %>
+    <% if danger %>
+    <div class="flash danger">
+      <i class="fas fa-exclamation-triangle"></i>
+      <p><%= danger %></p>
+    </div>
+    <% end %>
+    <%= yield %>
     <%= render 'layouts/footer' unless defined? @no_header %>
   </body>
+  <script>
+    $(function() {
+      setTimeout("$('.flash').fadeOut('slow')", 1000);
+    });
+  </script>
 </html>
+
