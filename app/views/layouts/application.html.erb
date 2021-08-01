@@ -28,12 +28,6 @@
       <p><%= notice if notice %><%= alert if alert %></p>
     </div>
     <% end %>
-    <% if danger %>
-    <div class="flash danger">
-      <i class="fas fa-exclamation-triangle"></i>
-      <p><%= danger %></p>
-    </div>
-    <% end %>
     <%= yield %>
     <%= render 'layouts/footer' unless defined? @no_header %>
   </body>

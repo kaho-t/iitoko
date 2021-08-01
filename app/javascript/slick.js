@@ -1,6 +1,6 @@
 document.addEventListener("turbolinks:load"
 , function() {
-  $('.slider').slick({
+  $('.slider').not('.slick-initialized').slick({
     dots: true,
     dotsClass: 'slide-dots',
     infinite: true,
