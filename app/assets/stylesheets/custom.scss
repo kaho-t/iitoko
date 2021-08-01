@@ -26,6 +26,7 @@ $key-green: #2D5D24;
 $font-green: #003300;
 $key-coral: #E38692;
 $key-blue: #86c1e3;
+$key-ocean: #0048AE;
 
 /* universal */
 html {
@@ -182,6 +183,20 @@ h1.with_info {
 }
 .inline {
   display: inline-block;
+}
+
+.green_btn {
+  background-color: $key-green;
+  border-radius: 50px;
+  border: 3px solid $key-green;
+  color: #fff;
+  font-weight: 500;
+  padding: 0.2em 2em;
+
+  &:hover{
+    background-color: #fff;
+    color: $key-green;
+  }
 }
 
 // ================
@@ -512,6 +527,54 @@ input {
 .point {
   padding: 5px 10px;
   margin: 0 10px;
+}
+
+.tagcategory_area {
+  margin: 1em 0;
+}
+
+.tag_category {
+  display: flex;
+
+  p {
+    background-color: $key-ocean;
+    color: #fff;
+    padding: 0.5em;
+    border-radius: 5px;
+    line-height: 1em;
+    width: 20%;
+    text-align: center;
+  }
+  .tagcategory_items{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .field {
+    font-size: 1.2em;
+    padding: 0.5em;
+  }
+}
+
+.flex_form_row {
+  &.tag_pref_area {
+    align-items: center;
+
+    .flex_label {
+      text-align: center;
+    }
+    .flex_form {
+      flex: 4;
+
+      .custom-select {
+        width: 40%;
+        margin: 0.5em;
+
+        @include sp {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
 
@@ -1038,4 +1101,58 @@ img.header_img {
   font-size: 1.5em;
   font-weight: 500;
   margin-bottom: 3em;
+}
+
+
+// MODAL
+
+.overlays {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.5);
+	transition: opacity 200ms;
+	visibility: hidden;
+	opacity: 0;
+}
+.overlays .cancel {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	cursor: default;
+}
+.overlays:target {
+	visibility: visible;
+	opacity: 1;
+}
+.modals {
+	margin: 0px auto;
+	padding: 20px;
+	background: #fff;
+	border: 1px solid #666;
+	width: 400px;
+	border-radius:6px;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+	position: relative;
+}
+.modals h2 {
+	margin-top: 0;
+}
+.modals .close {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 20px;
+	right: 20px;
+	opacity: 0.8;
+	transition: all 200ms;
+	font-size: 24px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #777;
+}
+.modals .close:hover {
+	opacity: 1;
 }

@@ -1,132 +1,169 @@
-<div class="container">
-  <h1>iitoko検索</h1>
-  <%= search_form_for(@q, url:search_path) do |f| %>
-    
-    <div class="field">
-      <%= f.label :local_prefecture, '都道府県' %><br />
-      <%= f.collection_select :prefecture_code_eq, JpPrefecture::Prefecture.all, :code, :name, { include_blank: '都道府県' }, { class: 'custom-select'} %>
+<div class="container top60 btm10per">
+  <h1 class="with_info"><i class="fas fa-search"></i> キーワードから探す</h1>
+  <p class="page_info">気になるワードにチェックを入れてあなたのイイトコ見つけましょう</p>
+  <div class="form_area_w btm10per">
+    <%= search_form_for(@q, url:search_path) do |f| %>
+      
+      <div class="flex_form_row tag_pref_area">
+        <div class="flex_label">
+          <%= f.label :local_prefecture, '都道府県', class: 'form-label' %><br />
+        </div>
+        <div class="flex_form">
+          <%= f.collection_select :prefecture_code_eq, JpPrefecture::Prefecture.all, :code, :name, { include_blank: '都道府県' }, { class: 'custom-select'} %>
+        </div>
+      </div>
+<hr>
+      <div class="tagcategory_area">
+
+        <div class="tag_category">
+          <p>自然</p>
+          <div class="tagcategory_items">
+            <div class="field">
+              <%= f.check_box :tag_sea_true, {}, true, false %>
+              <%= f.label :tag_sea_true, '海' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_mountain_true, {}, true, false %>
+              <%= f.label :tag_mountai_true, '山' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_river_true, {}, true, false %>
+              <%= f.label :tag_river_true, '川' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_field_true, {}, true, false %>
+              <%= f.label :tag_field_true, '田畑' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_hotspring_true, {}, true, false %>
+              <%= f.label :tag_hotspring_true, '温泉' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_north_true, {}, true, false %>
+              <%= f.label :tag_north_true, '北国' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_south_true, {}, true, false %>
+              <%= f.label :tag_south_true, '南国' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag_category">
+          <p>アクセス</p>
+          <div class="tagcategory_items">
+            <div class="field">
+              <%= f.check_box :tag_easy_to_go_true, {}, true, false %>
+              <%= f.label :tag_easy_to_go_true, '都心へ好アクセス' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_small_city_true, {}, true, false %>
+              <%= f.label :tag_small_city_true, 'コンパクトシティ' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_car_true, {}, true, false %>
+              <%= f.label :tag_car_true, '車移動' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_train_true, {}, true, false %>
+              <%= f.label :tag_train_true, '電車移動' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag_category">
+          <p>お財布事情</p>
+          <div class="tagcategory_items">
+            <div class="field">
+              <%= f.check_box :tag_low_price_true, {}, true, false %>
+              <%= f.label :tag_low_price_true, '物価が安い' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_moving_support_true, {}, true, false %>
+              <%= f.label :tag_moving_support_true, '移住支援' %>
+            </div>
+          </div>
+        </div>
+        <div class="tag_category">
+          <p>職関連</p>
+          <div class="tagcategory_items">
+            <div class="field">
+              <%= f.check_box :tag_entrepreneur_support_true, {}, true, false %>
+              <%= f.label :tag_entrepreneur_support_true, '起業支援' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_job_change_support_true, {}, true, false %>
+              <%= f.label :tag_job_change_support_true, '転職支援' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag_category">
+          <p>ファミリー支援</p>
+          <div class="tagcategory_items">
+            <div class="field">
+              <%= f.check_box :tag_child_care_support_true, {}, true, false %>
+              <%= f.label :tag_child_care_support_true, '子育て支援' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_park_true, {}, true, false %>
+              <%= f.label :tag_park_true, '公園' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_education_true, {}, true, false %>
+              <%= f.label :tag_education_true, '教育' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="tag_category">
+          <p>文化</p>
+          <div class="tagcategory_items">
+            <div class="field">
+              <%= f.check_box :tag_food_true, {}, true, false %>
+              <%= f.label :tag_food_true, '食' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_architecture_true, {}, true, false %>
+              <%= f.label :tag_architecture_true, '建築・街並み' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_history_true, {}, true, false %>
+              <%= f.label :tag_history_true, '歴史' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_event_true, {}, true, false %>
+              <%= f.label :tag_event_true, 'イベント・祭' %>
+            </div>
+
+            <div class="field">
+              <%= f.check_box :tag_tourism_true, {}, true, false %>
+              <%= f.label :tag_tourism_true, '観光' %>
+            </div>
+          </div>
+        </div>
     </div>
-
-    <div style="display: flex;">
-      <div class="field">
-        <%= f.label :tag_sea %><br />
-        <%= f.check_box :tag_sea_true, {}, true, false %>
+      <div class="actions txt-center">
+      <%= f.submit '検索する', class: "green_btn" %>
       </div>
-
-      <div class="field">
-        <%= f.label :tag_mountain %><br />
-        <%= f.check_box :tag_mountain_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_river %><br />
-        <%= f.check_box :tag_river_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_field %><br />
-        <%= f.check_box :tag_field_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_hotspring %><br />
-        <%= f.check_box :tag_hotspring_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_north %><br />
-        <%= f.check_box :tag_north_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_south %><br />
-        <%= f.check_box :tag_south_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_easy_to_go %><br />
-        <%= f.check_box :tag_easy_to_go_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_small_city %><br />
-        <%= f.check_box :tag_small_city_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_car %><br />
-        <%= f.check_box :tag_car_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_train %><br />
-        <%= f.check_box :tag_train_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_low_price %><br />
-        <%= f.check_box :tag_low_price_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_moving_support %><br />
-        <%= f.check_box :tag_moving_support_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_entrepreneur_support %><br />
-        <%= f.check_box :tag_entrepreneur_support_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_child_care_support %><br />
-        <%= f.check_box :tag_child_care_support_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_job_change_support %><br />
-        <%= f.check_box :tag_job_change_support_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_park %><br />
-        <%= f.check_box :tag_park_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_education %><br />
-        <%= f.check_box :tag_education_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_food %><br />
-        <%= f.check_box :tag_food_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_architecture %><br />
-        <%= f.check_box :tag_architecture_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_history %><br />
-        <%= f.check_box :tag_history_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_event %><br />
-        <%= f.check_box :tag_event_true, {}, true, false %>
-      </div>
-
-      <div class="field">
-        <%= f.label :tag_tourism %><br />
-        <%= f.check_box :tag_tourism_true, {}, true, false %>
-      </div>
+    <% end %>
   </div>
-    <div class="actions">
-    <%= f.submit '検索', class: "btn btn-primary" %>
-    </div>
-  <% end %>
 
   <section>
   <table>
