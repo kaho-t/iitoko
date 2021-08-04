@@ -29,17 +29,9 @@ $key-blue: #86c1e3;
 $key-ocean: #0048AE;
 
 /* universal */
-html {
-  @include pc {
-    height: 100%;
-  }
-}
 
 body {
-  @include pc {
-  height: 100%;
-  }
-  background-image: image-url('bgimage.png');
+  background: no-repeat image-url('bgimage.png');
   background-size: cover;
   font-family: 'Noto Sans JP', sans-serif;
   color: $font-green;
@@ -117,7 +109,7 @@ textarea {
     @include pc {
     align-self: stretch;
     margin: 0;
-    padding: 0;
+    padding: 0 0 60%;
     display: block;
     }
     display: none;
@@ -204,13 +196,15 @@ h1.with_info {
 // ================
 
 header {
-  background: rgba(255, 255, 224, 0.3)
+  background: rgba(255, 255, 224, 0.3) no-repeat image-url('header_img.png') center center;
+  background-size: cover;
 }
 
 .logonnav {
   display: flex;
   display:-webkit-box;
   display:-ms-flexbox;
+  align-items: center;
 }
 
 #logo {
@@ -235,7 +229,7 @@ nav {
 
 .navItem {
   color: $key-green;
-  padding: 2px 10px !important;
+  padding: 2px 8px !important;
   margin: 5px;
   font-size: 1.1em;
   font-weight: 500;
@@ -247,6 +241,10 @@ nav {
 }
 .navText {
   margin: 12px auto;
+
+  @include sp {
+    font-size: 1.5em;
+  }
 }
 
 .navButton {
@@ -287,6 +285,12 @@ nav {
   text-align: center;
   border-radius: 50%;
   color:white;
+  }
+}
+
+.menu_text {
+  @include sp {
+    display: none;
   }
 }
 

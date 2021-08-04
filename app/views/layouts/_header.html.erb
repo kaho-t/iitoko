@@ -8,23 +8,23 @@
         <% unless @title_for_local %>
           <% unless local_signed_in? %>
             <li><%= link_to search_path, class: 'navItem navText' do %>
-              <i class="fas fa-search"></i> キーワードから探す</a>
+              <i class="fas fa-search"></i> <span class="menu_text">キーワードから探す</span></a>
               <% end %>
             </li>
             <li><%= link_to prefectures_path, class: 'navItem navText' do %>
-              <i class="fas fa-map-marker-alt"></i> 都道府県から探す
+              <i class="fas fa-map-marker-alt"></i> <span class="menu_text">都道府県から探す</span>
               <% end %>
             </li>
           <% end %>
           <% if user_signed_in? %>
             <li>
               <%= link_to timeline_path, class: 'navItem navText' do %>
-                <i class="fas fa-stream"></i> タイムライン
+                <i class="fas fa-stream"></i> <span class="menu_text">タイムライン</span>
               <% end %>
             </li>
             <li>
               <%= link_to talkrooms_path, class: 'navItem navText' do %>
-                <i class="far fa-comment-alt"></i> メッセージ
+                <i class="far fa-comment-alt"></i> <span class="menu_text">メッセージ</span>
               <% end %>
             </li>
             <li> 
@@ -53,17 +53,17 @@
           <% elsif local_signed_in? %>
             <li>
               <%= link_to new_article_path, class: 'navItem navText' do %>
-                <i class="fas fa-pen"></i> 記事作成
+                <i class="fas fa-pen"></i> <span class="menu_text">記事作成</span>
               <% end %>
             </li>
             <li>
               <%= link_to local_articles_path(current_local), class: 'navItem navText' do %>
-                <i class="fas fa-stream"></i> 記事一覧
+                <i class="fas fa-stream"></i> <span class="menu_text">記事一覧</span>
               <% end %>
             </li>
             <li>
               <%= link_to talkrooms_path, class: 'navItem navText' do %>
-                <i class="far fa-comment-alt"></i> メッセージ
+                <i class="far fa-comment-alt"></i> <span class="menu_text">メッセージ</span>
               <% end %>
             </li>
             <li>
