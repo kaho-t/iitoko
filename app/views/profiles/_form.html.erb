@@ -4,19 +4,10 @@
 
     <div class="flex_form_row">
       <div class="flex_label">
-         <%= f.label :catchphrase, "町のキャッチコピー" %>
-        </div>
-        <div class="flex_form">
-         <%= f.text_field :catchphrase, placeholder: "あなたの町のキャッチコピーを50文字以内で教えてください" %>
-      </div>
-    </div>
-
-    <div class="flex_form_row">
-      <div class="flex_label">
         <%= f.label :population, "人口" %>
       </div>
       <div class="flex_form">
-        <%= f.number_field :population, step: '1', autofocus: true, autocomplete: "population", class: 'width80', placeholder: '1000' %>
+        <%= f.number_field :population, step: '1', autofocus: true, autocomplete: "population", class: 'width80', placeholder: '1000000' %>
         <span class="unit">人</span>
       </div>
     </div>
@@ -26,7 +17,7 @@
         <%= f.label :temperature, "平均気温" %>
       </div>
       <div class="flex_form">
-        <%= f.number_field :temperature, step: '0.1', autofocus: true, autocomplete: "temperature", class: 'width80' %>
+        <%= f.number_field :temperature, step: '0.1', autofocus: true, autocomplete: "temperature", class: 'width80', placeholder: '15' %>
         <span class="unit">&#x2103;</span>
       </div>
     </div>
@@ -36,7 +27,7 @@
         <%= f.label :moved_in, "転入数（前年）" %>
       </div>
       <div class="flex_form">
-        <%= f.number_field :moved_in, autofocus: true, autocomplete: "moved_in", class: 'width80' %>
+        <%= f.number_field :moved_in, autofocus: true, autocomplete: "moved_in", class: 'width80', placeholder: '00' %>
         <span class="unit">人</span>
       </div>
     </div>
@@ -46,17 +37,17 @@
         <%= f.label :waiting_children, "待機児童数" %>
       </div>
       <div class="flex_form">
-        <%= f.number_field :waiting_children, autofocus: true, autocomplete: "waiting_children", class: 'width80' %>
+        <%= f.number_field :waiting_children, autofocus: true, autocomplete: "waiting_children", class: 'width80', placeholder: '00' %>
         <span class="unit">人</span>
       </div>
     </div>
 
     <div class="flex_form_row">
       <div class="flex_label">
-        <%= f.label :land_price, "地価" %>
+        <%= f.label :land_price, "平均家賃" %>
       </div>
       <div class="flex_form">
-        <%= f.number_field :land_price, autofocus: true, autocomplete: "land_price", class: 'width80' %>
+        <%= f.number_field :land_price, autofocus: true, autocomplete: "land_price", class: 'width80', placeholder: '50000' %>
         <span class="unit">円</span>
       </div>
     </div>
@@ -66,7 +57,7 @@
         <%= f.label :income, "平均所得" %>
       </div>
       <div class="flex_form">
-        <%= f.number_field :income, autofocus: true, autocomplete: "income", class: 'width80' %>
+        <%= f.number_field :income, autofocus: true, autocomplete: "income", class: 'width80', placeholder: '400000' %>
         <span class="unit">円</span>
       </div>
     </div>
@@ -76,8 +67,18 @@
         <%= f.label :crime_rate, "犯罪率" %>
       </div>
       <div class="flex_form">
-        <%= f.number_field :crime_rate, step: '0.1', autofocus: true, autocomplete: "crime_rate", class:"width80" %>
+        <%= f.number_field :crime_rate, step: '0.1', autofocus: true, autocomplete: "crime_rate", class:"width80", placeholder: '00' %>
         <span class="unit">&#xFF05;</span>
+      </div>
+    </div>
+
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :catchphrase, "町のキャッチコピー" %>
+        </div>
+        <div class="flex_form">
+        <%= f.text_field :catchphrase, placeholder: "ex.自然が豊かでイイトコです！" %>
+        <p class="help_note">あなたの町のキャッチコピーを50文字以内で教えてください</p>
       </div>
     </div>
 
@@ -86,7 +87,8 @@
         <%= f.label :introduction, "町の紹介文" %>
       </div>
       <div class="flex_form">
-        <%= f.text_area :introduction, placeholder: "あなたの町を255文字以内でアピールしましょう" %>
+        <%= f.text_area :introduction, placeholder: "ex.あんなとこやこんなとこなどイイトコろがたくさんあります！ぜひ一度いらしてください！" %>
+        <p class="help_note">あなたの町を255文字以内でアピールしましょう</p>
       </div>
     </div>
 

@@ -2,7 +2,13 @@ class UserProfilesController < ApplicationController
   skip_before_action :authenticate_local!, if: :user_signed_in?
   before_action :correct_user, only: %i[edit update]
   def new
+    unless current_user.user_profile
     @user_profile = UserProfile.new
+    else
+      flash[:alert] = 'すでにプロフィール登録済みです'
+      redirect_to edit_user_profile_path(current_user.user_profile.id)
+    end
+
   end
 
   def create

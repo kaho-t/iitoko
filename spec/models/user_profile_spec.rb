@@ -19,10 +19,10 @@ RSpec.describe UserProfile, type: :model do
   it 'is invalid with invalid prefecture_code' do
     user_profile.prefecture_code = 48
     user_profile.valid?
-    expect(user_profile.errors[:prefecture_code]).to include('は47以下の値にしてください')
+    expect(user_profile.errors[:prefecture_code]).to include("は一覧にありません")
     user_profile.prefecture_code = 0
     user_profile.valid?
-    expect(user_profile.errors[:prefecture_code]).to include('は1以上の値にしてください')
+    expect(user_profile.errors[:prefecture_code]).to include("は一覧にありません")
   end
 
   it 'is invalid with invalid age' do

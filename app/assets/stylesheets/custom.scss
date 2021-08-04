@@ -584,6 +584,14 @@ input {
   }
 }
 
+.required_item {
+  &:after {
+    color: red;
+    content: "*";
+
+  }
+}
+
 // ================
 // FLASH
 // ================
@@ -605,7 +613,7 @@ input {
     background: linear-gradient(to bottom right, rgba(98, 204, 80, 0.8), rgba(74, 153, 60, 0.8));
   }
 
-  &.danger {
+  &.alert {
     background: -moz-linear-gradient( top left rgba(255, 176, 60, 0.8), rgba(255, 112, 141, 0.8));
     background: -webkit-linear-gradient(top left rgba(255, 176, 60, 0.8), rgba(255, 112, 141, 0.8));
     background: linear-gradient(to bottom right, rgba(255, 176, 60, 0.8), rgba(255, 112, 141, 0.8));
@@ -614,7 +622,10 @@ input {
     padding: 1em;
   }
 
-  .fa-check-circle {
+  .fa-check-circle{
+    font-size: 5em;
+  }
+  .fa-exclamation-triangle {
     font-size: 5em;
   }
 }

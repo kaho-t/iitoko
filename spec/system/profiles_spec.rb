@@ -16,7 +16,7 @@ RSpec.describe 'Profiles', type: :system do
       fill_in '平均気温', with: profile.temperature
       fill_in '転入数（前年）', with: profile.moved_in
       fill_in '待機児童数', with: profile.waiting_children
-      fill_in '地価', with: profile.land_price
+      fill_in '平均家賃', with: profile.land_price
       fill_in '平均所得', with: profile.income
       fill_in '犯罪率', with: profile.crime_rate
       fill_in '町の紹介文', with: profile.introduction
@@ -34,7 +34,7 @@ RSpec.describe 'Profiles', type: :system do
       fill_in '平均気温', with: profile.temperature
       fill_in '転入数（前年）', with: profile.moved_in
       fill_in '待機児童数', with: profile.waiting_children
-      fill_in '地価', with: profile.land_price
+      fill_in '平均家賃', with: profile.land_price
       fill_in '平均所得', with: profile.income
       fill_in '犯罪率', with: profile.crime_rate
       fill_in '町の紹介文', with: profile.introduction
@@ -62,7 +62,7 @@ RSpec.describe 'Profiles', type: :system do
       fill_in '平均気温', with: 1000
       fill_in '転入数（前年）', with: -1
       fill_in '待機児童数', with: -1
-      fill_in '地価', with: -1
+      fill_in '平均家賃', with: -1
       fill_in '平均所得', with: -1
       fill_in '犯罪率', with: -1
       fill_in '町の紹介文', with: 'a' * 1000
@@ -84,7 +84,7 @@ RSpec.describe 'Profiles', type: :system do
       fill_in '平均気温', with: 15
       fill_in '転入数（前年）', with: 100
       fill_in '待機児童数', with: 50
-      fill_in '地価', with: 2_000_000
+      fill_in '平均家賃', with: 2_000_000
       fill_in '平均所得', with: 5_000_000
       fill_in '犯罪率', with: 0.9
       fill_in '町の紹介文', with: '北区はよりいい街に！'

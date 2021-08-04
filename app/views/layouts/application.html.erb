@@ -22,10 +22,15 @@
     <%= render 'layouts/header' unless defined? @no_header %>
     <%= render 'layouts/title_area' if defined? @title_area %>
     <%= render 'layouts/local_title_area' if defined? @local_title_area %>
-    <% if notice || alert %>
+    <% if notice %>
     <div class="flash notice">
       <i class="far fa-check-circle"></i>
-      <p><%= notice if notice %><%= alert if alert %></p>
+      <p><%= notice if notice %></p>
+    </div>
+    <% elsif alert %>
+    <div class="flash alert">
+    <i class="fas fa-exclamation-triangle"></i>
+      <p><%= alert if alert %></p>
     </div>
     <% end %>
     <%= yield %>

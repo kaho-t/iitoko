@@ -1,10 +1,7 @@
 <section class="donnatoko">
   <div class="container">
-    <h1>プロフィール設定</h1>
-    <div class="flex_wrap">
-      <p>プロフィールを設定しましょう</p>
-      <p class="skip_btn"><%= link_to 'スキップして早速使う', root_path, class: 'repink_btn' %></p>
-    </div>
-    <%= render 'form' %>
+    <h1 class="with_info top60">プロフィール設定</h1>
+    <p class="page_info btm10per">プロフィールを設定しましょう</p>
+    <%= render 'form', withcomment: true %>
   <div>
 </section>

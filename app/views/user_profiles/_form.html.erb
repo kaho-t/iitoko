@@ -5,7 +5,7 @@
 
     <div class="flex_form_row">
       <div class="flex_label">
-        <%= f.label :prefecture_code, '居住地' %>
+        <%= f.label :prefecture_code, '居住地', class: 'required_item' %>
       </div>
       <div class="flex_form">
         <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name,
@@ -14,10 +14,35 @@
     </div>
     <div class="flex_form_row">
       <div class="flex_label">
-        <%= f.label :age, '年齢' %>
+        <%= f.label :age, '年齢', class: 'required_item' %>
       </div>
       <div class="flex_form">
-        <%= f.select :age, [[10],[20],[30],[40],[50],[60],[70],[80],[90]], {prompt: "年代を選択"}, { autofocus: 'true', class: 'width80' } %>&nbsp;代
+        <%= f.select :age, [[10],[20],[30],[40],[50],[60],[70],[80],[90]], {prompt: "年代を選択"}, { autofocus: 'true'} %>&nbsp;代
+      </div>
+    </div>
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :job, '職業', class: 'required_item' %>
+      </div>
+      <div class="flex_form">
+        <%= f.select :job, [['経営者・役員'], ['会社員'], ['契約社員・派遣社員'], ['パート・アルバイト'], ['公務員（教職員除く）'], ['教職員'], ['医療関係者'], ['自営業・自由業'], ['専業主夫・主婦'], ['士業'], ['大学生・大学院生'], ['無職'], ['定年退職'], ['転職活動中'], ['その他']], {prompt: "選択"}, { autofocus: 'true'} %>
+      </div>
+    </div>
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :family_structure, '家族構成', class: 'required_item' %>
+      </div>
+      <div class="flex_form">
+        <%= f.select :family_structure, [['1人'],['2人'],['3人'],['4人'],['5人'],['6人'],['7人'],['8人'],['9人'],['10人以上']], prompt: "人数を選択" %>
+      </div>
+    </div>
+
+    <div class="flex_form_row">
+      <div class="flex_label">
+        <%= f.label :timing, '移住を検討している時期', class: 'required_item' %>
+      </div>
+      <div class="flex_form">
+        <%= f.select :timing, [['条件があえばすぐにでも'],['3年以内'],['10年以内'],['定年後'],['きっかけがあれば'],['決まっていないがいつかは'],['未定']], prompt: "選択" %>
       </div>
     </div>
     <div class="flex_form_row">
@@ -31,32 +56,6 @@
     </div>
     <div class="flex_form_row">
       <div class="flex_label">
-        <%= f.label :job, '職業' %>
-      </div>
-      <div class="flex_form">
-        <%= f.text_field :job %>
-        <p class="help_note">50文字以内で入力してください</p>
-      </div>
-    </div>
-    <div class="flex_form_row">
-      <div class="flex_label">
-        <%= f.label :family_structure, '家族構成' %>
-      </div>
-      <div class="flex_form">
-        <%= f.select :family_structure, [['1人'],['2人'],['3人'],['4人'],['5人'],['6人'],['7人'],['8人'],['9人'],['10人以上']], prompt: "世帯の人数を選択" %>
-      </div>
-    </div>
-
-    <div class="flex_form_row">
-      <div class="flex_label">
-        <%= f.label :timing, '移住を検討している時期' %>
-      </div>
-      <div class="flex_form">
-        <%= f.select :timing, [['条件があえばすぐにでも'],['3年以内'],['10年以内'],['定年後'],['きっかけがあれば'],['決まっていないがいつかは'],['未定']], prompt: "移住を検討している時期を選択" %>
-      </div>
-    </div>
-    <div class="flex_form_row">
-      <div class="flex_label">
         <%= f.label :content, '移住を検討したきっかけ' %>
       </div>
       <div class="flex_form">
@@ -64,7 +63,11 @@
         <p class="help_note">255文字以内で入力してください</p>
       </div>
     </div>
-
-    <%= f.submit '確定する', class: 'pink_btn without_txt' %>
+    <% if local_assigns[:withcomment] %>
+      <p class="notenext">&#xFF3C; お疲れ様でした！ &#xFF0F;</p>
+      <%= f.submit 'プロフィールを確定する', class: 'pink_btn' %>
+    <% else%>
+      <%= f.submit 'プロフィールを確定する', class: 'pink_btn without_txt' %>
+    <% end %>
   <% end %>
 </div>

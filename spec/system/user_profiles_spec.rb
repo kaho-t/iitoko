@@ -13,7 +13,7 @@ RSpec.describe 'UserProfiles', type: :system do
         select '東京都', from: '居住地'
         select '30', from: '年齢'
         fill_in '興味のある地域・検討中の地域', with: '沖縄県'
-        fill_in '職業', with: '会社員'
+        select '会社員', from: '職業'
         select '3人', from: '家族構成'
         select '3年以内', from: '移住を検討している時期'
         fill_in '移住を検討したきっかけ', with: 'リモートワークが始まったため'
@@ -36,17 +36,7 @@ RSpec.describe 'UserProfiles', type: :system do
         click_button '確定する'
         expect(page).to have_current_path user_profiles_path
       end.to change(UserProfile, :count).by(0)
-      expect(page).to have_content '5 箇所のエラーがあります。'
-    end
-    it 'skips creating profile' do
-      sign_in user
-      visit new_user_profile_path
-      expect do
-        click_link 'スキップして早速使う'
-        expect(page).to have_current_path home_path
-      end.to change(UserProfile, :count).by(0)
-      visit user_path(user)
-      expect(page).to have_content 'プロフィールを登録しましょう'
+      expect(page).to have_content '箇所のエラーがあります。'
     end
   end
 
