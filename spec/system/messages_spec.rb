@@ -37,4 +37,26 @@ RSpec.describe 'Messages', js: true, type: :system do
       expect(page).to have_no_content message.content
     end.to change(Message, :count).by(-1)
   end
+  it 'creates a message with attachment' do
+    talkroom.save
+    sign_in user
+    visit talkroom_messages_path(talkroom)
+    expect do
+      select '質問がある', from: 'message[category]'
+      fill_in with: 'ファイルを添付します'
+      page.attach_file("#{Rails.root}/spec/files/attachment.jpeg") do
+        page.find('.fa-image').click
+      end
+      page.attach_file("#{Rails.root}/spec/files/sumple.pdf") do
+        page.find('.fa-paperclip').click
+      end
+      expect(page).to have_content '添付画像'
+      expect(page).to have_content '添付ファイル'
+      click_button '送信する'
+    end.to change(Message, :count).by(1)
+    expect(page).to have_css '.message_file_area'
+    expect(page).to have_content 'ファイルを添付します'
+    expect(page).to have_content '添付ファイル'
+  end
+
 end

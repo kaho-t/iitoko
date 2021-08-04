@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   def index
     @message = Message.new
     @talkroom = Talkroom.find(params[:talkroom_id])
-    @messages = Message.where(talkroom_id: params[:talkroom_id]).order(created_at: :asc)
+    @messages = Message.where(talkroom_id: params[:talkroom_id]).includes([:pdf_attachment],[:photo_attachment]).order(created_at: :asc)
     @user = User.find_by(id: @talkroom.user_id)
     @local = Local.find_by(id: @talkroom.local_id)
   end
@@ -40,17 +40,23 @@ class MessagesController < ApplicationController
     # @message.sender_id = current_account.id
     # @message.sender_type = boolean
     @message = current_account.messages.build(message_params)
+    @message.photo.attach(params[:message][:photo])
+    @message.pdf.attach(params[:message][:pdf])
     if @message.save
       @message.create_notification_msg(current_account, @message)
       flash[:notice] = 'メッセージを送信しました'
       redirect_to talkroom_messages_path(@talkroom)
     else
-      flash[:danger] = 'メッセージの送信に失敗しました'
+      flash[:notice] = 'メッセージの送信に失敗しました'
+      @user = User.find_by(id: @talkroom.user_id)
+      @local = Local.find_by(id: @talkroom.local_id)
+      @messages = Message.where(talkroom_id: params[:talkroom_id]).order(created_at: :asc)
+      render 'index'
     end
   end
 
   def message_params
-    params.require(:message).permit(:category, :content, :talkroom_id)
+    params.require(:message).permit(:category, :content, :talkroom_id, :photo, :pdf)
   end
 
   def correct_account

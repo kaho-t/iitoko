@@ -1,3 +1,6 @@
+document.addEventListener("turbolinks:before-cache", function(){
+  $('.slider.slick-initialized').slick('unslick');
+},
 document.addEventListener("turbolinks:load"
 , function() {
   $('.slider').not('.slick-initialized').slick({
@@ -86,5 +89,4 @@ document.addEventListener("turbolinks:load"
       // instead of a settings object
     ]
   });
-
-});
+}));

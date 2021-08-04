@@ -168,3 +168,16 @@ select.category {
   border-radius: 4px;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+
+.message_file_area {
+  &.txt-right {
+  margin: 1em 0 1em auto;
+  }
+  &.txt-left {
+    margin: 1em auto 1em 0;
+  }
+  width: 60%;
+  img {
+    width: 100%;
+  }
+}
