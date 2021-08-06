@@ -51,5 +51,6 @@ test:
 production:
   <<: *default
   database: iitoko_production
-  username: <%= ENV['IITOKO_DATABASE_USERNAME'] %>
-  password: <%= ENV['IITOKO_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= Rails.application.credentials.db[:password] %>
+  host: <%= Rails.application.credentials.db[:hostname] %>
