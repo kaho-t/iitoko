@@ -53,6 +53,12 @@ production:
   adapter: mysql2
   encoding: utf8
   database: iitoko_production
+<<<<<<< HEAD
   username: <%= ENV['IITOKO_DATABASE_USERNAME'] %>
   password: <%= ENV['IITOKO_DATABASE_PASSWORD'] %>
   host: <%= ENV['IITOKO_DATABASE_HOST'] %>
+=======
+  username: <%= IITOKO_DATABASE_USERNAME %>
+  password: <%= IITOKO_DATABASE_PASSWORD %>
+  host: <%= IITOKO_DATABASE_HOST %>
+>>>>>>> 9bcf1532d19a6f49cc4a5c6c584b5c6694f86fe2
