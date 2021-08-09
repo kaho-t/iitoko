@@ -1,0 +1,15 @@
+current directory: /Users/kaho/Documents/app/iitoko/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.3/ext/bootsnap
+/opt/homebrew/Cellar/rbenv/1.1.2/versions/2.7.2/bin/ruby -I /opt/homebrew/Cellar/rbenv/1.1.2/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210809-80048-1har5z8.rb extconf.rb
+creating Makefile
+
+current directory: /Users/kaho/Documents/app/iitoko/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.3/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/kaho/Documents/app/iitoko/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.3/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/kaho/Documents/app/iitoko/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.3/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20210809-80048-1yejypq/bootsnap
