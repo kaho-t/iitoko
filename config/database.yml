@@ -50,6 +50,9 @@ test:
 #
 production:
   <<: *default
+  adapter: mysql2
+  encoding: utf8
   database: iitoko_production
   username: <%= ENV['IITOKO_DATABASE_USERNAME'] %>
   password: <%= ENV['IITOKO_DATABASE_PASSWORD'] %>
+  host: <%= ENV['IITOKO_DATABASE_HOST'] %>
