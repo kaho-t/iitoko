@@ -51,6 +51,6 @@ test:
 production:
   <<: *default
   database: iitoko_production
-  username: <%= IITOKO_DATABASE_USERNAME %>
-  password: <%= IITOKO_DATABASE_PASSWORD %>
-  host: <%= IITOKO_DATABASE_HOST %>
+  username: <%= ENV['IITOKO_DATABASE_USERNAME'] %>
+  password: <%= ENV['IITOKO_DATABASE_PASSWORD'] %>
+  host: <%= ENV['IITOKO_DATABASE_HOST'] %>
