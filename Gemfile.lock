@@ -81,6 +81,7 @@ GEM
     autoprefixer-rails (10.2.4.0)
       execjs
     bcrypt (3.1.16)
+    bcrypt_pbkdf (1.1.0)
     bindex (0.8.1)
     bootsnap (1.7.3)
       msgpack (~> 1.0)
@@ -140,6 +141,7 @@ GEM
     crass (1.0.6)
     database_rewinder (0.9.4)
     diff-lcs (1.4.4)
+    ed25519 (1.2.4)
     email_spec (2.2.0)
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
@@ -427,6 +429,7 @@ DEPENDENCIES
   actiontext
   active_storage_validations
   bcrypt (~> 3.1.7)
+  bcrypt_pbkdf
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.0.0.beta1)
   bootstrap-sass (= 3.4.1)
@@ -442,6 +445,7 @@ DEPENDENCIES
   carrierwave
   database_rewinder
   devise!
+  ed25519
   email_spec
   factory_bot_rails
   faker

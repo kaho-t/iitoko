@@ -4,7 +4,7 @@ lock "~> 3.16.0"
 set :application, "iitoko"
 set :repo_url, "git@github.com:kaho-t/iitoko.git"
 set :rbenv_ruby, File.read('.ruby-version').strip
-set :branch, ENV['BRANCH'] || "master"
+set :branch, ENV['BRANCH'] || "main"
 
 # Nginxの設定ファイル名と置き場所を修正
 set :nginx_config_name, "#{fetch(:application)}.conf"
@@ -17,7 +17,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "node_module
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
+set :deploy_to, "/var/www/iitoko"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh

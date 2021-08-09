@@ -62,6 +62,8 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rspec'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
 end
 
 group :development do

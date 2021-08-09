@@ -1,7 +1,7 @@
 server "18.178.115.143", user: "kaho", roles: %w{app db web}
 
 set :ssh_options, {
-  keys: %w(~/.ssh/iitoko_key.pem),
+  keys: %w(~/.ssh/iitoko_key_rsa),
   forward_agent: true,
   auth_methods: %w(publickey),
 }
