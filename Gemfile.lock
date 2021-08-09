@@ -209,6 +209,7 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.0.3)
+    mini_portile2 (2.5.3)
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
@@ -219,6 +220,9 @@ GEM
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
     nio4r (2.5.7)
+    nokogiri (1.11.2)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nokogiri (1.11.2-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.11.2-x86_64-linux)
@@ -392,7 +396,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
-    unicorn (6.0.0)
+    unicorn (5.4.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     uniform_notifier (1.14.2)
@@ -421,6 +425,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-20
+  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -478,13 +483,13 @@ DEPENDENCIES
   spring-commands-rspec
   turbolinks (~> 5)
   tzinfo-data
-  unicorn
+  unicorn (= 5.4.1)
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 3.0.0p0
+   ruby 2.7.2p137
 
 BUNDLED WITH
    2.2.15

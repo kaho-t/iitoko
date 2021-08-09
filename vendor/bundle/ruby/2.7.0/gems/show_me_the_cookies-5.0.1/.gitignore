@@ -1,0 +1,10 @@
+pkg/*
+*.gem
+.bundle
+
+capybara*html
+bin/
+.rspec
+.rbenv-version
+.idea
+.ruby-version
