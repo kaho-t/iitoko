@@ -3,6 +3,5 @@ class RenameTalkingLocalIdColumnToTalkrooms < ActiveRecord::Migration[6.1]
     add_index :talkrooms, [:user_id, :local_id], unique: true
 
     remove_columns :talkrooms, :talking_user_id, :talking_local_id
-    remove_index :talkrooms, [:talking_user_id, :talking_local_id]
   end
 end
