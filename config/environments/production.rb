@@ -83,7 +83,6 @@ Rails.application.configure do
   :password => ENV['IITOKO_MAIL_ADDRESS_PASSWORD'], #gmailパスワード
   :authentication => 'plain',
   :openssl_verify_mode => 'none',
-  :enable_starttls_auto => true
 }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
