@@ -25,7 +25,7 @@ $key-coral: #E38692;
 $key-blue: #86c1e3;
 
 section.user_profile_top {
-  background: #fff url('article_default.png') no-repeat center center;
+  background: #fff image-url('article_default.png') no-repeat center center;
   background-size: cover;
   padding: 10%;
   border-radius: 10px 10px 0 0;
