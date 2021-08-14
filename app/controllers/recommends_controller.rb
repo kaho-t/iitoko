@@ -19,6 +19,6 @@ class RecommendsController < ApplicationController
       end
     end
 
-    @recommends.sample(10)
+    @recommends = @recommends.sample(10)
   end
 end
