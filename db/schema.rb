@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2021_08_04_045250) do
 
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "talkroom_id", null: false
+    t.boolean "is_user"
     t.text "content"
     t.string "category"
     t.datetime "created_at", precision: 6, null: false
@@ -260,7 +261,6 @@ ActiveRecord::Schema.define(version: 2021_08_04_045250) do
   add_foreign_key "articles", "locals"
   add_foreign_key "bookmarks", "locals"
   add_foreign_key "bookmarks", "users"
-  add_foreign_key "messages", "talkrooms"
   add_foreign_key "notifications", "articles"
   add_foreign_key "notifications", "bookmarks"
   add_foreign_key "notifications", "footprints"
