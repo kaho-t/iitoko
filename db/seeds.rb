@@ -1,26 +1,16 @@
 User.create!(name: "Test Taro",
             email: "test@example.com",
             password: "Password123",
-            password_confirmation: "Password123")
-
-20.times do |n|
-  name = Faker::JapaneseMedia::OnePiece.character
-  email = "example-#{n+1}@example.com"
-  password = "Password123"
-  User.create!(name:  name,
-               email: email,
-               password:              password,
-               password_confirmation: password)
-end
-
+            password_confirmation: "Password123",
+            confirmed_at: Time.now)
 
 Local.create!(name: "SAMPLE市",
             email: "test@example.com",
             password: "Password123",
-            password_confirmation: "Password123")
+            password_confirmation: "Password123",
+            confirmed_at: Time.now)
 
-
-99.times do |n|
+50.times do |n|
   p_code = (1..47).to_a
   localname = "SAMPLE#{n+1}市"
   email = "example-#{n+1}@example.com"
@@ -29,7 +19,8 @@ Local.create!(name: "SAMPLE市",
                 name: localname,
                 email: email,
                 password: password,
-                password_confirmation: password)
+                password_confirmation: password,
+                confirmed_at: Time.now)
   local = Local.last
   score = (0..5).to_a
   local.create_score!(nature: score.sample, accessibility: score.sample,
@@ -45,7 +36,8 @@ end
                 name: localname,
                 email: email,
                 password: password,
-                password_confirmation: password)
+                password_confirmation: password,
+                confirmed_at: Time.now)
   local = Local.last
   score = (0..5).to_a
   local.create_score!(nature: score.sample, accessibility: score.sample,
