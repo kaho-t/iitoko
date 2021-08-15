@@ -1,27 +1,30 @@
-User.create!(name: "Test Taro",
+user = User.new(name: "Test Taro",
             email: "test@example.com",
             password: "Password123",
-            password_confirmation: "Password123",
-            confirmed_at: Time.now)
+            password_confirmation: "Password123")
+user.skip_confirmation!
+user.save!
 
-Local.create!(name: "SAMPLE市",
+l = Local.new(prefecture_code: 1,
+            name: "SAMPLE市",
             email: "test@example.com",
             password: "Password123",
-            password_confirmation: "Password123",
-            confirmed_at: Time.now)
+            password_confirmation: "Password123")
+l.skip_confirmation!
+l.save!
 
 50.times do |n|
   p_code = (1..47).to_a
   localname = "SAMPLE#{n+1}市"
   email = "example-#{n+1}@example.com"
   password = "Password123"
-  Local.create!(prefecture_code: p_code.sample,
+  local = Local.new(prefecture_code: p_code.sample,
                 name: localname,
                 email: email,
                 password: password,
-                password_confirmation: password,
-                confirmed_at: Time.now)
-  local = Local.last
+                password_confirmation: password)
+  local.skip_confirmation!
+  local.save!
   score = (0..5).to_a
   local.create_score!(nature: score.sample, accessibility: score.sample,
                       budget: score.sample, job_support: score.sample,
@@ -32,13 +35,13 @@ end
   localname = "SAMPLE2-#{n+1}市"
   email = "example2-#{n+1}@example.com"
   password = "Password123"
-  Local.create!(prefecture_code: 2,
+  local = Local.new(prefecture_code: 2,
                 name: localname,
                 email: email,
                 password: password,
-                password_confirmation: password,
-                confirmed_at: Time.now)
-  local = Local.last
+                password_confirmation: password)
+  local.skip_confirmation!
+  local.save!
   score = (0..5).to_a
   local.create_score!(nature: score.sample, accessibility: score.sample,
                       budget: score.sample, job_support: score.sample,

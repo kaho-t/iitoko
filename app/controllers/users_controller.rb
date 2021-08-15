@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def bookmarks
     @user = User.find_by(id: params[:id])
-    @bookmarked_locals = @user.locals.includes([:profile]).page(params[:page])
+    @bookmarked_locals = @user.locals.includes([:profile]).page(params[:page]).per(10)
   end
 
   # def timeline
@@ -25,6 +25,6 @@ class UsersController < ApplicationController
   # end
 
   def timeline
-    @articles = current_user.feed.page(params[:page])
+    @articles = current_user.feed.page(params[:page]).per(10)
   end
 end
