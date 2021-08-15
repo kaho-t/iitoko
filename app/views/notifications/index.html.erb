@@ -5,7 +5,9 @@
   <div class="notice_list">
     <%= render @notifications %>
   </div>
-  <%= paginate @notifications %>
+  <div class="paginate_area">
+    <%= paginate @notifications %>
+  </div>
 <% else %>
   <p class="page_info">通知はありません</p>
 <% end %>

@@ -8,6 +8,8 @@
     <div class="articles">
       <%= render @articles, local: @local, full: true %>
     </div>
+    <div class="paginate_area">
     <%= paginate @articles %>
+    </div>
   <% end %>
 </div>

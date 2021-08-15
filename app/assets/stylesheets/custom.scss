@@ -1209,3 +1209,42 @@ img.header_img {
 .modals .close:hover {
 	opacity: 1;
 }
+
+// ================
+//    ページネーション
+// ================
+
+.paginate_area {
+  text-align: center;
+}
+.pagination {
+  font-size: 1.2em;
+}
+
+.pagination>li>a {
+  border: none;     /*枠線をなくす*/
+  color: #fff;  
+  background-color: #999; /*文字の色を変える*/
+  border-radius: 5px;
+  margin: 0 5px;
+}
+
+.pagination>.active>a {
+  background: $key-green;     /*背景の色を変える*/
+  border-radius: 5px; /*角を丸くする*/
+
+  &:hover {
+    background: $key-green;
+  }
+}
+
+.paginate_arrow {
+
+  a {
+  background: none !important;
+  color: #999 !important;
+  &:hover {
+    color: $key-green !important;
+  }
+  }
+}

@@ -3,6 +3,8 @@
 <p class="page_info">お気に入り登録した自治体の新着記事をこちらで見ることができます。</p>
 <% if @articles.any? %>
     <%= render @articles, one_column: true %>
-  <%= paginate @articles %>
+    <div class="paginate_area">
+      <%= paginate @articles %>
+    </div>
 <% end %>
 </div>
