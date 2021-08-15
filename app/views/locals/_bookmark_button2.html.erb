@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+  <div id="bookmark_form2">
+    <% if current_user.bookmarking?(@local) %>
+      <%= render 'locals/unbookmark' %>
+    <% else %>
+      <%= render 'locals/bookmark' %>
+    <% end %>
+  </div>
+<% end %>
