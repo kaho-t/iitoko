@@ -260,8 +260,6 @@ GEM
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
     nio4r (2.5.7)
-    nokogiri (1.11.2-arm64-darwin)
-      racc (~> 1.4)
     nokogiri (1.11.2-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.7)
@@ -500,6 +498,7 @@ DEPENDENCIES
   mail-iso-2022-jp
   mini_magick
   mysql2 (~> 0.5)
+  omniauth
   omniauth-google-oauth2
   popper_js
   puma (~> 5.0)

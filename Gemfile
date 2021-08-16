@@ -36,6 +36,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'mail-iso-2022-jp'
 gem 'rails-controller-testing'
 gem "devise", git: "https://github.com/heartcombo/devise"
+gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'jp_prefecture'
 gem 'faker'
