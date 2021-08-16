@@ -53,6 +53,7 @@ gem 'active_storage_validations'
 gem 'kaminari'
 gem 'ransack'
 gem 'bullet'
+gem 'nokogiri'
 
 
 group :development, :test do
