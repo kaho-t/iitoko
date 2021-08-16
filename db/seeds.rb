@@ -56,6 +56,9 @@ locals = Local.order(:created_at).take(6)
   locals.each { |local| local.articles.create(title: title, content: content) }
 end
 
+taggedlocals = Local.order(:created_at).take(20)
+ 
+
 intro = '地域の紹介文です。こちらでは地域の特徴や魅力などをお伝えします！'
 catchphrase = '地域のキャッチコピーです！'
 locals.each { |local| local.create_profile!(introduction: intro, catchphrase: catchphrase,
