@@ -39,6 +39,7 @@ gem "devise", git: "https://github.com/heartcombo/devise"
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'jp_prefecture'
+gem 'jp_prefectures_tools'
 gem 'faker'
 gem 'carrierwave'
 gem 'mini_magick'

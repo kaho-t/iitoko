@@ -1,9 +1,6 @@
 <div class="top60">
   <section class="title_area">
     <div class="container">
-      <%= link_to root_path, id: "logo" do %>
-        <%= image_tag 'logo.png', class: 'footer-logo' %>
-      <% end %>
       <h1><%= yield(:copy) %></h1>
       <div class="text_area">
         <p class="title_txt"><%= yield(:subtext1) %></p>
@@ -14,31 +11,31 @@
       
         <div class="btn_area">
           <% if @title_for_user %>
-            <div class="title_btn">
-              <%= link_to search_path do %>
+            <div class="title_btn box_withlink">
+              <%= link_to search_path, class: 'linkinbox' do %>
                 <i class="fas fa-search"></i> キーワードから探す</a>
               <% end %>
             </div>
-            <div class="title_btn">
-              <%= link_to prefectures_path do %>
+            <div class="title_btn box_withlink">
+              <%= link_to prefectures_path, class: 'linkinbox' do %>
                 <i class="fas fa-map-marker-alt"></i> 都道府県から探す
               <% end %>
             </div>
           <% elsif @title_for_local %>
-            <div class="title_btn pink_btn">
-              <%= link_to '無料で会員登録する', new_local_registration_path %>
+            <div class="title_btn pink_btn box_withlink">
+              <%= link_to '無料で会員登録する', new_local_registration_path, class: 'linkinbox' %>
             </div>
           <% elsif @welcome && user_signed_in? && !current_user.score%>
-              <div class="title_btn pink_btn">
-                <%= link_to '住みたいトコ、ドンナトコ？', new_score_path %>
+              <div class="title_btn pink_btn box_withlink">
+                <%= link_to '住みたいトコ、ドンナトコ？', new_score_path, class: 'linkinbox' %>
               </div>
           <% elsif @welcome && local_signed_in? && !current_local.score %>
-            <div class="title_btn pink_btn">
-              <%= link_to 'あなたの町、ドンナトコ？', new_score_path %>
+            <div class="title_btn pink_btn box_withlink">
+              <%= link_to 'あなたの町、ドンナトコ？', new_score_path, class: 'linkinbox' %>
             </div>
             <% elsif @welcome %>
-              <div class="title_btn pink_btn">
-                <%= link_to 'トップページへ', root_path %>
+              <div class="title_btn pink_btn box_withlink">
+                <%= link_to 'トップページへ', root_path, class: 'linkinbox' %>
               </div>
           <% end %>
 

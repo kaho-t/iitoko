@@ -1,7 +1,7 @@
 <div class="container top60 btm10per">
   <h1 class="with_info"><i class="fas fa-search"></i> キーワードから探す</h1>
   <p class="page_info">気になるワードにチェックを入れてあなたのイイトコ見つけましょう</p>
-  <div class="form_area_w btm10per">
+  <div class="form_area_w">
     <%= search_form_for(@q, url:search_path) do |f| %>
       
       <div class="flex_form_row tag_pref_area">
@@ -9,7 +9,7 @@
           <%= f.label :local_prefecture, '都道府県', class: 'form-label' %><br />
         </div>
         <div class="flex_form">
-          <%= f.collection_select :prefecture_code_eq, JpPrefecture::Prefecture.all, :code, :name, { include_blank: '都道府県' }, { class: 'custom-select'} %>
+          <%= f.collection_select :prefecture_code_eq, JpPrefecture::Prefecture.all, :code, :name, { include_blank: '都道府県' }, { autofocus: true, class: 'custom-select pointer_on'} %>
         </div>
       </div>
 <hr>
@@ -19,38 +19,38 @@
           <p>自然</p>
           <div class="tagcategory_items">
             <div class="field">
-              <%= f.check_box :tag_sea_true, {}, true, false %>
-              <%= f.label :tag_sea_true, '海' %>
+              <%= f.check_box :tag_sea_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_sea_true, '海', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_mountain_true, {}, true, false %>
-              <%= f.label :tag_mountai_true, '山' %>
+              <%= f.check_box :tag_mountain_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_mountai_true, '山', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_river_true, {}, true, false %>
-              <%= f.label :tag_river_true, '川' %>
+              <%= f.check_box :tag_river_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_river_true, '川', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_field_true, {}, true, false %>
-              <%= f.label :tag_field_true, '田畑' %>
+              <%= f.check_box :tag_field_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_field_true, '田畑', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_hotspring_true, {}, true, false %>
-              <%= f.label :tag_hotspring_true, '温泉' %>
+              <%= f.check_box :tag_hotspring_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_hotspring_true, '温泉', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_north_true, {}, true, false %>
-              <%= f.label :tag_north_true, '北国' %>
+              <%= f.check_box :tag_north_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_north_true, '北国', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_south_true, {}, true, false %>
-              <%= f.label :tag_south_true, '南国' %>
+              <%= f.check_box :tag_south_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_south_true, '南国', class: 'pointer_on' %>
             </div>
           </div>
         </div>
@@ -59,23 +59,23 @@
           <p>アクセス</p>
           <div class="tagcategory_items">
             <div class="field">
-              <%= f.check_box :tag_easy_to_go_true, {}, true, false %>
-              <%= f.label :tag_easy_to_go_true, '都心へ好アクセス' %>
+              <%= f.check_box :tag_easy_to_go_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_easy_to_go_true, '都心へ好アクセス', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_small_city_true, {}, true, false %>
-              <%= f.label :tag_small_city_true, 'コンパクトシティ' %>
+              <%= f.check_box :tag_small_city_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_small_city_true, 'コンパクトシティ', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_car_true, {}, true, false %>
-              <%= f.label :tag_car_true, '車移動' %>
+              <%= f.check_box :tag_car_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_car_true, '車移動', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_train_true, {}, true, false %>
-              <%= f.label :tag_train_true, '電車移動' %>
+              <%= f.check_box :tag_train_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_train_true, '電車移動', class: 'pointer_on' %>
             </div>
           </div>
         </div>
@@ -84,13 +84,13 @@
           <p>お財布事情</p>
           <div class="tagcategory_items">
             <div class="field">
-              <%= f.check_box :tag_low_price_true, {}, true, false %>
-              <%= f.label :tag_low_price_true, '物価が安い' %>
+              <%= f.check_box :tag_low_price_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_low_price_true, '物価が安い', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_moving_support_true, {}, true, false %>
-              <%= f.label :tag_moving_support_true, '移住支援' %>
+              <%= f.check_box :tag_moving_support_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_moving_support_true, '移住支援', class: 'pointer_on' %>
             </div>
           </div>
         </div>
@@ -98,13 +98,13 @@
           <p>職関連</p>
           <div class="tagcategory_items">
             <div class="field">
-              <%= f.check_box :tag_entrepreneur_support_true, {}, true, false %>
-              <%= f.label :tag_entrepreneur_support_true, '起業支援' %>
+              <%= f.check_box :tag_entrepreneur_support_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_entrepreneur_support_true, '起業支援', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_job_change_support_true, {}, true, false %>
-              <%= f.label :tag_job_change_support_true, '転職支援' %>
+              <%= f.check_box :tag_job_change_support_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_job_change_support_true, '転職支援', class: 'pointer_on' %>
             </div>
           </div>
         </div>
@@ -113,18 +113,18 @@
           <p>ファミリー支援</p>
           <div class="tagcategory_items">
             <div class="field">
-              <%= f.check_box :tag_child_care_support_true, {}, true, false %>
-              <%= f.label :tag_child_care_support_true, '子育て支援' %>
+              <%= f.check_box :tag_child_care_support_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_child_care_support_true, '子育て支援', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_park_true, {}, true, false %>
-              <%= f.label :tag_park_true, '公園' %>
+              <%= f.check_box :tag_park_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_park_true, '公園', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_education_true, {}, true, false %>
-              <%= f.label :tag_education_true, '教育' %>
+              <%= f.check_box :tag_education_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_education_true, '教育', class: 'pointer_on' %>
             </div>
           </div>
         </div>
@@ -133,41 +133,51 @@
           <p>文化</p>
           <div class="tagcategory_items">
             <div class="field">
-              <%= f.check_box :tag_food_true, {}, true, false %>
-              <%= f.label :tag_food_true, '食' %>
+              <%= f.check_box :tag_food_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_food_true, '食', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_architecture_true, {}, true, false %>
-              <%= f.label :tag_architecture_true, '建築・街並み' %>
+              <%= f.check_box :tag_architecture_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_architecture_true, '建築・街並み', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_history_true, {}, true, false %>
-              <%= f.label :tag_history_true, '歴史' %>
+              <%= f.check_box :tag_history_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_history_true, '歴史', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_event_true, {}, true, false %>
-              <%= f.label :tag_event_true, 'イベント・祭' %>
+              <%= f.check_box :tag_event_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_event_true, 'イベント・祭', class: 'pointer_on' %>
             </div>
 
             <div class="field">
-              <%= f.check_box :tag_tourism_true, {}, true, false %>
-              <%= f.label :tag_tourism_true, '観光' %>
+              <%= f.check_box :tag_tourism_true, { autofocus: true, class: 'pointer_on' }, true, false %>
+              <%= f.label :tag_tourism_true, '観光', class: 'pointer_on' %>
             </div>
           </div>
         </div>
     </div>
       <div class="actions txt-center">
-      <%= f.submit '検索する', class: "green_btn" %>
+      <%= f.submit '検索する', class: "green_btn pointer_on", onclick: 'scrollToTop()' %>
       </div>
     <% end %>
   </div>
-
+      <div id="result" style="height: 80px;"></div>
   <section>
   <table>
   <%= render @locals %>
   </table>
   </section>
 </div>
+
+<script>
+var element = document.getElementById('result');
+var rect = element.getBoundingClientRect();
+var position = rect.top;
+window.onload = function scrollToTop() {
+  scrollTo(60, position);
+}
+
+</script>

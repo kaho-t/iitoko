@@ -71,8 +71,9 @@ $key-blue: #86c1e3;
   right: 5%;
 
   &:hover {
-    background-color: rgba(100, 149, 237, 1);
-    transition: 1.0s;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: 0.5s;
+    color: rgba(100, 149, 237, 1);
   }
 }
 .japan_map .area_btn.area2{
@@ -81,8 +82,9 @@ $key-blue: #86c1e3;
   right: 3%;
 
   &:hover {
-    background-color: rgba(102, 205, 170, 1);
-    transition: 1.0s;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgba(102, 205, 170, 1);
+    transition:0.5s;
   }
 }
 .japan_map .area_btn.area3{
@@ -90,8 +92,9 @@ $key-blue: #86c1e3;
   top: 42%;
   right: 24%;
   &:hover {
-    background-color: rgba(46, 139, 87, 1);
-    transition: 1.0s;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgba(46, 139, 87, 1);
+    transition: 0.5s;
   }
 }
 .japan_map .area_btn.area4{
@@ -99,8 +102,9 @@ $key-blue: #86c1e3;
   top: 67%;
   left: 45%;
   &:hover {
-    background-color: rgba(255, 215, 0, 1);
-    transition: 1.0s;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 215, 0, 1);
+    transition: 0.5s;
   }
 }
 .japan_map .area_btn.area5{
@@ -108,8 +112,9 @@ $key-blue: #86c1e3;
   top: 52%;
   left: 23%;
   &:hover {
-    background-color: rgba(210, 105, 30, 1);
-    transition: 1.0s;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgba(210, 105, 30, 1);
+    transition: 0.5s;
   }
 }
 .japan_map .area_btn.area6{
@@ -117,8 +122,9 @@ $key-blue: #86c1e3;
   top: 65%;
   left: -2%;
   &:hover {
-    background-color: rgba(178, 34, 34, 1);
-    transition: 1.0s;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgba(178, 34, 34, 1);
+    transition: 0.5s;
   }
 }
 /* オーバーレイ */
@@ -134,7 +140,6 @@ $key-blue: #86c1e3;
   height: auto;
   background-color: #111;
   opacity: 0.5;
-  cursor: pointer;
 }
 
 /* 選択前は表示を隠す */
@@ -170,6 +175,13 @@ $key-blue: #86c1e3;
   p {
     margin: 0;
     font-size: 1.2em;
+  }
+  &:hover {
+    background-color: $key-green;
+    color: #fff;
+  }
+  &:active {
+    opacity: 0.8;
   }
 }
 
