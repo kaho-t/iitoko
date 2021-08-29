@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
     @local_title_area = true
     @local = Local.find(params[:local_id])
     @articles = @local.articles.includes(%i[main_image_attachment
-                                            rich_text_content]).order(created_at: :desc).page(params[:page])
+                                            rich_text_content]).order(created_at: :desc).page(params[:page]).per(10)
     @talkroom = Talkroom.new
     @local_headerimage = @local.image ? @local.image.url : asset_path('default.png')
     @room = Talkroom.find_by(local: @local, user: current_user)

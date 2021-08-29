@@ -214,7 +214,7 @@
         <%= f.submit 'ちょっと話を聞いてみたい！', class: 'pink_btn' %>
       <% end %>
     <% else %>
-      <%= link_to 'トークルームへ', talkroom_messages_path(@room), class: 'pink_btn to_room' %>
+      <%= link_to 'トークルームへ移動', talkroom_messages_path(@room), class: 'pink_btn to_room' %>
     <% end %>
     <%= render 'locals/bookmark_button2', local: @local %>
   </div>

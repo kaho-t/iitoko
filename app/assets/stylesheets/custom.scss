@@ -936,7 +936,7 @@ input {
 .tag {
   display: inline-block;
   padding: 0px 10px 2px;
-  margin: 1px 3px;
+  margin: 4px;
   justify-content: space-between;
   border: 1px solid #aaa;
   border-radius: 30px;
@@ -1020,7 +1020,7 @@ img.header_img {
 
 .bookmark-btn {
   color: orange;
-  border: 2px solid;
+  border: 2px solid orange;
   background: #fff;
   border-radius: 50px;
   font-size: 1.2em;
@@ -1031,7 +1031,8 @@ img.header_img {
   width: 100%;
 
   &:hover {
-    opacity: 0.8;
+    background-color: orange;
+    color: #fff;
   }
 }
 

@@ -27,7 +27,7 @@ end
 
 locals = Local.all
 catchphrase = '程よく田舎で程よく都会。少し行けば自然が溢れる環境で、ワークライフバランスを充実させませんか？'
-locals.each { |local| local.create_profile!(introduction: '#{local.name}は#{local.prefecture.name}の経済・文化の中心地です。医療施設や商業施設も充実しており、生活に必要なものが揃っています。車で少し行けば豊かな自然が広がっているので、ワークライフバランスを充実させたい方におすすめです。', 
+locals.each { |local| local.create_profile!(introduction: "#{local.name}は#{local.prefecture.name}の経済・文化の中心地です。医療施設や商業施設も充実しており、生活に必要なものが揃っています。車で少し行けば豊かな自然が広がっているので、ワークライフバランスを充実させたい方におすすめです。", 
                                             catchphrase: catchphrase,
                                             population: 100000, temperature: 15, moved_in: 10,
                                             waiting_children: 0, land_price: 100000,
@@ -40,7 +40,7 @@ titles = ['オンライン移住説明会を開催します！', '町のおす�
   content = '<div class="trix-content"><div>こんにちは！<br>移住を検討中の方に大ニュースです。<br>0月0日にオンライン移住説明会の開催が決定しました！<br><br>
             町のおすすめスポット・暮らしの様子のご紹介や先輩移住者のインタビュー、移住先を選ぶポイントや
             チェックすべき移住支援制度など、盛りだくさんでお伝えします！（こちらはサンプル用の投稿です）</div></div>'
-  locals.each { |local| local.articles.create(title: titles.sample(1), content: content) }
+  locals.each { |local| local.articles.create(title: titles.sample, content: content) }
 end
 
 taggedlocals = Local.order(:created_at).take(20)
