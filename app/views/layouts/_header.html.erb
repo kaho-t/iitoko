@@ -11,7 +11,7 @@
               <i class="fas fa-search"></i> <span class="menu_text">キーワードから探す</span></a>
               <% end %>
             </li>
-            <li><%= link_to prefectures_path, class: 'navItem navText' do %>
+            <li class="sp_position"><%= link_to prefectures_path, class: 'navItem navText' do %>
               <i class="fas fa-map-marker-alt"></i> <span class="menu_text">都道府県から探す</span>
               <% end %>
             </li>
@@ -90,14 +90,25 @@
               </ul>
             </li>
           <% else %>
-            <li><%= link_to "ログイン", new_user_session_path, class: 'navButton login_btn navItem navText' %></li>
-            <li><%= link_to "会員登録", new_user_registration_path, class: 'navButton signin_btn navItem navText' %></li>
-            <li><%= link_to "自治体の方", top_path, class: 'navItem navText' %></li>
+            <li class="sp_none"><%= link_to "ログイン", new_user_session_path, class: 'navButton login_btn navItem navText' %></li>
+            <li class="sp_none"><%= link_to "会員登録", new_user_registration_path, class: 'navButton signin_btn navItem navText' %></li>
+            <li class="sp_none"><%= link_to "自治体の方", top_path, class: 'navItem navText' %></li>
+            <div class="hamburger-menu">
+                <input type="checkbox" id="menu-btn-check">
+                <label for="menu-btn-check" class="menu-btn"><span></span></label>
+                <div class="menu-content">
+                  <ul>
+                    <li><%= link_to "ログイン", new_user_session_path, class: 'navItem navText' %></li>
+                    <li><%= link_to "会員登録", new_user_registration_path, class: 'navItem navText' %></li>
+                    <li><%= link_to "自治体の方", top_path, class: 'navItem navText' %></li>
+                  </ul>
+                </div>
+            </div>
           <% end %>
         <% else %>
-          <li><%= link_to "ログイン", new_local_session_path, class: 'navButton login_btn navItem navText' %></li>
-          <li><%= link_to "会員登録", new_local_registration_path, class: 'navButton signin_btn navItem navText' %></li>
-          <li><%= link_to "一般の方", root_path, class: 'navItem navText' %></li>
+          <li><%= link_to "ログイン", new_local_session_path, class: 'navButton login_btn navItem navText sp_textSize' %></li>
+          <li><%= link_to "会員登録", new_local_registration_path, class: 'navButton signin_btn navItem navText sp_textSize' %></li>
+          <li><%= link_to "一般の方", root_path, class: 'navItem navText sp_textSize' %></li>
         <% end %>
       </ul>
     </nav>
